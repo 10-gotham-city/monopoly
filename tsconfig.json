@@ -6,6 +6,7 @@
     "target": "es5",
     "jsx": "react-jsx",
     "importHelpers": true,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "strict": true,
