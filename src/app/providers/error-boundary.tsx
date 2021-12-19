@@ -1,17 +1,14 @@
-import {
-  Component, ErrorInfo, ReactNode, FunctionComponent,
-} from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 
-interface Props {
+type Props = {
   children ?: ReactNode;
-}
+};
 
-interface State {
+interface TState {
   hasError: boolean;
 }
 
-// eslint-disable-next-line max-len
-export const withErrorBoundary = (WrappedComponent : FunctionComponent) => class extends Component<Props, State> {
+export class ErrorBoundary extends React.Component<Props, TState> {
   constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
@@ -27,15 +24,14 @@ export const withErrorBoundary = (WrappedComponent : FunctionComponent) => class
 
   render() {
     const { hasError } = this.state;
-
+    const { children } = this.props;
     if (hasError) {
       return (
-        <div>
-          <h2>Что-то пошло не так...</h2>
-        </div>
+        // TODO: Доделать UI при возникновении ошибок
+        <h1>Что-то пошло не так...</h1>
       );
     }
 
-    return <WrappedComponent />;
+    return children;
   }
-};
+}
