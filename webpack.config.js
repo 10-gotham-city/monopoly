@@ -8,6 +8,10 @@ module.exports = {
     filename: "bundle.js",
   },
   resolve: {
+    alias: {
+      pages: path.resolve(__dirname, 'src/pages/'),
+      shared: path.resolve(__dirname, 'src/shared/'),
+    },
     extensions: [".tsx", ".ts", ".js"],
   },
   module: {
@@ -28,4 +32,7 @@ module.exports = {
       template: "./static/index.html",
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+  }
 };
