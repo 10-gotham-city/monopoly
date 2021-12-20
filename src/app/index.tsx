@@ -1,10 +1,13 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter } from 'react-router-dom';
 import { Router } from 'pages';
+import { ErrorBoundary } from './providers/error-boundary';
 
 export const App = () => (
-  <BrowserRouter>
+  <ErrorBoundary>
     <CssBaseline />
-    <Router />
-  </BrowserRouter>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  </ErrorBoundary>
 );
