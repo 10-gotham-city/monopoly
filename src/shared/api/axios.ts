@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from 'shared/API/config';
+import { BASE_URL } from 'shared/api/config';
 
 export const instanceAxios = axios.create({
   baseURL: BASE_URL,
