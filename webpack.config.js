@@ -10,6 +10,7 @@ module.exports = {
   resolve: {
     alias: {
       pages: path.resolve(__dirname, 'src/pages/'),
+      features: path.resolve(__dirname, 'src/features'),
       shared: path.resolve(__dirname, 'src/shared/'),
     },
     extensions: [".tsx", ".ts", ".js"],
