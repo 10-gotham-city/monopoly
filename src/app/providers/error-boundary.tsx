@@ -4,9 +4,9 @@ type Props = {
   children ?: ReactNode;
 };
 
-interface TState {
+type TState = {
   hasError: boolean;
-}
+};
 
 export class ErrorBoundary extends React.Component<Props, TState> {
   constructor(props: Props) {

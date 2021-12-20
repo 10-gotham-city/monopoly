@@ -1,10 +1,13 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import { Typography } from '@mui/material';
-import { ErrorBoundary } from './providers/error-boundary';
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'pages';
+import { ErrorBoundary } from './providers';
 
 export const App = () => (
   <ErrorBoundary>
     <CssBaseline />
-    <Typography variant="h1">App</Typography>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   </ErrorBoundary>
 );
