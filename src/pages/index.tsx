@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { routes } from 'shared/config';
+import { RegistrationPage } from './registration-page';
 
 export const Router = () => (
   <Routes>
@@ -7,6 +8,6 @@ export const Router = () => (
       path={routes.home}
       element={<>App</>}
     />
-    <Route path={routes.test} element={<>Test</>} />
+    <Route path={routes.registration} element={<RegistrationPage />} />
   </Routes>
 );
