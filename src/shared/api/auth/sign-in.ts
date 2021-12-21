@@ -14,7 +14,7 @@ type TBadRequest = {
 type TResp = string | TBadRequest;
 
 export const signIn = async ({ login, password }: TSignIn): Promise<AxiosResponse<TResp>> => {
-  const response = await instanceAxios.post(PATH.AUTH.SIGNIN, { login, password });
+  const response = await instanceAxios.post(PATH.AUTH.SIGN_IN, { login, password });
 
   return response;
 };
