@@ -1,11 +1,11 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: './src/index.tsx',
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "bundle.js",
+    path: path.join(__dirname, '/dist'),
+    filename: 'bundle.js',
   },
   resolve: {
     alias: {
@@ -13,27 +13,27 @@ module.exports = {
       features: path.resolve(__dirname, 'src/features'),
       shared: path.resolve(__dirname, 'src/shared/'),
     },
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./static/index.html",
+      template: './static/index.html',
     }),
   ],
   devServer: {
     historyApiFallback: true,
-  }
+  },
 };

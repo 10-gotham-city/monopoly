@@ -1,7 +1,7 @@
 import React, { ErrorInfo, ReactNode } from 'react';
 
 type Props = {
-  children ?: ReactNode;
+  children?: ReactNode;
 };
 
 type TState = {
@@ -14,11 +14,12 @@ export class ErrorBoundary extends React.Component<Props, TState> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(_: Error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // eslint-disable-next-line no-console
     console.error('Uncaught error:', error, errorInfo);
   }
 

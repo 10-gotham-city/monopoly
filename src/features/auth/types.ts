@@ -8,5 +8,5 @@ export enum RegistrationFormNames {
 }
 
 export type TRegistrationFormValues = {
-  [key in RegistrationFormNames]: string
+  [key in RegistrationFormNames]: string;
 };

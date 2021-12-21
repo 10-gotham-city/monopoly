@@ -19,6 +19,9 @@
       }
     ],
     "import/prefer-default-export": "off",
-    "react/require-default-props": [0]
+    "react/require-default-props": [
+      0
+    ],
+    "object-curly-newline": "off"
   }
 }

@@ -1,12 +1,5 @@
 import { memo } from 'react';
-import {
-  Card,
-  Typography,
-  Box,
-  Grid,
-  styled,
-  Button,
-} from '@mui/material';
+import { Card, Typography, Box, Grid, styled, Button } from '@mui/material';
 import { InputField } from 'shared/ui/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -18,21 +11,23 @@ const FormCard = styled(Card)`
 `;
 
 const ButtonsWrapper = styled(Box)`
-width: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   padding: ${({ theme }) => `${theme.spacing(3)} ${theme.spacing(4)} 0`};
 `;
 
 // TODO: Добавить специфичную валидацию для полей
-const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup.object().shape({
-  'first-name': yup.string().required('Обязательное поле'),
-  'second-name': yup.string().required('Обязательное поле'),
-  email: yup.string().required('Обязательное поле'),
-  login: yup.string().required('Обязательное поле'),
-  password: yup.string().required('Обязательное поле'),
-  phone: yup.string().required('Обязательное поле'),
-});
+const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup
+  .object()
+  .shape({
+    'first-name': yup.string().required('Обязательное поле'),
+    'second-name': yup.string().required('Обязательное поле'),
+    email: yup.string().required('Обязательное поле'),
+    login: yup.string().required('Обязательное поле'),
+    password: yup.string().required('Обязательное поле'),
+    phone: yup.string().required('Обязательное поле'),
+  });
 
 const defaultValues: TRegistrationFormValues = {
   'first-name': '',
@@ -44,7 +39,7 @@ const defaultValues: TRegistrationFormValues = {
 };
 
 type Props = {
-  onSubmit: () => void
+  onSubmit: () => void;
 };
 
 export const RegistrationForm = memo(({ onSubmit }: Props) => (
@@ -71,13 +66,19 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => (
               <InputField name={RegistrationFormNames.firstName} label="Имя" />
             </Grid>
             <Grid item width={1}>
-              <InputField name={RegistrationFormNames.secondName} label="Фамилия" />
+              <InputField
+                name={RegistrationFormNames.secondName}
+                label="Фамилия"
+              />
             </Grid>
             <Grid item width={1}>
               <InputField name={RegistrationFormNames.phone} label="Телефон" />
             </Grid>
             <Grid item width={1}>
-              <InputField name={RegistrationFormNames.password} label="Пароль" />
+              <InputField
+                name={RegistrationFormNames.password}
+                label="Пароль"
+              />
             </Grid>
           </Grid>
 
