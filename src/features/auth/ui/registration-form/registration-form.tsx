@@ -57,26 +57,26 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => (
         <>
           <Grid container spacing={3}>
             <Grid item width={1}>
-              <InputField name={RegistrationFormNames.login} label="Логин" />
+              <InputField name={RegistrationFormNames.Login} label="Логин" />
             </Grid>
             <Grid item width={1}>
-              <InputField name={RegistrationFormNames.email} label="Email" />
+              <InputField name={RegistrationFormNames.Email} label="Email" />
             </Grid>
             <Grid item width={1}>
-              <InputField name={RegistrationFormNames.firstName} label="Имя" />
+              <InputField name={RegistrationFormNames.FirstName} label="Имя" />
             </Grid>
             <Grid item width={1}>
               <InputField
-                name={RegistrationFormNames.secondName}
+                name={RegistrationFormNames.SecondName}
                 label="Фамилия"
               />
             </Grid>
             <Grid item width={1}>
-              <InputField name={RegistrationFormNames.phone} label="Телефон" />
+              <InputField name={RegistrationFormNames.Phone} label="Телефон" />
             </Grid>
             <Grid item width={1}>
               <InputField
-                name={RegistrationFormNames.password}
+                name={RegistrationFormNames.Password}
                 label="Пароль"
               />
             </Grid>

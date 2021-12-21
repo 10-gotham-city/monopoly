@@ -1,10 +1,10 @@
 export enum RegistrationFormNames {
-  login = 'login',
-  password = 'password',
-  firstName = 'first-name',
-  secondName = 'second-name',
-  email = 'email',
-  phone = 'phone',
+  Login = 'login',
+  Password = 'password',
+  FirstName = 'first-name',
+  SecondName = 'second-name',
+  Email = 'email',
+  Phone = 'phone',
 }
 
 export type TRegistrationFormValues = {
