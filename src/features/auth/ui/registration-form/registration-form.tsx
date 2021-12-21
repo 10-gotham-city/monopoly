@@ -1,8 +1,18 @@
 import { memo } from 'react';
-import { Card, Typography, Box, Grid, styled, Button } from '@mui/material';
+import {
+  Card,
+  Typography,
+  Box,
+  Grid,
+  styled,
+  Button,
+  Link,
+} from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { InputField, getNumberFormatCustom } from 'shared/ui/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { routes } from 'shared/config';
 import { TRegistrationFormValues, RegistrationFormNames } from '../../types';
 
 const FormCard = styled(Card)`
@@ -13,7 +23,9 @@ const FormCard = styled(Card)`
 const ButtonsWrapper = styled(Box)`
   width: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing(2)};
   padding: ${({ theme }) => `${theme.spacing(3)} ${theme.spacing(4)} 0`};
 `;
 
@@ -99,6 +111,9 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => (
             >
               Зарегистрироваться
             </Button>
+            <Link component={RouterLink} to={routes.login}>
+              Войти
+            </Link>
           </ButtonsWrapper>
         </>
       )}
