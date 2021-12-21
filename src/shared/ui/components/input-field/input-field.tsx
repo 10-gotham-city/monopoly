@@ -9,7 +9,6 @@ type Props = {
   inputProps?: ComponentProps<typeof TextField>['InputProps'];
 };
 
-// TODO: добавить возможность добавлять маску инпуту
 export const InputField = memo(
   ({ name, label, type = 'text', inputProps }: Props) => {
     const theme = useTheme();
