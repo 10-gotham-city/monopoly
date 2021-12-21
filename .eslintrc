@@ -9,6 +9,9 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "plugins": [
+    "sort-imports-es6-autofix"
+  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [
@@ -18,6 +21,11 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "sort-imports-es6-autofix/sort-imports-es6": [2, {
+      "ignoreCase": true,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["all", "none", "single", "multiple" ]
+    }]
   }
 }
