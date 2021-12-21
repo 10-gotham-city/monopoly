@@ -1,13 +1,5 @@
 import { memo } from 'react';
-import {
-  Card,
-  Typography,
-  Box,
-  Grid,
-  styled,
-  Button,
-  Link,
-} from '@mui/material';
+import { Card, Typography, Box, Grid, styled, Button, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { InputField, getNumberFormatCustom } from 'shared/ui/components';
 import { Formik } from 'formik';
@@ -30,16 +22,14 @@ const ButtonsWrapper = styled(Box)`
 `;
 
 // TODO: Добавить специфичную валидацию для полей
-const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup
-  .object()
-  .shape({
-    'first-name': yup.string().required('Обязательное поле'),
-    'second-name': yup.string().required('Обязательное поле'),
-    email: yup.string().required('Обязательное поле'),
-    login: yup.string().required('Обязательное поле'),
-    password: yup.string().required('Обязательное поле'),
-    phone: yup.string().required('Обязательное поле'),
-  });
+const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup.object().shape({
+  'first-name': yup.string().required('Обязательное поле'),
+  'second-name': yup.string().required('Обязательное поле'),
+  email: yup.string().required('Обязательное поле'),
+  login: yup.string().required('Обязательное поле'),
+  password: yup.string().required('Обязательное поле'),
+  phone: yup.string().required('Обязательное поле'),
+});
 
 const defaultValues: TRegistrationFormValues = {
   'first-name': '',
@@ -80,10 +70,7 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => (
               <InputField name={RegistrationFormNames.FirstName} label="Имя" />
             </Grid>
             <Grid item width={1}>
-              <InputField
-                name={RegistrationFormNames.SecondName}
-                label="Фамилия"
-              />
+              <InputField name={RegistrationFormNames.SecondName} label="Фамилия" />
             </Grid>
             <Grid item width={1}>
               <InputField
@@ -96,19 +83,12 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => (
               />
             </Grid>
             <Grid item width={1}>
-              <InputField
-                name={RegistrationFormNames.Password}
-                label="Пароль"
-              />
+              <InputField name={RegistrationFormNames.Password} label="Пароль" />
             </Grid>
           </Grid>
 
           <ButtonsWrapper>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => handleSubmit()}
-            >
+            <Button variant="contained" size="large" onClick={() => handleSubmit()}>
               Зарегистрироваться
             </Button>
             <Link component={RouterLink} to={routes.login}>
