@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Card, Typography, Box, Grid, styled, Button } from '@mui/material';
-import { InputField } from 'shared/ui/components';
+import { InputField, getNumberFormatCustom } from 'shared/ui/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { TRegistrationFormValues, RegistrationFormNames } from '../../types';
@@ -38,6 +38,8 @@ const defaultValues: TRegistrationFormValues = {
   phone: '',
 };
 
+const FormatPhoneCustom = getNumberFormatCustom({ format: '+# ### ### ## ##' });
+
 type Props = {
   onSubmit: () => void;
 };
@@ -72,7 +74,14 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => (
               />
             </Grid>
             <Grid item width={1}>
-              <InputField name={RegistrationFormNames.Phone} label="Телефон" />
+              <InputField
+                name={RegistrationFormNames.Phone}
+                label="Телефон"
+                inputProps={{
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                  inputComponent: FormatPhoneCustom as any,
+                }}
+              />
             </Grid>
             <Grid item width={1}>
               <InputField
