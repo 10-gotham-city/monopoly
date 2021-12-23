@@ -5,6 +5,7 @@ import { InputField, getNumberFormatCustom } from 'shared/ui/components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { routes } from 'shared/config';
+import { regexp } from 'shared/lib';
 import { TRegistrationFormValues, RegistrationFormNames } from '../../types';
 
 const FormCard = styled(Card)`
@@ -25,10 +26,10 @@ const ButtonsWrapper = styled(Box)`
 const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup.object().shape({
   'first-name': yup.string().required('Обязательное поле'),
   'second-name': yup.string().required('Обязательное поле'),
-  email: yup.string().required('Обязательное поле'),
+  email: yup.string().required('Обязательное поле').matches(regexp.email, 'Неверный формат'),
   login: yup.string().required('Обязательное поле'),
   password: yup.string().required('Обязательное поле'),
-  phone: yup.string().required('Обязательное поле'),
+  phone: yup.string().required('Обязательное поле').matches(regexp.phone, 'Неверный формат'),
 });
 
 const defaultValues: TRegistrationFormValues = {
@@ -40,7 +41,7 @@ const defaultValues: TRegistrationFormValues = {
   phone: '',
 };
 
-const FormatPhoneCustom = getNumberFormatCustom({ format: '+# ### ### ## ##' });
+const FormatPhoneCustom = getNumberFormatCustom({ format: '+7 ### ### ## ##' });
 
 type Props = {
   onSubmit: () => void;
