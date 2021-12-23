@@ -9,7 +9,6 @@ import { routes } from 'shared/config';
 import { regexp } from 'shared/lib';
 import { TRegistrationFormValues, RegistrationFormNames } from '../../types';
 
-// TODO: Добавить специфичную валидацию для полей
 const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup.object().shape({
   'first-name': yup.string().required('Обязательное поле'),
   'second-name': yup.string().required('Обязательное поле'),
@@ -83,7 +82,7 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => {
   );
 
   return (
-    <AuthFormTemplate
+    <AuthFormTemplate<TRegistrationFormValues>
       title="Регистрация"
       validationSchema={validationSchema}
       defaultValues={defaultValues}
