@@ -1,20 +1,18 @@
-import { PATH } from 'shared/api/config';
-import { instanceAxios } from 'shared/api/axios';
-import { AxiosResponse } from 'axios';
+import { http } from 'shared/api/axios';
+import { TFailedResponse, TSuccessResponse } from 'shared/api/types';
 
-type TSignIn = {
-  login: string,
-  password: string
+type TSignInTSignInRequest = {
+  login: string;
+  password: string;
 };
 
-type TBadRequest = {
-  reason: string
-};
-
-type TResp = string | TBadRequest;
-
-export const signIn = async ({ login, password }: TSignIn): Promise<AxiosResponse<TResp>> => {
-  const response = await instanceAxios.post(PATH.AUTH.SIGN_IN, { login, password });
-
-  return response;
-};
+export const signIn = ({
+  login,
+  password,
+}: TSignInTSignInRequest): Promise<TSuccessResponse | TFailedResponse> =>
+  http.getInstance().post('/auth/signin', {
+    data: {
+      login,
+      password,
+    },
+  });
