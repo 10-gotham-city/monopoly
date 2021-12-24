@@ -1,11 +1,24 @@
-import axios from 'axios';
-import { BASE_URL } from 'shared/api/config';
+import axios, { AxiosInstance } from 'axios';
 
-export const instanceAxios = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Content-type': 'application/json',
-  },
-  withCredentials: true,
-  timeout: 3000,
-});
+export const http = (function () {
+  let instance: AxiosInstance | undefined;
+
+  function createInstanceAxios(): AxiosInstance {
+    return axios.create({
+      baseURL: 'ya-praktikum.tech/api/v2',
+      headers: { 'Content-type': 'application/json' },
+      withCredentials: true,
+      timeout: 3000,
+    });
+  }
+
+  return {
+    getInstance() {
+      if (!instance) {
+        instance = createInstanceAxios();
+      }
+
+      return instance;
+    },
+  };
+}());
