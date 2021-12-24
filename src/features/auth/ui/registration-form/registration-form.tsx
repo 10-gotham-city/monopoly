@@ -10,8 +10,8 @@ import { regexp } from 'shared/lib';
 import { TRegistrationFormValues, RegistrationFormNames } from '../../types';
 
 const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup.object().shape({
-  'first-name': yup.string().required('Обязательное поле'),
-  'second-name': yup.string().required('Обязательное поле'),
+  first_name: yup.string().required('Обязательное поле'),
+  second_name: yup.string().required('Обязательное поле'),
   email: yup.string().required('Обязательное поле').matches(regexp.email, 'Неверный формат'),
   login: yup.string().required('Обязательное поле'),
   password: yup.string().required('Обязательное поле'),
@@ -19,8 +19,8 @@ const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup.object().sha
 });
 
 const defaultValues: TRegistrationFormValues = {
-  'first-name': '',
-  'second-name': '',
+  first_name: '',
+  second_name: '',
   email: '',
   login: '',
   password: '',
