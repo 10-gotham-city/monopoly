@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Box, Avatar, styled, Button } from '@mui/material';
 import { UserData } from 'entities/user';
-import { ChangePasswordDialog, ChangeUserDataDialog } from 'features/user';
+import { ChangePasswordDialog, ChangeUserDataDialog, ChangeAvatarDialog } from 'features/user';
 
 const AvatarWrapper = styled(Box)`
   display: flex;
@@ -21,6 +21,7 @@ const ButtonsWrapper = styled(Box)`
 export const ProfilePage = () => {
   const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
   const [isChangeUserDataDialogOpen, setChangeUserDataDialogOpen] = useState(false);
+  const [isChangeAvatarDialogOpen, setChangeAvatarDialogOpen] = useState(false);
 
   const handleOpenChangePassword = useCallback(() => setChangePasswordDialogOpen(true), []);
   const handleCloseChangePassword = useCallback(() => setChangePasswordDialogOpen(false), []);
@@ -28,13 +29,17 @@ export const ProfilePage = () => {
   const handleOpenChangeUserData = useCallback(() => setChangeUserDataDialogOpen(true), []);
   const handleCloseChangeUserData = useCallback(() => setChangeUserDataDialogOpen(false), []);
 
-  const handleChangeAvatar = useCallback(() => null, []);
+  const handleOpenChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(true), []);
+  const handleCloseChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(false), []);
 
+  const logoutHandler = useCallback(() => null, []);
   const handleSubmitChangePassword = useCallback(() => null, []);
   const handleSubmitChangeUserData = useCallback(() => null, []);
+  const handleSubmitChangeAvatar = useCallback(() => null, []);
 
   const avatarSrc =
     'https://im0-tub-ru.yandex.net/i?id=a482f9ff07db5e691c0ed263cdeab7d4&n=13&exp=1';
+  const isChangeAvatarLoading = false;
 
   return (
     <>
@@ -48,7 +53,7 @@ export const ProfilePage = () => {
               height: 200,
             }}
           />
-          <Button onClick={handleChangeAvatar} variant="outlined" size="small">
+          <Button onClick={handleOpenChangeAvatar} variant="outlined" size="small">
             Изменить аватар
           </Button>
         </AvatarWrapper>
@@ -73,7 +78,7 @@ export const ProfilePage = () => {
               Изменить пароль
             </Button>
           </Box>
-          <Button variant="text" color="error">
+          <Button variant="text" color="error" onClick={logoutHandler}>
             Выйти
           </Button>
         </ButtonsWrapper>
@@ -97,6 +102,12 @@ export const ProfilePage = () => {
         open={isChangeUserDataDialogOpen}
         onClose={handleCloseChangeUserData}
         onSubmit={handleSubmitChangeUserData}
+      />
+      <ChangeAvatarDialog
+        open={isChangeAvatarDialogOpen}
+        isLoading={isChangeAvatarLoading}
+        onClose={handleCloseChangeAvatar}
+        onSubmit={handleSubmitChangeAvatar}
       />
     </>
   );
