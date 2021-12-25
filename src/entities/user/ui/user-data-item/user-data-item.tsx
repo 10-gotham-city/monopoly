@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const UserDataItem = ({ title, value, titleWidth }: Props) => (
-  <Box display="flex" alignItems="end">
+  <Box width={1} display="flex" alignItems="end" justifyContent="space-between">
     <Box width={titleWidth}>
       <Typography
         variant="caption"
