@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Box, Avatar, styled, Button } from '@mui/material';
 import { UserData } from 'entities/user';
-import { ChangePasswordDialog } from 'features/user';
+import { ChangePasswordDialog, ChangeUserDataDialog } from 'features/user';
 
 const AvatarWrapper = styled(Box)`
   display: flex;
@@ -19,14 +19,19 @@ const ButtonsWrapper = styled(Box)`
 `;
 
 export const ProfilePage = () => {
-  const [isChangePasswordDialogOpen, setPasswordDialogOpen] = useState(false);
+  const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
+  const [isChangeUserDataDialogOpen, setChangeUserDataDialogOpen] = useState(false);
 
-  const handleOpenChangePassword = useCallback(() => setPasswordDialogOpen(true), []);
-  const handleCloseChangePassword = useCallback(() => setPasswordDialogOpen(false), []);
+  const handleOpenChangePassword = useCallback(() => setChangePasswordDialogOpen(true), []);
+  const handleCloseChangePassword = useCallback(() => setChangePasswordDialogOpen(false), []);
+
+  const handleOpenChangeUserData = useCallback(() => setChangeUserDataDialogOpen(true), []);
+  const handleCloseChangeUserData = useCallback(() => setChangeUserDataDialogOpen(false), []);
 
   const handleChangeAvatar = useCallback(() => null, []);
 
   const handleSubmitChangePassword = useCallback(() => null, []);
+  const handleSubmitChangeUserData = useCallback(() => null, []);
 
   const avatarSrc =
     'https://im0-tub-ru.yandex.net/i?id=a482f9ff07db5e691c0ed263cdeab7d4&n=13&exp=1';
@@ -61,7 +66,9 @@ export const ProfilePage = () => {
 
         <ButtonsWrapper>
           <Box display="flex" gap={2}>
-            <Button variant="outlined">Изменить данные</Button>
+            <Button variant="outlined" onClick={handleOpenChangeUserData}>
+              Изменить данные
+            </Button>
             <Button variant="outlined" onClick={handleOpenChangePassword}>
               Изменить пароль
             </Button>
@@ -76,6 +83,20 @@ export const ProfilePage = () => {
         open={isChangePasswordDialogOpen}
         onClose={handleCloseChangePassword}
         onSubmit={handleSubmitChangePassword}
+      />
+      <ChangeUserDataDialog
+        // tmp
+        initialValues={{
+          'display-name': 'Иван',
+          'first-name': 'Иван',
+          'second-name': 'Иванов',
+          email: 'ivan@ivan.ivan',
+          login: 'Ivan',
+          phone: '89099990099',
+        }}
+        open={isChangeUserDataDialogOpen}
+        onClose={handleCloseChangeUserData}
+        onSubmit={handleSubmitChangeUserData}
       />
     </>
   );

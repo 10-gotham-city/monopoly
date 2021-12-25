@@ -1,1 +1,1 @@
-export { ChangePasswordDialog } from './ui';
+export { ChangePasswordDialog, ChangeUserDataDialog } from './ui';
