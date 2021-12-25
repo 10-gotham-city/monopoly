@@ -1,8 +1,8 @@
 export enum RegistrationFormNames {
   Login = 'login',
   Password = 'password',
-  FirstName = 'first_name',
-  SecondName = 'second_name',
+  FirstName = 'first-name',
+  SecondName = 'second-name',
   Email = 'email',
   Phone = 'phone',
 }
