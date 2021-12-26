@@ -1,3 +1,3 @@
-import { AuthorizationForm } from 'features/auth/ui/authorization-form';
+import { AuthorizationForm } from 'features/auth';
 
 export const AuthorizationPage = () => <AuthorizationForm onSubmit={() => {}} />;
