@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { routes } from 'shared/config';
-import { AuthorizationPage, RegistrationPage } from './registration-page';
+import { RegistrationPage } from './registration-page';
+import { AuthorizationPage } from './authorization-page';
 
 export const Router = () => (
   <Routes>
