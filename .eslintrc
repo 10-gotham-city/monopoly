@@ -9,9 +9,6 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "sort-imports-es6-autofix"
-  ],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [
@@ -27,11 +24,6 @@
     "react/jsx-props-no-spreading": [0],
     "implicit-arrow-linebreak": 0,
     "operator-linebreak": "off",
-    "@typescript-eslint/indent": "off",
-    "sort-imports-es6-autofix/sort-imports-es6": [2, {
-      "ignoreCase": true,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["all", "none", "single", "multiple" ]
-    }]
+    "@typescript-eslint/indent": "off"
   }
 }
