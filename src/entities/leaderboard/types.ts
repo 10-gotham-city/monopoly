@@ -1,14 +1,8 @@
-import { MouseEvent } from 'react';
-
 export type TDataRowLeaderboardTable = {
   displayName: string;
   winsCount: number;
   allPlays: number;
   winsPercent: number;
-};
-
-export type TDataRowsLeaderboardTable = {
-  dataTable: TDataRowLeaderboardTable[];
 };
 
 export type THeadCell = {
@@ -20,9 +14,3 @@ export type THeadCell = {
 };
 
 export type TOrder = 'asc' | 'desc';
-
-export type TEnhancedTableProps = {
-  onRequestSort: (event: MouseEvent<unknown>, property: keyof TDataRowLeaderboardTable) => void;
-  order: TOrder;
-  orderBy: string;
-};
