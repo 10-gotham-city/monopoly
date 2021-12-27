@@ -4,13 +4,15 @@
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": ["sort-imports-es6-autofix"],
+  "plugins": ["prettier"],
   "rules": {
+    "prettier/prettier": ["error"],
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [
       2,
