@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -11,6 +12,7 @@ module.exports = {
     alias: {
       pages: path.resolve(__dirname, 'src/pages/'),
       shared: path.resolve(__dirname, 'src/shared/'),
+      entities: path.resolve(__dirname, 'src/entities/'),
     },
     extensions: [".tsx", ".ts", ".js"],
   },
@@ -25,11 +27,20 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: 'asset',
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./static/index.html",
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "./static/assets/", to: "./" },
+      ],
     }),
   ],
   devServer: {

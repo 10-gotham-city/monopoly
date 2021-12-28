@@ -1,7 +1,7 @@
 import React, { ErrorInfo, ReactNode } from 'react';
 
 type Props = {
-  children ?: ReactNode;
+  children?: ReactNode;
 };
 
 type TState = {
@@ -27,7 +27,7 @@ export class ErrorBoundary extends React.Component<Props, TState> {
     const { children } = this.props;
     if (hasError) {
       return (
-        // TODO: Доделать UI при возникновении ошибок
+      // TODO: Доделать UI при возникновении ошибок
         <h1>Что-то пошло не так...</h1>
       );
     }

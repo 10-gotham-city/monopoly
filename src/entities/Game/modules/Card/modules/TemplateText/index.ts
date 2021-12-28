@@ -1,0 +1,1 @@
+export { TemplateText } from './TemplateText';
