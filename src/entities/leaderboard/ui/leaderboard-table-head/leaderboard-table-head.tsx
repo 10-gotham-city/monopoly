@@ -33,13 +33,13 @@ const headCells: readonly THeadCell[] = [
   },
 ];
 
-type TProps = {
+type Props = {
   onRequestSort: (event: MouseEvent<unknown>, property: keyof TDataRowLeaderboardTable) => void;
   order: TOrder;
   orderBy: string;
 };
 
-export const LeaderboardTableHead = memo(({ order, orderBy, onRequestSort }: TProps) => {
+export const LeaderboardTableHead = memo(({ order, orderBy, onRequestSort }: Props) => {
   const createSortHandler = useCallback(
     (property: keyof TDataRowLeaderboardTable) => (event: MouseEvent<unknown>) => {
       onRequestSort(event, property);
