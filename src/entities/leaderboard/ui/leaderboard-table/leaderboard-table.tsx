@@ -1,4 +1,4 @@
-import { useState, MouseEvent, ChangeEvent } from 'react';
+import { useState, MouseEvent, ChangeEvent, memo, useCallback, useMemo } from 'react';
 import {
   Paper,
   Table,
@@ -20,34 +20,37 @@ type Props = {
   dataTable: TDataRowLeaderboardTable[];
 };
 
-export const LeaderboardTable = ({ dataTable }: Props) => {
+export const LeaderboardTable = memo(({ dataTable }: Props) => {
   const [order, setOrder] = useState<TOrder>('desc');
   const [orderBy, setOrderBy] = useState<keyof TDataRowLeaderboardTable>('winsCount');
   const [page, setPage] = useState(INITIAL_PAGE_INDEX);
   const [rowsPerPage, setRowsPerPage] = useState(INITIAL_ROW_PER_PAGE);
 
-  const handleRequestSort = (
-    event: MouseEvent<unknown>,
-    property: keyof TDataRowLeaderboardTable,
-  ) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+  const handleRequestSort = useCallback(
+    (event: MouseEvent<unknown>, property: keyof TDataRowLeaderboardTable) => {
+      const isAsc = orderBy === property && order === 'asc';
+      setOrder(isAsc ? 'desc' : 'asc');
+      setOrderBy(property);
+    },
+    [order, orderBy],
+  );
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = useCallback((event: unknown, newPage: number) => {
     setPage(newPage);
-  };
+  }, []);
 
-  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(INITIAL_PAGE_INDEX);
-  };
+  }, []);
 
-  const emptyRows =
-    page > INITIAL_PAGE_INDEX
-      ? Math.max(INITIAL_PAGE_INDEX, (1 + page) * rowsPerPage - dataTable.length)
-      : 0;
+  const emptyRows = useMemo(
+    () =>
+      page > INITIAL_PAGE_INDEX
+        ? Math.max(INITIAL_PAGE_INDEX, (1 + page) * rowsPerPage - dataTable.length)
+        : 0,
+    [dataTable.length, page, rowsPerPage],
+  );
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -95,4 +98,4 @@ export const LeaderboardTable = ({ dataTable }: Props) => {
       />
     </Paper>
   );
-};
+});
