@@ -1,13 +1,16 @@
-import { memo, useCallback } from 'react';
-import { Grid, Button, Link } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import { InputField, getNumberFormatCustom } from 'shared/ui/components';
+import { Button, Grid, Link } from '@mui/material';
 import { FormikProps } from 'formik';
+import { memo, useCallback } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
+
 import { AuthFormTemplate } from 'entities/auth';
+
 import { routes } from 'shared/config';
 import { regexp } from 'shared/lib';
-import { TRegistrationFormValues, RegistrationFormNames } from '../../types';
+import { InputField, getNumberFormatCustom } from 'shared/ui/components';
+
+import { RegistrationFormNames, TRegistrationFormValues } from '../../types';
 
 const validationSchema: yup.SchemaOf<TRegistrationFormValues> = yup.object().shape({
   'first-name': yup.string().required('Обязательное поле'),

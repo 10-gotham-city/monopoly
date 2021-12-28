@@ -1,6 +1,8 @@
-import { RegistrationForm } from 'features/auth';
-import { BaseLayer } from 'shared/ui/layers';
 import { Box } from '@mui/material';
+
+import { RegistrationForm } from 'features/auth';
+
+import { BaseLayer } from 'shared/ui/layers';
 
 export const RegistrationPage = () => (
   <BaseLayer>
