@@ -1,6 +1,7 @@
 import CssBaseline from '@mui/material/CssBaseline';
-import { Router } from 'pages';
 import { BrowserRouter } from 'react-router-dom';
+
+import { Router } from 'pages';
 
 import { ErrorBoundary } from './providers';
 

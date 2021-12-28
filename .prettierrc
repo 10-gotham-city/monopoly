@@ -12,8 +12,8 @@
   "importOrderSortSpecifiers": true,
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^app/(.*)$",
-    "^pages/(.*)$",
+    "(^app/(.*)$|app)",
+    "(^pages/(.*)$|pages)",
     "^features/(.*)$",
     "^entities/(.*)$",
     "^shared/(.*)$",
