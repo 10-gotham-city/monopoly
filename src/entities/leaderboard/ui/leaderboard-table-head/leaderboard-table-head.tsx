@@ -1,5 +1,5 @@
 import { TDataRowLeaderboardTable, THeadCell, TOrder } from 'entities/leaderboard/types';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent, useCallback } from 'react';
 import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
 
 const headCells: readonly THeadCell[] = [
@@ -39,11 +39,13 @@ type TProps = {
   orderBy: string;
 };
 
-export const LeaderboardTableHead = ({ order, orderBy, onRequestSort }: TProps) => {
-  const createSortHandler =
+export const LeaderboardTableHead = memo(({ order, orderBy, onRequestSort }: TProps) => {
+  const createSortHandler = useCallback(
     (property: keyof TDataRowLeaderboardTable) => (event: MouseEvent<unknown>) => {
       onRequestSort(event, property);
-    };
+    },
+    [onRequestSort],
+  );
 
   return (
     <TableHead>
@@ -67,4 +69,4 @@ export const LeaderboardTableHead = ({ order, orderBy, onRequestSort }: TProps) 
       </TableRow>
     </TableHead>
   );
-};
+});
