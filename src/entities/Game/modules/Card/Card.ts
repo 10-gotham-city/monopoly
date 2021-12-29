@@ -3,32 +3,38 @@ import { Corner } from './typesCard/Corner';
 import { Main } from './typesCard/Main';
 import { Other } from './typesCard/Other';
 import { TCardOrientation, TCardSetting, TCardType } from '../../types/card';
-import { Topic } from '../../setting/Topic';
+import { topic } from '../../setting/topic';
 
 type TCardInit = {
-  card: TCardSetting,
-  position: number
-  ctx: CanvasRenderingContext2D,
-  canvasSize: number
+  card: TCardSetting;
+  position: number;
+  ctx: CanvasRenderingContext2D;
+  canvasSize: number;
 };
 
 export class Card {
   static async initAll(ctx: CanvasRenderingContext2D, canvasSize: number) {
-    return Promise.all(Topic.instance.cards.map(
-      (card, position) => Card.init({
-        card, position, ctx, canvasSize,
-      }),
-    ));
+    return Promise.all(
+      topic.cards.map((card, position) =>
+        Card.init({
+          card,
+          position,
+          ctx,
+          canvasSize,
+        }),
+      ),
+    );
   }
 
   static async init(props: TCardInit): Promise<Corner | Main | Chance | Other> {
-    const {
-      card, position, ctx, canvasSize,
-    } = props;
+    const { card, position, ctx, canvasSize } = props;
     const { type } = card;
     const orientation = Card.getOrientation(position);
     const rectProps = {
-      position, canvasSize, ctx, orientation,
+      position,
+      canvasSize,
+      ctx,
+      orientation,
     };
 
     if (type === TCardType.Corner) {

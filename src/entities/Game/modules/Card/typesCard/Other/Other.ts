@@ -4,8 +4,8 @@ import { Rect } from 'entities/Game/modules/Card/modules/Rect/Rect';
 import { TCard } from 'entities/Game/modules/Card/typesCard/types';
 import { TCardOther, TCardType } from 'entities/Game/types/card';
 import { TemplateText } from 'entities/Game/modules/Card/modules/TemplateText';
-import { Theme } from 'entities/Game/setting/Theme';
-import { Topic } from 'entities/Game/setting/Topic';
+import { theme } from 'entities/Game/setting/theme';
+import { topic } from 'entities/Game/setting/topic';
 
 export class Other extends Rect {
   type = TCardType.Other;
@@ -15,11 +15,9 @@ export class Other extends Rect {
 
   title: TemplateText;
 
-  constructor({
-    position, canvasSize, ctx, orientation,
-  }: TCard) {
+  constructor({ position, canvasSize, ctx, orientation }: TCard) {
     super({ position, canvasSize, ctx });
-    const { title, amount, background } = (Topic.instance.cards[position] as TCardOther);
+    const { title, amount, background } = topic.cards[position] as TCardOther;
 
     this.title = new TemplateText({
       ...this.sizeCtx,
@@ -30,7 +28,7 @@ export class Other extends Rect {
 
     this.amount = new TemplateText({
       ...this.sizeCtx,
-      text: `${amount} ${Topic.instance.currency}`,
+      text: `${amount} ${topic.currency}`,
       shift: 0.1,
       orientation,
     });
@@ -51,7 +49,7 @@ export class Other extends Rect {
   }
 
   render() {
-    const { hover, normal } = Theme.instance.color.background.card;
+    const { hover, normal } = theme.color.background.card;
     drawFillRect({
       ...this.sizeCtx,
       color: this.hover ? hover : normal,

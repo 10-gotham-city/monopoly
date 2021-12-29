@@ -4,8 +4,8 @@ import { Rect } from 'entities/Game/modules/Card/modules/Rect';
 import { TCard } from 'entities/Game/modules/Card/typesCard/types';
 import { TCardChance, TCardType } from 'entities/Game/types/card';
 import { TemplateText } from 'entities/Game/modules/Card/modules/TemplateText';
-import { Theme } from 'entities/Game/setting/Theme';
-import { Topic } from 'entities/Game/setting/Topic';
+import { theme } from 'entities/Game/setting/theme';
+import { topic } from 'entities/Game/setting/topic';
 
 export class Chance extends Rect {
   background: BackgroundImage;
@@ -13,11 +13,9 @@ export class Chance extends Rect {
 
   title: TemplateText;
 
-  constructor({
-    position, canvasSize, ctx, orientation,
-  }: TCard) {
+  constructor({ position, canvasSize, ctx, orientation }: TCard) {
     super({ position, canvasSize, ctx });
-    const { title, background } = (Topic.instance.cards[position] as TCardChance);
+    const { title, background } = topic.cards[position] as TCardChance;
 
     this.title = new TemplateText({
       ...this.sizeCtx,
@@ -42,7 +40,7 @@ export class Chance extends Rect {
   }
 
   render() {
-    drawFillRect({ ...this.sizeCtx, color: Theme.instance.color.background.card.normal });
+    drawFillRect({ ...this.sizeCtx, color: theme.color.background.card.normal });
     this.renderStroke();
     this.background.render();
     this.title.render();

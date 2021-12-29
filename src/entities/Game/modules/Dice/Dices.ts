@@ -2,13 +2,13 @@ import { Dice } from 'entities/Game/modules/Dice/Dice';
 import { TMouse } from 'entities/Game/types/card';
 
 type TDices = {
-  ctx: CanvasRenderingContext2D
-  canvasSize: number
+  ctx: CanvasRenderingContext2D;
+  canvasSize: number;
 };
 
 type TRoll = {
-  value: number
-  double: boolean
+  value: number;
+  double: boolean;
 };
 
 export class Dices {

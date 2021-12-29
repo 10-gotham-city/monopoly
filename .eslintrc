@@ -4,15 +4,15 @@
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "sort-imports-es6-autofix"
-  ],
+  "plugins": ["prettier"],
   "rules": {
+    "prettier/prettier": ["error"],
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [
       2,
@@ -23,10 +23,11 @@
     ],
     "import/prefer-default-export": "off",
     "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
-    "sort-imports-es6-autofix/sort-imports-es6": [2, {
-      "ignoreCase": true,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["all", "none", "single", "multiple" ]
-    }]
+    "react/require-default-props": [0],
+    "object-curly-newline": "off",
+    "react/jsx-props-no-spreading": [0],
+    "implicit-arrow-linebreak": 0,
+    "operator-linebreak": "off",
+    "@typescript-eslint/indent": "off"
   }
 }

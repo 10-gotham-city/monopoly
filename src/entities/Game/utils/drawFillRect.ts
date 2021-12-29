@@ -1,13 +1,11 @@
 import { TRect } from 'entities/Game/types/rect';
 
 type TDrawRect = TRect & {
-  color?: string
-  rotate?: number
+  color?: string;
+  rotate?: number;
 };
 
-export function drawFillRect({
-  ctx, x, y, width, height, color, rotate,
-}: TDrawRect) {
+export function drawFillRect({ ctx, x, y, width, height, color, rotate }: TDrawRect) {
   if (color) {
     ctx.fillStyle = color;
   }

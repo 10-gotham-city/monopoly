@@ -1,12 +1,12 @@
 import { drawText, TCanvasTextAlign } from 'entities/Game/utils/drawText';
 import { TCardOrientation } from 'entities/Game/types/card';
-import { Theme } from 'entities/Game/setting/Theme';
+import { theme } from 'entities/Game/setting/theme';
 import { TRect } from 'entities/Game/types/rect';
 
 export type TTemplateTitle = TRect & {
-  text: string,
-  shift: number,
-  orientation: TCardOrientation
+  text: string;
+  shift: number;
+  orientation: TCardOrientation;
 };
 
 export class TemplateText {
@@ -25,15 +25,11 @@ export class TemplateText {
   rotate: number;
 
   constructor(props: TTemplateTitle) {
-    const {
-      ctx, text, orientation, shift, ...size
-    } = props;
+    const { ctx, text, orientation, shift, ...size } = props;
     this.text = text;
     this.ctx = ctx;
     this.shift = shift;
-    const {
-      x, y, width, rotate,
-    } = this.getCoordinates({ ...size, orientation });
+    const { x, y, width, rotate } = this.getCoordinates({ ...size, orientation });
     this.x = x;
     this.y = y;
     this.width = width;
@@ -44,7 +40,7 @@ export class TemplateText {
     drawText({
       x: this.x,
       y: this.y,
-      color: Theme.instance.color.text,
+      color: theme.color.text,
       ctx: this.ctx,
       text: this.text,
       width: this.width,
@@ -54,9 +50,7 @@ export class TemplateText {
   }
 
   private getCoordinates(props: Omit<TRect, 'ctx'> & { orientation: TCardOrientation }) {
-    const {
-      x, y, width, height, orientation,
-    } = props;
+    const { x, y, width, height, orientation } = props;
 
     if (orientation === TCardOrientation.Top) {
       return {

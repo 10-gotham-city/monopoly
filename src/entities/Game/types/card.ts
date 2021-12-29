@@ -24,32 +24,32 @@ export enum TCardOrientation {
 }
 
 export type TMouse = {
-  x: number
-  y: number
+  x: number;
+  y: number;
 };
 export type TCardSetting = TCardCorner | TCardMain | TCardChance | TCardOther;
 
 export type TCardCorner = {
-  type: TCardType.Corner
-  background: string
+  type: TCardType.Corner;
+  background: string;
 };
 
 export type TCardMain = {
-  type: TCardType.Main
-  color: TColorMainCard
-  title: string
-  price: number
+  type: TCardType.Main;
+  color: TColorMainCard;
+  title: string;
+  price: number;
 };
 
 export type TCardChance = {
-  type: TCardType.Chance
-  title: string
-  background: string
+  type: TCardType.Chance;
+  title: string;
+  background: string;
 };
 
 export type TCardOther = {
-  type: TCardType.Other
-  title: string
-  amount: number
-  background: string
+  type: TCardType.Other;
+  title: string;
+  amount: number;
+  background: string;
 };

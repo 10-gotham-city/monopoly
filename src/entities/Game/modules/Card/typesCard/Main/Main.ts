@@ -4,8 +4,8 @@ import { Rect } from 'entities/Game/modules/Card/modules/Rect/Rect';
 import { TCard } from 'entities/Game/modules/Card/typesCard/types';
 import { TCardMain, TCardType } from 'entities/Game/types/card';
 import { TemplateText } from 'entities/Game/modules/Card/modules/TemplateText';
-import { Theme } from 'entities/Game/setting/Theme';
-import { Topic } from 'entities/Game/setting/Topic';
+import { theme } from 'entities/Game/setting/theme';
+import { topic } from 'entities/Game/setting/topic';
 
 export class Main extends Rect {
   type = TCardType.Main;
@@ -19,7 +19,7 @@ export class Main extends Rect {
   constructor(props: TCard) {
     super(props);
     const { position, orientation } = props;
-    const { title, color, price } = (Topic.instance.cards[position] as TCardMain);
+    const { title, color, price } = topic.cards[position] as TCardMain;
 
     this.title = new TemplateText({
       ...this.sizeCtx,
@@ -29,7 +29,7 @@ export class Main extends Rect {
     });
     this.price = new TemplateText({
       ...this.sizeCtx,
-      text: `${price} ${Topic.instance.currency}`,
+      text: `${price} ${topic.currency}`,
       shift: 0.1,
       orientation,
     });
@@ -41,7 +41,7 @@ export class Main extends Rect {
   }
 
   render() {
-    const { hover, normal } = Theme.instance.color.background.card;
+    const { hover, normal } = theme.color.background.card;
     drawFillRect({
       ...this.sizeCtx,
       color: this.hover ? hover : normal,

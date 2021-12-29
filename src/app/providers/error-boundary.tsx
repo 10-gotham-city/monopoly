@@ -14,11 +14,12 @@ export class ErrorBoundary extends React.Component<Props, TState> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(_: Error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // eslint-disable-next-line no-console
     console.error('Uncaught error:', error, errorInfo);
   }
 
@@ -27,7 +28,7 @@ export class ErrorBoundary extends React.Component<Props, TState> {
     const { children } = this.props;
     if (hasError) {
       return (
-      // TODO: Доделать UI при возникновении ошибок
+        // TODO: Доделать UI при возникновении ошибок
         <h1>Что-то пошло не так...</h1>
       );
     }

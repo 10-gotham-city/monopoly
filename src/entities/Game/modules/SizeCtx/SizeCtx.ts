@@ -12,9 +12,7 @@ export abstract class SizeCtx {
 
   protected ctx: CanvasRenderingContext2D;
 
-  protected constructor({
-    x, y, width, height, ctx,
-  }: TRect) {
+  protected constructor({ x, y, width, height, ctx }: TRect) {
     this.x = x;
     this.y = y;
     this.width = width;

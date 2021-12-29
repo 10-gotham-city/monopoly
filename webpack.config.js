@@ -3,29 +3,30 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: './src/index.tsx',
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "bundle.js",
+    path: path.join(__dirname, '/dist'),
+    filename: 'bundle.js',
   },
   resolve: {
     alias: {
       pages: path.resolve(__dirname, 'src/pages/'),
+      features: path.resolve(__dirname, 'src/features'),
+      entities: path.resolve(__dirname, 'src/entities'),
       shared: path.resolve(__dirname, 'src/shared/'),
-      entities: path.resolve(__dirname, 'src/entities/'),
     },
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/i,
@@ -35,7 +36,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./static/index.html",
+      template: './static/index.html',
     }),
     new CopyPlugin({
       patterns: [
@@ -45,5 +46,5 @@ module.exports = {
   ],
   devServer: {
     historyApiFallback: true,
-  }
+  },
 };

@@ -1,5 +1,5 @@
 import { drawRect } from 'entities/Game/utils/drawRect';
-import { Theme } from 'entities/Game/setting/Theme';
+import { theme } from 'entities/Game/setting/theme';
 import { TMouse } from 'entities/Game/types/card';
 
 enum TypePosition {
@@ -9,9 +9,9 @@ enum TypePosition {
 }
 
 type CoordinatesCard = {
-  position: number
-  canvasSize: number
-  ctx: CanvasRenderingContext2D
+  position: number;
+  canvasSize: number;
+  ctx: CanvasRenderingContext2D;
 };
 
 /**
@@ -64,9 +64,7 @@ export abstract class Rect {
 
   calcCoordinates(position: number, canvasSize: number) {
     this.baseSize = Math.floor(canvasSize * 0.14);
-    const {
-      width, height, x, y,
-    } = this.getSizes(position, canvasSize);
+    const { width, height, x, y } = this.getSizes(position, canvasSize);
     this.width = width;
     this.height = height;
     this.x = x;
@@ -89,7 +87,10 @@ export abstract class Rect {
     const x = position === 0 || position === 30 ? 0 : canvasSize - this.baseSize;
     const y = position === 0 || position === 10 ? 0 : canvasSize - this.baseSize;
     return {
-      width, height, x, y,
+      width,
+      height,
+      x,
+      y,
     };
   }
 
@@ -102,7 +103,10 @@ export abstract class Rect {
     const y = position < 10 ? 0 : canvasSize - this.baseSize;
 
     return {
-      width, height, x, y,
+      width,
+      height,
+      x,
+      y,
     };
   }
 
@@ -115,14 +119,17 @@ export abstract class Rect {
     const y = position < 30 ? baseY : canvasSize - baseY - height;
 
     return {
-      width, height, x, y,
+      width,
+      height,
+      x,
+      y,
     };
   }
 
   renderStroke() {
     drawRect({
       ...this.sizeCtx,
-      color: Theme.instance.color.stroke,
+      color: theme.color.stroke,
     });
   }
 

@@ -1,14 +1,14 @@
 import { TCardOrientation } from 'entities/Game/types/card';
 
 type TBackgroundImage = {
-  src: string
-  ctx: CanvasRenderingContext2D
-  width: number
-  height: number
-  x: number
-  y: number
-  orientation?: TCardOrientation
-  isCenter?: boolean
+  src: string;
+  ctx: CanvasRenderingContext2D;
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  orientation?: TCardOrientation;
+  isCenter?: boolean;
 };
 
 // TODO Добавить ресайз
@@ -23,9 +23,7 @@ export class BackgroundImage {
   private readonly ctx: CanvasRenderingContext2D;
 
   constructor({ ctx, src, ...props }: TBackgroundImage) {
-    const {
-      x, y, width, height, rotate,
-    } = BackgroundImage.calcSizes(props);
+    const { x, y, width, height, rotate } = BackgroundImage.calcSizes(props);
     this.ctx = ctx;
     this.src = src;
     this.width = width;
@@ -38,11 +36,20 @@ export class BackgroundImage {
   }
 
   private static calcSizes({
-    x, y, width, height, isCenter, orientation,
+    x,
+    y,
+    width,
+    height,
+    isCenter,
+    orientation,
   }: Omit<TBackgroundImage, 'ctx' | 'src'>) {
     if (!isCenter) {
       return {
-        width, height, x, y, rotate: 0,
+        width,
+        height,
+        x,
+        y,
+        rotate: 0,
       };
     }
     if (orientation === TCardOrientation.Top) {

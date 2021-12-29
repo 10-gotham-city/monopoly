@@ -1,28 +1,28 @@
-import { Theme } from 'entities/Game/setting/Theme';
+import { theme } from 'entities/Game/setting/theme';
 
 type TDice = {
-  ctx: CanvasRenderingContext2D
+  ctx: CanvasRenderingContext2D;
   start: {
-    x: number,
-    y: number
-  }
+    x: number;
+    y: number;
+  };
   end: {
-    x: number,
-    y: number
-  }
-  size: number
+    x: number;
+    y: number;
+  };
+  size: number;
 };
 
 export class Dice {
   value = 0;
   private readonly start: {
-    x: number
-    y: number
+    x: number;
+    y: number;
   };
 
   private readonly end: {
-    x: number
-    y: number
+    x: number;
+    y: number;
   };
 
   // Размер кубика
@@ -30,14 +30,12 @@ export class Dice {
   private x = 0;
   private y = 0;
   private readonly ctx: CanvasRenderingContext2D;
-  private readonly background = Theme.instance.color.dice.background;
+  private readonly background = theme.color.dice.background;
   private rotate = 0;
-  private radius = 0;
-  private dots: { x: number, y: number }[] = [];
+  private readonly radius;
+  private dots: { x: number; y: number }[] = [];
 
-  constructor({
-    ctx, start, end, size,
-  }: TDice) {
+  constructor({ ctx, start, end, size }: TDice) {
     this.ctx = ctx;
     this.start = start;
     this.end = end;
@@ -81,7 +79,7 @@ export class Dice {
   private renderDot(x: number, y: number) {
     this.ctx.beginPath();
     this.ctx.arc(x, y, this.radius, 0, 2 * Math.PI, false);
-    this.ctx.fillStyle = Theme.instance.color.dice.dots;
+    this.ctx.fillStyle = theme.color.dice.dots;
     this.ctx.fill();
   }
 

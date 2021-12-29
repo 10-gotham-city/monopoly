@@ -1,11 +1,11 @@
 type TChip = {
-  color: string
-  ctx: CanvasRenderingContext2D
+  color: string;
+  ctx: CanvasRenderingContext2D;
 };
 
 type TCord = {
-  x: number
-  y: number
+  x: number;
+  y: number;
 };
 
 export class Chip {

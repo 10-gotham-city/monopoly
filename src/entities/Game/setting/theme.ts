@@ -1,6 +1,5 @@
-export class Theme {
-  private static inst: Theme;
-  color = {
+export const theme = {
+  color: {
     background: {
       playingField: '#06262a',
       card: {
@@ -15,14 +14,6 @@ export class Theme {
     base: '#c4eda4',
     stroke: '#0d1c00',
     text: '#000000',
-  };
-
-  background = '/sprites/background.png';
-
-  static get instance() {
-    if (Theme.inst) {
-      return Theme.inst;
-    }
-    return new Theme();
-  }
-}
+  },
+  background: '/sprites/background.png',
+};

@@ -8,63 +8,44 @@ import { drawFillRect } from 'entities/Game/utils/drawFillRect';
 import { Main } from 'entities/Game/modules/Card/typesCard/Main';
 import { Other } from 'entities/Game/modules/Card/typesCard/Other';
 import { TCardType } from 'entities/Game/types/card';
-import { Theme } from 'entities/Game/setting/Theme';
+import { theme } from 'entities/Game/setting/theme';
+import { GameLoop } from 'entities/Game/modules/Scene/GameLoop';
 
 // TODO Добавить ресайз
 // TODO Добавить ожидание загрузки ресурсов
 // TODO обработать исключения
-
-export class Scene {
+export class Scene extends GameLoop {
   private readonly top: number;
-
   private readonly left: number;
-
   private readonly x: number = 0;
-
   private readonly y: number = 0;
-
   private readonly canvas: HTMLCanvasElement;
-
   private readonly ctx: CanvasRenderingContext2D;
-
   private readonly width: number;
-
   private readonly height: number;
-
   private background: BackgroundImage;
-
   private cards: (Corner | Chance | Main | Other)[] = [];
-
-  // время вызова предыдущего кадра
-  private last: number = performance.now();
-
-  // текущее время
-  private now: number = performance.now();
-
-  // количество времени на один кадр
-  private step: number = 1 / 60;
-
-  // время, прошедшее между кадрами
-  private dt = 0;
-
   private mouse = {
     x: 0,
     y: 0,
   };
 
   private chips: Chip[];
-
   private dices: Dices;
 
+  elements: (BackgroundImage | Corner | Chance | Main | Other | Dices | Chip)[];
+
   constructor(canvas: HTMLCanvasElement) {
+    super();
     this.canvas = canvas;
     this.ctx = Scene.getContext(canvas);
     const { height, width } = this.getSizeElement();
     this.width = width;
     this.height = height;
+
     this.background = new BackgroundImage({
       ...this.sizeCtx,
-      src: Theme.instance.background,
+      src: theme.background,
       isCenter: true,
     });
     this.dices = new Dices({
@@ -73,14 +54,17 @@ export class Scene {
     });
 
     // TODO сделать инициализацию фишек из состояния игры
-    this.chips = [new Chip({
-      ctx: this.ctx,
-      color: 'red',
-    })];
+    this.chips = [
+      new Chip({
+        ctx: this.ctx,
+        color: 'red',
+      }),
+    ];
 
     const { top, left } = this.canvas.getBoundingClientRect();
     this.top = top + window.scrollY;
     this.left = left + window.scrollX;
+    // TODO remove event
     this.addEventListeners();
   }
 
@@ -100,6 +84,10 @@ export class Scene {
     await scene.initCards();
     scene.moveChip(0, 0);
     scene.gameLoop();
+  }
+
+  async initCards() {
+    this.cards = await Card.initAll(this.ctx, this.width);
   }
 
   static getContext(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
@@ -167,40 +155,14 @@ export class Scene {
     this.mouse.y = 0;
   };
 
-  async initCards() {
-    this.cards = await Card.initAll(this.ctx, this.width);
-  }
-
   getSizeElement() {
     const { width, height } = this.canvas.getBoundingClientRect();
     return { width, height };
   }
 
-  gameLoop() {
-    // определяем текущее время
-    this.now = performance.now();
-    // добавляем прошедшую разницу во времени. Не более, чем 1 секунда
-    this.dt += Math.min(1, (this.now - this.last) / 1000);
-
-    /*
-              вложенный цикл может вызывать обновление состояния несколько раз подряд,
-              если прошло больше времени, чем выделено на один кадр
-             */
-    while (this.dt > this.step) {
-      this.dt -= this.step;
-      // TODO обновление сцены
-      // update(step);
-    }
-    this.last = this.now;
-    this.render();
-    requestAnimationFrame(() => {
-      this.gameLoop();
-    });
-  }
-
   render() {
     this.clear();
-    drawFillRect({ ...this.sizeCtx, color: Theme.instance.color.background.playingField });
+    drawFillRect({ ...this.sizeCtx, color: theme.color.background.playingField });
     this.background?.render();
     this.cards.forEach((card) => card.render());
     this.dices.render();

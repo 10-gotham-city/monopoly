@@ -7,20 +7,18 @@ export enum TCanvasTextAlign {
 }
 
 type TDrawText = {
-  text: string
-  ctx: CanvasRenderingContext2D
-  x: number
-  y: number
-  width?: number
-  color?: string
-  textAlign?: TCanvasTextAlign
-  rotate?: number
+  text: string;
+  ctx: CanvasRenderingContext2D;
+  x: number;
+  y: number;
+  width?: number;
+  color?: string;
+  textAlign?: TCanvasTextAlign;
+  rotate?: number;
 };
 
 export function drawText(props: TDrawText) {
-  const {
-    x, y, text, textAlign, ctx, color, width, rotate,
-  } = props;
+  const { x, y, text, textAlign, ctx, color, width, rotate } = props;
   if (rotate) {
     ctx.save();
     ctx.translate(x, y);
