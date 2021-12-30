@@ -1,6 +1,6 @@
-import { TCardSetting, TCardType, TColorMainCard } from '../types/card';
+import { TCard, TCardType, TColorMainCard } from '../types/card';
 
-const cards: TCardSetting[] = [
+const cards: TCard[] = [
   {
     type: TCardType.Corner,
     background: '/sprites/start.png',
@@ -13,7 +13,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Казна',
-    type: TCardType.Chance,
+    type: TCardType.NoPrice,
     background: '/sprites/treasury.png',
   },
   {
@@ -24,13 +24,13 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Налог',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 100,
     background: '/sprites/tax.png',
   },
   {
     title: 'Рижская ж/д',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 200,
     background: '/sprites/railway-station.png',
   },
@@ -42,7 +42,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Шанс',
-    type: TCardType.Chance,
+    type: TCardType.NoPrice,
     background: '/sprites/chance.png',
   },
   {
@@ -69,7 +69,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Электростанция',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 150,
     background: '/sprites/power-plant.png',
   },
@@ -87,7 +87,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Курская ж/д',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 200,
     background: '/sprites/railway-station.png',
   },
@@ -99,7 +99,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Шанс',
-    type: TCardType.Chance,
+    type: TCardType.NoPrice,
     background: '/sprites/chance.png',
   },
   {
@@ -126,7 +126,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Шанс',
-    type: TCardType.Chance,
+    type: TCardType.NoPrice,
     background: '/sprites/chance.png',
   },
   {
@@ -143,7 +143,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Казанская ж/д',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 200,
     background: '/sprites/railway-station.png',
   },
@@ -161,7 +161,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Водопровод',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 150,
     background: '/sprites/water-supply.png',
   },
@@ -189,7 +189,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Казна',
-    type: TCardType.Chance,
+    type: TCardType.NoPrice,
     background: '/sprites/treasury.png',
   },
   {
@@ -200,13 +200,13 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Ленинградская ж/д',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 200,
     background: '/sprites/railway-station.png',
   },
   {
     title: 'Шанс',
-    type: TCardType.Chance,
+    type: TCardType.NoPrice,
     background: '/sprites/chance.png',
   },
   {
@@ -217,7 +217,7 @@ const cards: TCardSetting[] = [
   },
   {
     title: 'Сверхналог',
-    type: TCardType.Other,
+    type: TCardType.WithImage,
     amount: 200,
     background: '/sprites/super-tax.png',
   },

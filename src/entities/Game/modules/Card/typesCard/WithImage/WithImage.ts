@@ -1,36 +1,35 @@
 import { BackgroundImage } from 'entities/Game/modules/Card/modules/BackgroundImage/BackgroundImage';
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
-import { Rect } from 'entities/Game/modules/Card/modules/Rect/Rect';
-import { TCard } from 'entities/Game/modules/Card/typesCard/types';
-import { TCardOther, TCardType } from 'entities/Game/types/card';
+import { CardRect, TCardRect } from 'entities/Game/modules/Card/modules/CardRect/CardRect';
+import { TCardWithImage, TCardType } from 'entities/Game/types/card';
 import { TemplateText } from 'entities/Game/modules/Card/modules/TemplateText';
 import { theme } from 'entities/Game/setting/theme';
 import { topic } from 'entities/Game/setting/topic';
 
-export class Other extends Rect {
-  type = TCardType.Other;
+export class WithImage extends CardRect {
+  type = TCardType.WithImage;
   background: BackgroundImage;
-
   amount: TemplateText;
-
   title: TemplateText;
 
-  constructor({ position, canvasSize, ctx, orientation }: TCard) {
-    super({ position, canvasSize, ctx });
-    const { title, amount, background } = topic.cards[position] as TCardOther;
+  constructor({ index, canvasSize, ctx }: TCardRect) {
+    super({ index, canvasSize, ctx });
+    const { title, amount, background } = topic.cards[index] as TCardWithImage;
 
     this.title = new TemplateText({
       ...this.sizeCtx,
       text: title,
       shift: 0.85,
-      orientation,
+      position: this.position,
+      orientation: this.orientation,
     });
 
     this.amount = new TemplateText({
       ...this.sizeCtx,
       text: `${amount} ${topic.currency}`,
       shift: 0.1,
-      orientation,
+      position: this.position,
+      orientation: this.orientation,
     });
 
     this.background = new BackgroundImage({
@@ -38,12 +37,13 @@ export class Other extends Rect {
       ctx: this.ctx,
       src: background,
       isCenter: true,
-      orientation,
+      position: this.position,
+      orientation: this.orientation,
     });
   }
 
-  static async init(props: TCard): Promise<Other> {
-    const instance = new Other(props);
+  static async init(props: TCardRect): Promise<WithImage> {
+    const instance = new WithImage(props);
     await instance.background.load();
     return instance;
   }

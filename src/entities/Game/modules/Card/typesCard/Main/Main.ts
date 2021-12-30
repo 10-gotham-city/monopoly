@@ -1,42 +1,43 @@
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
 import { Label } from 'entities/Game/modules/Card/typesCard/Main/Label';
-import { Rect } from 'entities/Game/modules/Card/modules/Rect/Rect';
-import { TCard } from 'entities/Game/modules/Card/typesCard/types';
+import { CardRect, TCardRect } from 'entities/Game/modules/Card/modules/CardRect/CardRect';
 import { TCardMain, TCardType } from 'entities/Game/types/card';
 import { TemplateText } from 'entities/Game/modules/Card/modules/TemplateText';
 import { theme } from 'entities/Game/setting/theme';
 import { topic } from 'entities/Game/setting/topic';
 
-export class Main extends Rect {
+export class Main extends CardRect {
   type = TCardType.Main;
-
   title: TemplateText;
-
   price: TemplateText;
-
   label: Label;
 
-  constructor(props: TCard) {
+  constructor(props: TCardRect) {
     super(props);
-    const { position, orientation } = props;
-    const { title, color, price } = topic.cards[position] as TCardMain;
+    const { index } = props;
+    const { title, color, price } = topic.cards[index] as TCardMain;
 
     this.title = new TemplateText({
       ...this.sizeCtx,
       text: title,
       shift: 0.8,
-      orientation,
+      position: this.position,
+      orientation: this.orientation,
     });
+
     this.price = new TemplateText({
       ...this.sizeCtx,
       text: `${price} ${topic.currency}`,
       shift: 0.1,
-      orientation,
+      position: this.position,
+      orientation: this.orientation,
     });
+
     this.label = new Label({
       ...this.sizeCtx,
       color,
-      orientation,
+      position: this.position,
+      orientation: this.orientation,
     });
   }
 

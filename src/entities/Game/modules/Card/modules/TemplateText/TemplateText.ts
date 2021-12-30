@@ -1,35 +1,38 @@
 import { drawText, TCanvasTextAlign } from 'entities/Game/utils/drawText';
-import { TCardOrientation } from 'entities/Game/types/card';
+import { TCardOrientation, TCardPosition } from 'entities/Game/types/card';
 import { theme } from 'entities/Game/setting/theme';
 import { TRect } from 'entities/Game/types/rect';
 
 export type TTemplateTitle = TRect & {
   text: string;
   shift: number;
+  position: TCardPosition;
   orientation: TCardOrientation;
 };
 
+type TGetCoordinates = Omit<TRect, 'ctx'> & {
+  position: TCardPosition;
+  orientation: TCardOrientation;
+};
+
+/**
+ * Отрисовка текста в карточках
+ */
 export class TemplateText {
   text: string;
-
   ctx: CanvasRenderingContext2D;
-
   x: number;
-
+  y: number;
+  width: number;
+  rotate: number;
   shift: number;
 
-  y: number;
-
-  width: number;
-
-  rotate: number;
-
   constructor(props: TTemplateTitle) {
-    const { ctx, text, orientation, shift, ...size } = props;
+    const { ctx, text, position, orientation, shift, ...size } = props;
     this.text = text;
     this.ctx = ctx;
     this.shift = shift;
-    const { x, y, width, rotate } = this.getCoordinates({ ...size, orientation });
+    const { x, y, width, rotate } = this.getCoordinates({ ...size, position, orientation });
     this.x = x;
     this.y = y;
     this.width = width;
@@ -49,38 +52,20 @@ export class TemplateText {
     });
   }
 
-  private getCoordinates(props: Omit<TRect, 'ctx'> & { orientation: TCardOrientation }) {
-    const { x, y, width, height, orientation } = props;
-
-    if (orientation === TCardOrientation.Top) {
+  private getCoordinates({ x, y, width, height, orientation, position }: TGetCoordinates) {
+    if (orientation === TCardOrientation.Vertical) {
       return {
         x: x + width * 0.5,
-        y: height * this.shift,
-        width: width * 0.8,
-        rotate: 0,
-      };
-    }
-    if (orientation === TCardOrientation.Right) {
-      return {
-        x: x + width * (1 - this.shift),
-        y: y + height * 0.5,
-        width: height * 0.8,
-        rotate: 90,
-      };
-    }
-    if (orientation === TCardOrientation.Bottom) {
-      return {
-        x: x + width * 0.5,
-        y: y + height * (1 - this.shift) + 5,
+        y: position === TCardPosition.Top ? height * this.shift : y + height * (1 - this.shift) + 5,
         width: width * 0.8,
         rotate: 0,
       };
     }
     return {
-      x: x + width * this.shift,
+      x: x + width * (position === TCardPosition.Right ? 1 - this.shift : this.shift),
       y: y + height * 0.5,
       width: height * 0.8,
-      rotate: -90,
+      rotate: position === TCardPosition.Right ? 90 : -90,
     };
   }
 }

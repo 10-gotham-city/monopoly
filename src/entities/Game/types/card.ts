@@ -1,8 +1,8 @@
 export enum TCardType {
-  Corner = 'corner', // Старт
-  Chance = 'chance', // Шанс
-  Other = 'other', // Дополнительные
-  Main = 'main', // Основные карточки
+  Main = 'main', // основные карточки (улицы)
+  Corner = 'corner', // угловые карточки
+  NoPrice = 'noPrice', // казна, шанс
+  WithImage = 'withImage', // жж, налоги, электростация и водоканал
 }
 
 export enum TColorMainCard {
@@ -16,18 +16,25 @@ export enum TColorMainCard {
   Gray = '#a1a2a3',
 }
 
-export enum TCardOrientation {
+export enum TCardPosition {
   Top = 'top',
   Right = 'right',
   Bottom = 'bottom',
   Left = 'left',
 }
 
+export enum TCardOrientation {
+  Corner = 'corner',
+  Vertical = 'vertical',
+  Horizontal = 'horizontal',
+}
+
 export type TMouse = {
   x: number;
   y: number;
 };
-export type TCardSetting = TCardCorner | TCardMain | TCardChance | TCardOther;
+
+export type TCard = TCardCorner | TCardMain | TCardNoPrice | TCardWithImage;
 
 export type TCardCorner = {
   type: TCardType.Corner;
@@ -41,14 +48,14 @@ export type TCardMain = {
   price: number;
 };
 
-export type TCardChance = {
-  type: TCardType.Chance;
+export type TCardNoPrice = {
+  type: TCardType.NoPrice;
   title: string;
   background: string;
 };
 
-export type TCardOther = {
-  type: TCardType.Other;
+export type TCardWithImage = {
+  type: TCardType.WithImage;
   title: string;
   amount: number;
   background: string;

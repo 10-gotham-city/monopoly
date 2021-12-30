@@ -1,180 +1,119 @@
 import { BackgroundImage } from 'entities/Game/modules/Card/modules/BackgroundImage/BackgroundImage';
 import { Card } from 'entities/Game/modules/Card';
-import { Chance } from 'entities/Game/modules/Card/typesCard/Chance';
+import { NoPrice } from 'entities/Game/modules/Card/typesCard/NoPrice';
 import { Chip } from 'entities/Game/modules/Chip';
 import { Corner } from 'entities/Game/modules/Card/typesCard/Corner';
 import { Dices } from 'entities/Game/modules/Dice';
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
 import { Main } from 'entities/Game/modules/Card/typesCard/Main';
-import { Other } from 'entities/Game/modules/Card/typesCard/Other';
+import { WithImage } from 'entities/Game/modules/Card/typesCard/WithImage';
 import { TCardType } from 'entities/Game/types/card';
 import { theme } from 'entities/Game/setting/theme';
 import { GameLoop } from 'entities/Game/modules/Scene/GameLoop';
+import { Canvas } from 'entities/Game/modules/Scene/Canvas';
+
+type TScene = {
+  canvas: HTMLCanvasElement;
+  onRollDices: (value: number, double: boolean) => void;
+  onClickCard: (card: Main) => void;
+};
 
 // TODO Добавить ресайз
 // TODO Добавить ожидание загрузки ресурсов
 // TODO обработать исключения
 export class Scene extends GameLoop {
-  private readonly top: number;
-  private readonly left: number;
-  private readonly x: number = 0;
-  private readonly y: number = 0;
-  private readonly canvas: HTMLCanvasElement;
-  private readonly ctx: CanvasRenderingContext2D;
-  private readonly width: number;
-  private readonly height: number;
-  private background: BackgroundImage;
-  private cards: (Corner | Chance | Main | Other)[] = [];
-  private mouse = {
-    x: 0,
-    y: 0,
-  };
+  private readonly canvas: Canvas;
+  private background: BackgroundImage | undefined;
+  private dices: Dices | undefined;
+  cards: (Corner | NoPrice | Main | WithImage)[] = [];
+  chips: Chip[] = [];
+  private readonly onRollDices: (value: number, double: boolean) => void;
+  private readonly onClickCard: (card: Main) => void;
 
-  private chips: Chip[];
-  private dices: Dices;
-
-  elements: (BackgroundImage | Corner | Chance | Main | Other | Dices | Chip)[];
-
-  constructor(canvas: HTMLCanvasElement) {
+  constructor({ canvas, onRollDices, onClickCard }: TScene) {
     super();
-    this.canvas = canvas;
-    this.ctx = Scene.getContext(canvas);
-    const { height, width } = this.getSizeElement();
-    this.width = width;
-    this.height = height;
+    this.canvas = new Canvas(canvas, {
+      mousemove: this.onMousemove,
+      mouseout: this.onMouseout,
+      click: this.onClick,
+    });
+    this.onRollDices = onRollDices;
+    this.onClickCard = onClickCard;
+  }
 
+  async createElements() {
     this.background = new BackgroundImage({
-      ...this.sizeCtx,
+      ...this.canvas.sizeCtx,
       src: theme.background,
       isCenter: true,
     });
+    await this.background.load();
+
+    this.cards = await Card.initAll(this.canvas.ctx, this.canvas.width);
+
     this.dices = new Dices({
-      ctx: this.ctx,
-      canvasSize: this.width,
+      ctx: this.canvas.ctx,
+      canvasSize: this.canvas.width,
     });
 
     // TODO сделать инициализацию фишек из состояния игры
     this.chips = [
       new Chip({
-        ctx: this.ctx,
+        ctx: this.canvas.ctx,
         color: 'red',
       }),
     ];
-
-    const { top, left } = this.canvas.getBoundingClientRect();
-    this.top = top + window.scrollY;
-    this.left = left + window.scrollX;
-    // TODO remove event
-    this.addEventListeners();
-  }
-
-  get sizeCtx() {
-    return {
-      width: this.width,
-      height: this.height,
-      x: this.x,
-      y: this.y,
-      ctx: this.ctx,
-    };
-  }
-
-  static async init(canvas: HTMLCanvasElement) {
-    const scene = new Scene(canvas);
-    await scene.background.load();
-    await scene.initCards();
-    scene.moveChip(0, 0);
-    scene.gameLoop();
-  }
-
-  async initCards() {
-    this.cards = await Card.initAll(this.ctx, this.width);
-  }
-
-  static getContext(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      return ctx;
-    }
-    throw new Error('Идентификатор контекста не определён');
-  }
-
-  addEventListeners() {
-    this.canvas.addEventListener('mousemove', this.onMousemove);
-    this.canvas.addEventListener('mouseout', this.onMouseout);
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    this.canvas.addEventListener('click', this.onClick);
   }
 
   onClick = async (e: MouseEvent): Promise<void> => {
-    this.mouse.x = e.pageX - this.left;
-    this.mouse.y = e.pageY - this.top;
+    const mouseCord = this.canvas.getPositionMouseOnCanvas(e);
 
-    // TODO обработать клик
-    const cardClick = this.cards.find((card) => card.checkHover(this.mouse));
+    const cardClick = this.cards.find((card) => card.checkHover(mouseCord));
     if (cardClick && cardClick.type === TCardType.Main) {
-      // eslint-disable-next-line no-console
-      console.log((cardClick as Main).title.text);
+      this.onClickCard(cardClick as Main);
     }
 
-    if (this.dices.isPointInPath(this.mouse)) {
+    if (this.dices?.isPointInPath(mouseCord)) {
       const { value, double } = await this.dices.roll();
-      // eslint-disable-next-line no-console
-      console.log(value, double);
-      const position = this.chips[0].takeStep(value);
-      this.moveChip(0, position);
+      this.onRollDices(value, double);
     }
   };
 
   onMousemove = (e: MouseEvent) => {
-    this.mouse.x = e.pageX - this.left;
-    this.mouse.y = e.pageY - this.top;
+    const mouseCord = this.canvas.getPositionMouseOnCanvas(e);
 
-    let noHover = true;
+    let isHover = false;
     this.cards.forEach((card) => {
-      if (card.type === TCardType.Main || card.type === TCardType.Other) {
-        const hoverCard = card.checkHover(this.mouse);
+      if (card.type === TCardType.Main || card.type === TCardType.WithImage) {
+        const hoverCard = card.checkHover(mouseCord);
         if (hoverCard) {
-          this.canvas.style.cursor = 'pointer';
-          noHover = false;
+          isHover = true;
         }
       }
     });
 
-    if (this.dices.isPointInPath(this.mouse)) {
-      this.canvas.style.cursor = 'pointer';
-      noHover = false;
+    if (this.dices?.isPointInPath(mouseCord)) {
+      isHover = true;
     }
 
-    if (noHover) {
-      this.canvas.style.cursor = 'default';
-    }
+    this.canvas.setCursor(isHover);
   };
 
   onMouseout = () => {
-    this.mouse.x = 0;
-    this.mouse.y = 0;
+    this.cards.forEach((card) => {
+      card.checkHover();
+    });
   };
 
-  getSizeElement() {
-    const { width, height } = this.canvas.getBoundingClientRect();
-    return { width, height };
-  }
-
   render() {
-    this.clear();
-    drawFillRect({ ...this.sizeCtx, color: theme.color.background.playingField });
+    this.canvas.clear();
+    drawFillRect({
+      ...this.canvas.sizeCtx,
+      color: theme.color.background.playingField,
+    });
     this.background?.render();
     this.cards.forEach((card) => card.render());
-    this.dices.render();
+    this.dices?.render();
     this.chips.forEach((chip) => chip.render());
-  }
-
-  clear() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
-  }
-
-  moveChip(indexChip: number, indexCard: number) {
-    const { center } = this.cards[indexCard];
-    this.chips[indexChip].setCoordinates(center);
   }
 }

@@ -1,4 +1,4 @@
-import { TCardOrientation } from 'entities/Game/types/card';
+import { TCardOrientation, TCardPosition } from 'entities/Game/types/card';
 
 type TBackgroundImage = {
   src: string;
@@ -7,11 +7,15 @@ type TBackgroundImage = {
   height: number;
   x: number;
   y: number;
+  position?: TCardPosition;
   orientation?: TCardOrientation;
   isCenter?: boolean;
 };
 
 // TODO Добавить ресайз
+/**
+ * Отрисовка изображений в карточке
+ */
 export class BackgroundImage {
   private readonly x: number;
   private readonly y: number;
@@ -41,57 +45,36 @@ export class BackgroundImage {
     width,
     height,
     isCenter,
+    position,
     orientation,
   }: Omit<TBackgroundImage, 'ctx' | 'src'>) {
     if (!isCenter) {
+      return { width, height, x, y, rotate: 0 };
+    }
+
+    if (orientation === TCardOrientation.Horizontal) {
       return {
-        width,
-        height,
-        x,
-        y,
-        rotate: 0,
+        width: height * 0.8,
+        height: height * 0.8,
+        x: position === TCardPosition.Right ? x + width * 0.3 : height * 0.7 - height,
+        y: position === TCardPosition.Right ? y + height * 0.1 : y + width * 0.5,
+        rotate: position === TCardPosition.Right ? 90 : -90,
       };
     }
-    if (orientation === TCardOrientation.Top) {
+    if (orientation === TCardOrientation.Vertical) {
       return {
         width: width * 0.8,
         height: width * 0.8,
         x: x + width * 0.1,
-        y: height * 0.25,
+        y: position === TCardPosition.Top ? height * 0.25 : y + height * 0.3,
         rotate: 0,
       };
     }
-    if (orientation === TCardOrientation.Right) {
-      return {
-        width: height * 0.8,
-        height: height * 0.8,
-        x: x + width * 0.3,
-        y: y + height * 0.1,
-        rotate: 90,
-      };
-    }
-    if (orientation === TCardOrientation.Bottom) {
-      return {
-        width: width * 0.8,
-        height: width * 0.8,
-        x: x + width * 0.1,
-        y: y + height * 0.3,
-        rotate: 0,
-      };
-    }
-    if (orientation === TCardOrientation.Left) {
-      return {
-        width: height * 0.8,
-        height: height * 0.8,
-        x: height * 0.7 - height,
-        y: y + width * 0.5,
-        rotate: -90,
-      };
-    }
+
     return {
-      width: height * 0.6,
-      height: height * 0.6,
-      x: height * 0.2,
+      width: width * 0.6,
+      height: width * 0.6,
+      x: width * 0.2,
       y: width * 0.2,
       rotate: 0,
     };

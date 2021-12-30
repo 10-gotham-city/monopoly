@@ -1,29 +1,21 @@
 import { theme } from 'entities/Game/setting/theme';
 
+type TCoordinates = {
+  x: number;
+  y: number;
+};
+
 type TDice = {
   ctx: CanvasRenderingContext2D;
-  start: {
-    x: number;
-    y: number;
-  };
-  end: {
-    x: number;
-    y: number;
-  };
+  start: TCoordinates;
+  end: TCoordinates;
   size: number;
 };
 
 export class Dice {
   value = 0;
-  private readonly start: {
-    x: number;
-    y: number;
-  };
-
-  private readonly end: {
-    x: number;
-    y: number;
-  };
+  private readonly start: TCoordinates;
+  private readonly end: TCoordinates;
 
   // Размер кубика
   private readonly size: number;
@@ -33,7 +25,7 @@ export class Dice {
   private readonly background = theme.color.dice.background;
   private rotate = 0;
   private readonly radius;
-  private dots: { x: number; y: number }[] = [];
+  private dots: TCoordinates[] = [];
 
   constructor({ ctx, start, end, size }: TDice) {
     this.ctx = ctx;

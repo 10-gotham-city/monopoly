@@ -1,1 +1,0 @@
-export { Rect } from './Rect';
