@@ -13,13 +13,9 @@ type TRoll = {
 
 export class Dices {
   dice1: Dice;
-
   dice2: Dice;
-
   ctx: CanvasRenderingContext2D;
-
   private readonly xyHover: number;
-
   private readonly sizeHover: number;
 
   constructor({ ctx, canvasSize }: TDices) {

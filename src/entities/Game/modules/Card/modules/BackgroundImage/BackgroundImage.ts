@@ -18,19 +18,12 @@ type TBackgroundImage = {
  */
 export class BackgroundImage {
   private readonly x: number;
-
   private readonly y: number;
-
   private readonly width: number;
-
   private readonly height: number;
-
   private readonly rotate: number;
-
   private readonly src: string;
-
   private readonly image: HTMLImageElement;
-
   private readonly ctx: CanvasRenderingContext2D;
 
   constructor({ ctx, src, ...props }: TBackgroundImage) {

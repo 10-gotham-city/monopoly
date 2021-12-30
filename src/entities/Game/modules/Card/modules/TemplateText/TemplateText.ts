@@ -20,17 +20,11 @@ type TGetCoordinates = Omit<TRect, 'ctx'> & {
  */
 export class TemplateText {
   text: string;
-
   ctx: CanvasRenderingContext2D;
-
   x: number;
-
   y: number;
-
   width: number;
-
   rotate: number;
-
   shift: number;
 
   constructor(props: TTemplateTitle) {

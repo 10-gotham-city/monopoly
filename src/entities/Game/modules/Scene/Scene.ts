@@ -23,13 +23,9 @@ type TScene = {
 // TODO обработать исключения
 export class Scene extends GameLoop {
   private readonly canvas: Canvas;
-
   private background: BackgroundImage | undefined;
-
   private dices: Dices | undefined;
-
   cards: (Corner | NoPrice | Main | WithImage)[] = [];
-
   chips: Chip[] = [];
 
   private readonly onRollDices: (value: number, double: boolean) => void;

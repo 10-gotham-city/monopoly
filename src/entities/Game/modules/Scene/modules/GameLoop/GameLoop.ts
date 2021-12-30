@@ -1,13 +1,10 @@
 export class GameLoop {
   // время вызова предыдущего кадра
   private last: number = performance.now();
-
   // текущее время
   private now: number = performance.now();
-
   // количество времени на один кадр
   private step: number = 1 / 60;
-
   // время, прошедшее между кадрами
   private dt = 0;
 

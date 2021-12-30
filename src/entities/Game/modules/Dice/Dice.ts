@@ -14,26 +14,16 @@ type TDice = {
 
 export class Dice {
   value = 0;
-
   private readonly start: TCoordinates;
-
   private readonly end: TCoordinates;
-
   // Размер кубика
   private readonly size: number;
-
   private x = 0;
-
   private y = 0;
-
   private readonly ctx: CanvasRenderingContext2D;
-
   private readonly background = theme.color.dice.background;
-
   private rotate = 0;
-
   private readonly radius;
-
   private dots: TCoordinates[] = [];
 
   constructor({ ctx, start, end, size }: TDice) {
