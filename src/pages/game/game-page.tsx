@@ -1,4 +1,4 @@
-import { Game } from 'entities/Game/modules/Game';
+import { Game } from 'entities/Game';
 import { useEffect, useRef } from 'react';
 
 export const GamePage = () => {

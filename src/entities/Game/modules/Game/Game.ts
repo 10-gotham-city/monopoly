@@ -1,4 +1,4 @@
-import { Scene } from 'entities/Game';
+import { Scene } from 'entities/Game/modules/Scene';
 import { Main } from 'entities/Game/modules/Card/typesCard/Main';
 
 export class Game {

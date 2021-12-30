@@ -1,5 +1,7 @@
 type TCanvasEvents = {
-  [eventName in keyof Partial<HTMLElementEventMap>]: any;
+  mouseout: () => void;
+  mousemove: (e: MouseEvent) => void;
+  click: (e: MouseEvent) => Promise<void>;
 };
 
 export class Canvas {
@@ -29,6 +31,9 @@ export class Canvas {
   // TODO remove event
   addEventListeners(events: TCanvasEvents) {
     Object.entries(events).forEach(([type, listener]) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       this.canvas.addEventListener(type, listener);
     });
   }

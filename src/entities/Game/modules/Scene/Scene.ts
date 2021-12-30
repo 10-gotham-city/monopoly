@@ -9,8 +9,8 @@ import { Main } from 'entities/Game/modules/Card/typesCard/Main';
 import { WithImage } from 'entities/Game/modules/Card/typesCard/WithImage';
 import { TCardType } from 'entities/Game/types/card';
 import { theme } from 'entities/Game/setting/theme';
-import { GameLoop } from 'entities/Game/modules/Scene/GameLoop';
-import { Canvas } from 'entities/Game/modules/Scene/Canvas';
+import { GameLoop } from 'entities/Game/modules/Scene/modules/GameLoop';
+import { Canvas } from 'entities/Game/modules/Scene/modules/Canvas';
 
 type TScene = {
   canvas: HTMLCanvasElement;
