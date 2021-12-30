@@ -10,6 +10,7 @@ import { topic } from 'entities/Game/setting/topic';
  */
 export class Corner extends CardRect {
   type = TCardType.Corner;
+
   background: BackgroundImage;
 
   constructor({ index, canvasSize, ctx }: TCardRect) {

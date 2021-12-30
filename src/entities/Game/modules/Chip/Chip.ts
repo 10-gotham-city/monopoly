@@ -10,10 +10,15 @@ type TCord = {
 
 export class Chip {
   private x = 0;
+
   private y = 0;
+
   private ctx: CanvasRenderingContext2D;
+
   private radius = 15;
+
   private position = 0;
+
   private readonly color: string;
 
   constructor({ color, ctx }: TChip) {

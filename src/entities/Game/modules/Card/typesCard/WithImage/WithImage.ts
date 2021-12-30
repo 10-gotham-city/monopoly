@@ -8,8 +8,11 @@ import { topic } from 'entities/Game/setting/topic';
 
 export class WithImage extends CardRect {
   type = TCardType.WithImage;
+
   background: BackgroundImage;
+
   amount: TemplateText;
+
   title: TemplateText;
 
   constructor({ index, canvasSize, ctx }: TCardRect) {

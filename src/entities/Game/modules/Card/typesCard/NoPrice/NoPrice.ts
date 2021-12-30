@@ -8,7 +8,9 @@ import { topic } from 'entities/Game/setting/topic';
 
 export class NoPrice extends CardRect {
   type = TCardType.NoPrice;
+
   background: BackgroundImage;
+
   title: TemplateText;
 
   constructor(props: TCardRect) {

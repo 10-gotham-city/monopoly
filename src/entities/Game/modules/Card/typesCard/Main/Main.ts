@@ -8,8 +8,11 @@ import { topic } from 'entities/Game/setting/topic';
 
 export class Main extends CardRect {
   type = TCardType.Main;
+
   title: TemplateText;
+
   price: TemplateText;
+
   label: Label;
 
   constructor(props: TCardRect) {

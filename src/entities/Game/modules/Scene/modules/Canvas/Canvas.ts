@@ -6,13 +6,21 @@ type TCanvasEvents = {
 
 export class Canvas {
   private isHover = false;
+
   private readonly top: number;
+
   private readonly left: number;
+
   private readonly x: number = 0;
+
   private readonly y: number = 0;
+
   private readonly canvas: HTMLCanvasElement;
+
   readonly ctx: CanvasRenderingContext2D;
+
   readonly width: number;
+
   readonly height: number;
 
   constructor(canvas: HTMLCanvasElement, events: TCanvasEvents) {

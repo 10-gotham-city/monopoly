@@ -17,8 +17,10 @@ export type TCardRect = {
 export abstract class CardRect extends CanvasElement {
   // Базовый размер (для вертикальных - высота, для горизонтальных - ширина)
   private readonly baseSize: number;
+
   // Позиционирование карточки
   protected readonly orientation: TCardOrientation;
+
   protected readonly position: TCardPosition;
 
   protected constructor({ index, canvasSize, ctx }: TCardRect) {

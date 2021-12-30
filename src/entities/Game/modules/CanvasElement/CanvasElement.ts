@@ -16,10 +16,15 @@ export type TCoordinates = {
  */
 export abstract class CanvasElement {
   hover = false;
+
   readonly ctx: CanvasRenderingContext2D;
+
   protected x: number;
+
   protected y: number;
+
   protected width: number;
+
   protected height: number;
 
   protected constructor({ x = 0, y = 0, width = 0, height = 0, ctx }: TCanvasElements) {
