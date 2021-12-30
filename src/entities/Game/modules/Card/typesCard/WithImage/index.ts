@@ -1,0 +1,1 @@
+export { WithImage } from './WithImage';
