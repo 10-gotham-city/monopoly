@@ -2,6 +2,7 @@ import { drawRect } from 'entities/Game/utils/drawRect';
 import { theme } from 'entities/Game/setting/theme';
 import { CanvasElement } from 'entities/Game/modules/CanvasElement';
 import { TCardOrientation, TCardPosition } from 'entities/Game/types/card';
+import { TCoordinates } from 'entities/Game/modules/CanvasElement/CanvasElement';
 
 export type TCardRect = {
   index: number;
@@ -10,16 +11,17 @@ export type TCardRect = {
 };
 
 /**
- * Абстрактый класс для расчета координат карточки и отрисовки обасти карточки
- * Размеры карточек расчитываются в соотношении (14 / 9*8 / 14) от размера холста
+ * Абстрактный класс для расчета координат карточки и отрисовки области карточки
+ * Размеры карточек рассчитываются в соотношении (14 / 9*8 / 14) от размера холста
  * т.е. угловые - 14%, остальные 8%
  */
 export abstract class CardRect extends CanvasElement {
   // Базовый размер (для вертикальных - высота, для горизонтальных - ширина)
   private readonly baseSize: number;
   // Позиционирование карточки
-  protected readonly orientation: TCardOrientation;
-  protected readonly position: TCardPosition;
+  readonly orientation: TCardOrientation;
+  readonly position: TCardPosition;
+  chipPosition: TCoordinates;
 
   protected constructor({ index, canvasSize, ctx }: TCardRect) {
     super({ ctx });
@@ -32,6 +34,7 @@ export abstract class CardRect extends CanvasElement {
     this.height = height;
     this.x = x;
     this.y = y;
+    this.chipPosition = this.getChipPosition(index);
   }
 
   private static getOrientation(index: number): TCardOrientation {
@@ -81,7 +84,7 @@ export abstract class CardRect extends CanvasElement {
     const height = this.baseSize;
     const baseX = this.baseSize + width * ((position % 10) - 1);
     const x = position < 10 ? baseX : canvasSize - baseX - width;
-    // к угловой карточке (размер this.baseSize) прибавляем произведенние ширины на (позицию - 1)
+    // к угловой карточке (размер this.baseSize) прибавляем произведение ширины на (позицию - 1)
     const y = position < 10 ? 0 : canvasSize - this.baseSize;
 
     return { width, height, x, y };
@@ -91,7 +94,7 @@ export abstract class CardRect extends CanvasElement {
     const width = this.baseSize;
     const height = Math.floor(canvasSize * 0.08);
     const x = position < 30 ? canvasSize - this.baseSize : 0;
-    // к угловой карточке (размер this.baseSize) прибавляем произведенние высоты на (позицию - 1)
+    // к угловой карточке (размер this.baseSize) прибавляем произведение высоты на (позицию - 1)
     const baseY = this.baseSize + height * ((position % 10) - 1);
     const y = position < 30 ? baseY : canvasSize - baseY - height;
 
@@ -103,6 +106,34 @@ export abstract class CardRect extends CanvasElement {
       ...this.sizeCtx,
       color: theme.color.stroke,
     });
+  }
+
+  private getChipPosition(index: number) {
+    const topShift = 0.25;
+    const bottomShift = 1 - topShift;
+
+    if (index === 0 || index === 10 || this.position === TCardPosition.Top) {
+      return {
+        x: this.x + Math.floor(this.width * 0.5),
+        y: this.y + Math.floor(this.height * topShift),
+      };
+    }
+    if (index === 20 || index === 30 || this.position === TCardPosition.Bottom) {
+      return {
+        x: this.x + Math.floor(this.width * 0.5),
+        y: this.y + Math.floor(this.height * bottomShift),
+      };
+    }
+    if (this.position === TCardPosition.Right) {
+      return {
+        x: this.x + Math.floor(this.width * bottomShift),
+        y: this.y + Math.floor(this.height * 0.5),
+      };
+    }
+    return {
+      x: this.x + Math.floor(this.width * topShift),
+      y: this.y + Math.floor(this.height * 0.5),
+    };
   }
 
   // TODO окрасить карточку если она у юзера

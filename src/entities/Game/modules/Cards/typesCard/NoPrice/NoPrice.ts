@@ -1,8 +1,8 @@
-import { BackgroundImage } from 'entities/Game/modules/Card/modules/BackgroundImage';
+import { BackgroundImage } from 'entities/Game/modules/BackgroundImage';
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
-import { CardRect, TCardRect } from 'entities/Game/modules/Card/modules/CardRect';
+import { CardRect, TCardRect } from 'entities/Game/modules/Cards/modules/CardRect';
 import { TCardNoPrice, TCardType } from 'entities/Game/types/card';
-import { TemplateText } from 'entities/Game/modules/Card/modules/TemplateText';
+import { TemplateText } from 'entities/Game/modules/Cards/modules/TemplateText';
 import { theme } from 'entities/Game/setting/theme';
 import { topic } from 'entities/Game/setting/topic';
 

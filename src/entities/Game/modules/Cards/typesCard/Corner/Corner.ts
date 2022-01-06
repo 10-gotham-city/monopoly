@@ -1,6 +1,6 @@
-import { BackgroundImage } from 'entities/Game/modules/Card/modules/BackgroundImage/BackgroundImage';
+import { BackgroundImage } from 'entities/Game/modules/BackgroundImage/BackgroundImage';
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
-import { CardRect, TCardRect } from 'entities/Game/modules/Card/modules/CardRect/CardRect';
+import { CardRect, TCardRect } from 'entities/Game/modules/Cards/modules/CardRect/CardRect';
 import { TCardCorner, TCardType } from 'entities/Game/types/card';
 import { theme } from 'entities/Game/setting/theme';
 import { topic } from 'entities/Game/setting/topic';

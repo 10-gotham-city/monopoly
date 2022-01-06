@@ -1,1 +1,1 @@
-export { Game } from './modules/Game';
+export { Game } from './Game';

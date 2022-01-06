@@ -1,20 +1,16 @@
-import { BackgroundImage } from 'entities/Game/modules/Card/modules/BackgroundImage/BackgroundImage';
-import { Card } from 'entities/Game/modules/Card';
-import { NoPrice } from 'entities/Game/modules/Card/typesCard/NoPrice';
-import { Chip } from 'entities/Game/modules/Chip';
-import { Corner } from 'entities/Game/modules/Card/typesCard/Corner';
-import { Dices } from 'entities/Game/modules/Dice';
+import { BackgroundImage } from 'entities/Game/modules/BackgroundImage';
+import { Cards } from 'entities/Game/modules/Cards';
+import { Chips } from 'entities/Game/modules/Chips';
+import { Dices } from 'entities/Game/modules/Dices';
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
-import { Main } from 'entities/Game/modules/Card/typesCard/Main';
-import { WithImage } from 'entities/Game/modules/Card/typesCard/WithImage';
-import { TCardType } from 'entities/Game/types/card';
+import { Main } from 'entities/Game/modules/Cards/typesCard/Main';
 import { theme } from 'entities/Game/setting/theme';
-import { GameLoop } from 'entities/Game/modules/Scene/modules/GameLoop';
-import { Canvas } from 'entities/Game/modules/Scene/modules/Canvas';
+import { GameLoop } from './modules/GameLoop';
+import { Canvas } from './modules/Canvas';
 
 type TScene = {
   canvas: HTMLCanvasElement;
-  onRollDices: (value: number, double: boolean) => void;
+  onRollDices: () => void;
   onClickCard: (card: Main) => void;
 };
 
@@ -25,10 +21,10 @@ export class Scene extends GameLoop {
   private readonly canvas: Canvas;
   private background: BackgroundImage | undefined;
   private dices: Dices | undefined;
-  cards: (Corner | NoPrice | Main | WithImage)[] = [];
-  chips: Chip[] = [];
+  cards: Cards | undefined;
+  chips: Chips | undefined;
 
-  private readonly onRollDices: (value: number, double: boolean) => void;
+  private readonly onRollDices: () => void;
 
   private readonly onClickCard: (card: Main) => void;
 
@@ -43,6 +39,13 @@ export class Scene extends GameLoop {
     this.onClickCard = onClickCard;
   }
 
+  static async init(props: TScene) {
+    const scene = new Scene(props);
+    await scene.createElements();
+    scene.gameLoop();
+    return scene;
+  }
+
   async createElements() {
     this.background = new BackgroundImage({
       ...this.canvas.sizeCtx,
@@ -51,60 +54,40 @@ export class Scene extends GameLoop {
     });
     await this.background.load();
 
-    this.cards = await Card.initAll(this.canvas.ctx, this.canvas.width);
+    this.cards = await Cards.initAll(this.canvas.ctx, this.canvas.width);
 
     this.dices = new Dices({
       ctx: this.canvas.ctx,
       canvasSize: this.canvas.width,
     });
 
-    // TODO сделать инициализацию фишек из состояния игры
-    this.chips = [
-      new Chip({
-        ctx: this.canvas.ctx,
-        color: 'red',
-      }),
-    ];
+    this.chips = new Chips(this.canvas.ctx);
   }
 
   onClick = async (e: MouseEvent): Promise<void> => {
     const mouseCord = this.canvas.getPositionMouseOnCanvas(e);
 
-    const cardClick = this.cards.find((card) => card.checkHover(mouseCord));
-    if (cardClick && cardClick.type === TCardType.Main) {
-      this.onClickCard(cardClick as Main);
+    const cardClick = this.cards?.checkClickMain(mouseCord);
+    if (cardClick) {
+      this.onClickCard(cardClick);
     }
 
-    if (this.dices?.isPointInPath(mouseCord)) {
-      const { value, double } = await this.dices.roll();
-      this.onRollDices(value, double);
+    if (this.dices?.checkClick(mouseCord)) {
+      this.onRollDices();
     }
   };
 
   onMousemove = (e: MouseEvent) => {
     const mouseCord = this.canvas.getPositionMouseOnCanvas(e);
-
-    let isHover = false;
-    this.cards.forEach((card) => {
-      if (card.type === TCardType.Main || card.type === TCardType.WithImage) {
-        const hoverCard = card.checkHover(mouseCord);
-        if (hoverCard) {
-          isHover = true;
-        }
-      }
-    });
-
-    if (this.dices?.isPointInPath(mouseCord)) {
+    let isHover = this.cards!.checkHover(mouseCord);
+    if (this.dices?.checkClick(mouseCord)) {
       isHover = true;
     }
-
     this.canvas.setCursor(isHover);
   };
 
   onMouseout = () => {
-    this.cards.forEach((card) => {
-      card.checkHover();
-    });
+    this.cards?.clearHover();
   };
 
   render() {
@@ -114,8 +97,12 @@ export class Scene extends GameLoop {
       color: theme.color.background.playingField,
     });
     this.background?.render();
-    this.cards.forEach((card) => card.render());
+    this.cards?.render();
     this.dices?.render();
-    this.chips.forEach((chip) => chip.render());
+    this.chips?.render();
+  }
+
+  update() {
+    this.chips?.update();
   }
 }

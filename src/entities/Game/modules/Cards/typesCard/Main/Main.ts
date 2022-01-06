@@ -1,8 +1,8 @@
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
-import { Label } from 'entities/Game/modules/Card/typesCard/Main/Label';
-import { CardRect, TCardRect } from 'entities/Game/modules/Card/modules/CardRect/CardRect';
+import { Label } from 'entities/Game/modules/Cards/typesCard/Main/Label';
+import { CardRect, TCardRect } from 'entities/Game/modules/Cards/modules/CardRect/CardRect';
 import { TCardMain, TCardType } from 'entities/Game/types/card';
-import { TemplateText } from 'entities/Game/modules/Card/modules/TemplateText';
+import { TemplateText } from 'entities/Game/modules/Cards/modules/TemplateText';
 import { theme } from 'entities/Game/setting/theme';
 import { topic } from 'entities/Game/setting/topic';
 

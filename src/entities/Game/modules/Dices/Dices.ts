@@ -1,4 +1,4 @@
-import { Dice } from 'entities/Game/modules/Dice/Dice';
+import { Dice } from 'entities/Game/modules/Dices/modules/Dice';
 import { TMouse } from 'entities/Game/types/card';
 
 type TDices = {
@@ -12,6 +12,7 @@ type TRoll = {
 };
 
 export class Dices {
+  private static instance: Dices;
   dice1: Dice;
   dice2: Dice;
   ctx: CanvasRenderingContext2D;
@@ -43,6 +44,12 @@ export class Dices {
     // увеличение области для клика
     this.xyHover = start - sizeDice;
     this.sizeHover = sizeRect + sizeDice * 2;
+
+    Dices.instance = this;
+  }
+
+  static getInstance() {
+    return Dices.instance;
   }
 
   get value(): TRoll {
@@ -67,7 +74,7 @@ export class Dices {
     this.dice2.render();
   }
 
-  isPointInPath({ x, y }: TMouse) {
+  checkClick({ x, y }: TMouse) {
     this.ctx.beginPath();
     this.ctx.rect(this.xyHover, this.xyHover, this.sizeHover, this.sizeHover);
     return this.ctx.isPointInPath(x, y);

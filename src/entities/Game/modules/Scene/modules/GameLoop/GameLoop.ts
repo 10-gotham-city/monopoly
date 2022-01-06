@@ -11,7 +11,7 @@ export class GameLoop {
   gameLoop() {
     // определяем текущее время
     this.now = performance.now();
-    // добавляем прошедшую разницу во времени. Не более, чем 1 секунда
+    // Добавляем прошедшую разницу во времени. Не более, чем 1 секунда
     this.dt += Math.min(1, (this.now - this.last) / 1000);
 
     /*
@@ -21,6 +21,7 @@ export class GameLoop {
     while (this.dt > this.step) {
       this.dt -= this.step;
       // TODO обновление сцены
+      this.update();
       // update(step);
     }
     this.last = this.now;
@@ -31,4 +32,6 @@ export class GameLoop {
   }
 
   render() {}
+
+  update() {}
 }

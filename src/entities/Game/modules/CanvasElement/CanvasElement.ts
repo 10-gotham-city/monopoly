@@ -30,6 +30,13 @@ export abstract class CanvasElement {
     this.y = y;
   }
 
+  get center() {
+    return {
+      x: this.x + this.width / 2,
+      y: this.y + this.height / 2,
+    };
+  }
+
   get sizeCtx() {
     return {
       x: this.x,
@@ -37,13 +44,6 @@ export abstract class CanvasElement {
       width: this.width,
       height: this.height,
       ctx: this.ctx,
-    };
-  }
-
-  get center() {
-    return {
-      x: this.x + this.width / 2,
-      y: this.y + this.height / 2,
     };
   }
 
