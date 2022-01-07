@@ -5,23 +5,22 @@ type TChip = {
   ctx: CanvasRenderingContext2D;
 };
 
-type TCord = {
-  x: number;
-  y: number;
-};
-
 export class Chip {
-  static speedMove = 300;
+  private static radius = 15;
+  static stepInCard = Math.floor(Chip.radius * 0.7);
+  private static speedMove = 300;
+  private readonly color: string;
   private x = 0;
   private y = 0;
   private ctx: CanvasRenderingContext2D;
-  private radius = 15;
-  private position = 0;
-  private startTime = 0;
-  private endTime = 0;
-  private readonly color: string;
+  position = 0;
 
-  private moveCoordinates: {
+  private startMoveTime = 0;
+  private endMoveTime = 0;
+  private moveCoordinates: TCoordinates[] = [];
+  private callbackMove: (() => void) | undefined;
+
+  private moveStep: {
     from: TCoordinates | null;
     to: TCoordinates | null;
   } = {
@@ -29,25 +28,19 @@ export class Chip {
     to: null,
   };
 
-  private centerCards: TCoordinates[] = [];
-
   constructor({ color, ctx }: TChip) {
     this.color = color;
     this.ctx = ctx;
   }
 
-  get currentIndexCard() {
-    return this.position;
-  }
-
-  setCoordinates({ x, y }: TCord) {
+  setCoordinates({ x, y }: TCoordinates) {
     this.x = x;
     this.y = y;
   }
 
   render() {
     this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+    this.ctx.arc(this.x, this.y, Chip.radius, 0, 2 * Math.PI, false);
     this.ctx.fillStyle = this.color;
     this.ctx.fill();
   }
@@ -63,21 +56,22 @@ export class Chip {
     }
   }
 
-  setMoveCoordinates(value: number, centerCards: TCoordinates[]) {
-    this.centerCards = centerCards;
+  setMoveCoordinates(value: number, moveCoordinates: TCoordinates[], callbackMove?: () => void) {
+    this.moveCoordinates = moveCoordinates;
+    this.callbackMove = callbackMove;
     this.takeStep(value);
-    this.setNextCard();
+    this.setNextStep();
   }
 
   /**
    * установить координаты следующей карточки для перемещения на нее фишки,
    * зафиксировать время для линейной интерполяции
    */
-  private setNextCard() {
-    if (this.centerCards.length) {
+  private setNextStep() {
+    if (this.moveCoordinates.length) {
       // есть карточки для движения
-      const to = this.centerCards.shift()!;
-      this.moveCoordinates = {
+      const to = this.moveCoordinates.shift()!;
+      this.moveStep = {
         from: {
           x: this.x,
           y: this.y,
@@ -85,10 +79,13 @@ export class Chip {
         to,
       };
       // время для линейной интерполяции
-      this.startTime = performance.now();
-      this.endTime = this.startTime + Chip.speedMove;
+      this.startMoveTime = performance.now();
+      this.endMoveTime = this.startMoveTime + Chip.speedMove;
     } else {
-      this.moveCoordinates.to = null;
+      this.moveStep.to = null;
+      if (this.callbackMove) {
+        this.callbackMove();
+      }
     }
   }
 
@@ -97,22 +94,22 @@ export class Chip {
    * @private
    */
   update() {
-    if (this.moveCoordinates.to === null) {
+    if (this.moveStep.to === null) {
       return;
     }
     const currentTime = performance.now();
-    if (currentTime > this.endTime) {
-      this.setNextCard();
+    if (currentTime > this.endMoveTime) {
+      this.setNextStep();
     }
-    if (this.moveCoordinates.to) {
-      const time = (currentTime - this.startTime) / Chip.speedMove;
-      this.lerpCoordinates(time);
+    if (this.moveStep.to) {
+      const time = (currentTime - this.startMoveTime) / Chip.speedMove;
+      this.setLERPCoordinates(time);
     }
   }
 
-  private lerpCoordinates(time: number) {
-    this.x = Chip.lerp(this.moveCoordinates.from!.x, this.moveCoordinates.to!.x, time);
-    this.y = Chip.lerp(this.moveCoordinates.from!.y, this.moveCoordinates.to!.y, time);
+  private setLERPCoordinates(time: number) {
+    this.x = Chip.LERP(this.moveStep.from!.x, this.moveStep.to!.x, time);
+    this.y = Chip.LERP(this.moveStep.from!.y, this.moveStep.to!.y, time);
   }
 
   /**
@@ -121,7 +118,7 @@ export class Chip {
    * @param finish
    * @param time
    */
-  static lerp(start: number, finish: number, time: number) {
+  private static LERP(start: number, finish: number, time: number) {
     return Math.floor(start + (finish - start) * time);
   }
 }

@@ -20,9 +20,7 @@ export class GameLoop {
              */
     while (this.dt > this.step) {
       this.dt -= this.step;
-      // TODO обновление сцены
       this.update();
-      // update(step);
     }
     this.last = this.now;
     this.render();

@@ -101,27 +101,4 @@ export class Cards {
       return cardClick as Main;
     }
   }
-
-  /**
-   * Получить координаты count карточек, начиная с карточки index
-   * @param index
-   * @param count
-   */
-  getIntervalCardsCenter(index: number, count: number) {
-    let centerCards = [];
-
-    while (centerCards.length <= count) {
-      const { center } = this.getCardByIndex(index);
-      centerCards.push(center);
-      index++;
-      if (index === 40) {
-        index = 0;
-      }
-    }
-
-    const { chipPosition } = this.getCardByIndex(index === 0 ? 39 : index - 1);
-    centerCards.push(chipPosition);
-
-    return centerCards;
-  }
 }
