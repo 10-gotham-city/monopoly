@@ -15,6 +15,7 @@ import { LeaderboardTableHead } from 'entities/leaderboard/ui/leaderboard-table-
 
 const INITIAL_PAGE_INDEX = 0;
 const INITIAL_ROW_PER_PAGE = 5;
+const ROWS_PER_PAGE_OPTIONS = [5, 10, 25, 50, 75, 100];
 
 type Props = {
   dataTable: TDataRowLeaderboardTable[];
@@ -88,7 +89,7 @@ export const LeaderboardTable = memo(({ dataTable }: Props) => {
       </TableContainer>
       <TablePagination
         labelRowsPerPage="Показывать по:"
-        rowsPerPageOptions={[5, 10, 25, 50, 75, 100]}
+        rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
         component="div"
         count={dataTable.length}
         rowsPerPage={rowsPerPage}
