@@ -22,9 +22,11 @@ export abstract class CardRect extends CanvasElement {
   readonly orientation: TCardOrientation;
   readonly position: TCardPosition;
   chipPosition: TCoordinates;
+  index: number;
 
   protected constructor({ index, canvasSize, ctx }: TCardRect) {
     super({ ctx });
+    this.index = index;
     this.orientation = CardRect.getOrientation(index);
     this.position = CardRect.getPosition(index);
     this.baseSize = Math.floor(canvasSize * 0.14);

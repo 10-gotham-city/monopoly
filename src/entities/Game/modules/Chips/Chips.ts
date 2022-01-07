@@ -1,6 +1,8 @@
 import { Chip } from './modules/Chip';
 import { Cards } from 'entities/Game/modules/Cards';
 import { TCardOrientation } from 'entities/Game/types/card';
+import { EventBus } from 'entities/Game/modules/EventBus';
+import { EVENTS_NAME } from 'entities/Game/modules/EventBus/eventsName';
 
 export class Chips {
   chips: Chip[];
@@ -24,6 +26,12 @@ export class Chips {
     });
 
     Chips.instance = this;
+
+    this.addEventListener();
+  }
+
+  private addEventListener() {
+    EventBus.getInstance().on(EVENTS_NAME.CHIP_IN_CENTER_CARD, this.finishMove);
   }
 
   static getInstance() {
@@ -44,7 +52,6 @@ export class Chips {
 
   /**
    * Рассчитать координаты фишек на целевой карточке
-   * @param indexCard
    */
   getCoordinatesForCard(indexCard: number) {
     const card = Cards.getInstance().getCardByIndex(indexCard);
@@ -82,8 +89,6 @@ export class Chips {
 
   /**
    * Получить координаты count карточек, начиная с карточки index
-   * @param index
-   * @param count
    */
   getIntervalCardsCenter(index: number, count: number) {
     let centerCards = [];
@@ -105,20 +110,24 @@ export class Chips {
     const startCard = chip.position;
     const moveCoordinates = this.getIntervalCardsCenter(startCard, value);
 
-    // callback перемещения фишки - расставить фишки на одной карточке
-    const callbackMove = () => {
-      this.arrangeChipsOnCard(chip.position);
-    };
-    chip.setMoveCoordinates(value, moveCoordinates, callbackMove);
+    chip.moveBetweenCards(value, moveCoordinates);
 
     // обновить фишки на стартовой карточке
     this.arrangeChipsOnCard(startCard);
   }
 
-  // Расставить фишки на карточке
+  /**
+   * Расставить фишки на карточке
+   * @param indexCard
+   */
   arrangeChipsOnCard(indexCard: number) {
     this.getCoordinatesForCard(indexCard).forEach(({ chip, coordinates }) => {
-      chip.setMoveCoordinates(0, [coordinates]);
+      chip.moveInsideCard(coordinates);
     });
   }
+
+  private finishMove = (index: number) => {
+    this.arrangeChipsOnCard(index);
+    EventBus.getInstance().emit(EVENTS_NAME.READY_STEP, index);
+  };
 }

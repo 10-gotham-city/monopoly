@@ -3,16 +3,11 @@ import { Cards } from 'entities/Game/modules/Cards';
 import { Chips } from 'entities/Game/modules/Chips';
 import { Dices } from 'entities/Game/modules/Dices';
 import { drawFillRect } from 'entities/Game/utils/drawFillRect';
-import { Main } from 'entities/Game/modules/Cards/typesCard/Main';
 import { theme } from 'entities/Game/setting/theme';
 import { GameLoop } from './modules/GameLoop';
 import { Canvas } from './modules/Canvas';
-
-type TScene = {
-  canvas: HTMLCanvasElement;
-  onRollDices: () => void;
-  onClickCard: (card: Main) => void;
-};
+import { EventBus } from 'entities/Game/modules/EventBus';
+import { EVENTS_NAME } from 'entities/Game/modules/EventBus/eventsName';
 
 // TODO Добавить ресайз
 // TODO Добавить ожидание загрузки ресурсов
@@ -24,23 +19,17 @@ export class Scene extends GameLoop {
   cards: Cards | undefined;
   chips: Chips | undefined;
 
-  private readonly onRollDices: () => void;
-
-  private readonly onClickCard: (card: Main) => void;
-
-  constructor({ canvas, onRollDices, onClickCard }: TScene) {
+  constructor(canvas: HTMLCanvasElement) {
     super();
     this.canvas = new Canvas(canvas, {
       mousemove: this.onMousemove,
       mouseout: this.onMouseout,
       click: this.onClick,
     });
-    this.onRollDices = onRollDices;
-    this.onClickCard = onClickCard;
   }
 
-  static async init(props: TScene) {
-    const scene = new Scene(props);
+  static async init(canvas: HTMLCanvasElement) {
+    const scene = new Scene(canvas);
     await scene.createElements();
     scene.gameLoop();
     return scene;
@@ -69,11 +58,11 @@ export class Scene extends GameLoop {
 
     const cardClick = this.cards?.checkClickMain(mouseCord);
     if (cardClick) {
-      this.onClickCard(cardClick);
+      EventBus.getInstance().emit(EVENTS_NAME.CLICK_CARD, cardClick.index);
     }
 
     if (this.dices?.checkClick(mouseCord)) {
-      this.onRollDices();
+      EventBus.getInstance().emit(EVENTS_NAME.ROLL_DICES);
     }
   };
 

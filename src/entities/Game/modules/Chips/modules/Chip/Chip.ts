@@ -1,4 +1,6 @@
 import { TCoordinates } from 'entities/Game/modules/CanvasElement/CanvasElement';
+import { EventBus } from 'entities/Game/modules/EventBus';
+import { EVENTS_NAME } from 'entities/Game/modules/EventBus/eventsName';
 
 type TChip = {
   color: string;
@@ -18,7 +20,7 @@ export class Chip {
   private startMoveTime = 0;
   private endMoveTime = 0;
   private moveCoordinates: TCoordinates[] = [];
-  private callbackMove: (() => void) | undefined;
+  private moveToNewCard = false;
 
   private moveStep: {
     from: TCoordinates | null;
@@ -56,10 +58,24 @@ export class Chip {
     }
   }
 
-  setMoveCoordinates(value: number, moveCoordinates: TCoordinates[], callbackMove?: () => void) {
+  /**
+   * Перемещение фишек между карточек
+   * @param value
+   * @param moveCoordinates
+   */
+  moveBetweenCards(value: number, moveCoordinates: TCoordinates[]) {
+    this.moveToNewCard = true;
     this.moveCoordinates = moveCoordinates;
-    this.callbackMove = callbackMove;
     this.takeStep(value);
+    this.setNextStep();
+  }
+
+  /**
+   * Перемещение внутри карточки
+   * @param coordinates
+   */
+  moveInsideCard(coordinates: TCoordinates) {
+    this.moveCoordinates = [coordinates];
     this.setNextStep();
   }
 
@@ -83,8 +99,10 @@ export class Chip {
       this.endMoveTime = this.startMoveTime + Chip.speedMove;
     } else {
       this.moveStep.to = null;
-      if (this.callbackMove) {
-        this.callbackMove();
+      if (this.moveToNewCard) {
+        // выполнить только для перемещений между карточками
+        EventBus.getInstance().emit(EVENTS_NAME.CHIP_IN_CENTER_CARD, this.position);
+        this.moveToNewCard = false;
       }
     }
   }
