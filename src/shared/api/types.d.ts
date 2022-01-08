@@ -1,5 +1,5 @@
 export enum TSuccessResponse {
-  Ok = 'Ok',
+  Ok = "Ok",
 }
 
 export type TFailedResponse = {
