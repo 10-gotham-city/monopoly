@@ -5,10 +5,5 @@ type TSignInTSignInRequest = {
   password: string;
 };
 
-export const signIn = ({ login, password }: TSignInTSignInRequest) =>
-  http.getInstance().post('/auth/signin', {
-    data: {
-      login,
-      password,
-    },
-  });
+export const signIn = (data: TSignInTSignInRequest) =>
+  http.getInstance().post('/auth/signin', data);

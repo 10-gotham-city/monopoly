@@ -9,14 +9,4 @@ type TSignUp = {
   phone: string;
 };
 
-export const signUp = ({ first_name, second_name, login, email, password, phone }: TSignUp) =>
-  http.getInstance().post('/auth/signup', {
-    data: {
-      first_name,
-      second_name,
-      login,
-      email,
-      password,
-      phone,
-    },
-  });
+export const signUp = (data: TSignUp) => http.getInstance().post('/auth/signup', data);
