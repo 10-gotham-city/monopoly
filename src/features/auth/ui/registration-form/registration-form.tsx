@@ -30,7 +30,7 @@ const defaultValues: TRegistrationFormValues = {
   phone: '',
 };
 
-const FormatPhoneCustom = getNumberFormatCustom({ format: '+7 ### ### ## ##' });
+const FormatPhoneCustom = getNumberFormatCustom({ format: '+# ### ### ## ##' });
 
 type Props = {
   onSubmit: () => void;

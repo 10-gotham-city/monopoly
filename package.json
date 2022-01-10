@@ -45,6 +45,7 @@
   "dependencies": {
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
+    "@mui/lab": "^5.0.0-alpha.61",
     "@mui/material": "5.2.4",
     "@mui/styled-engine-sc": "5.1.0",
     "axios": "0.24.0",
