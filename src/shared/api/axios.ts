@@ -21,4 +21,4 @@ export const http = (function () {
       return instance;
     },
   };
-}());
+})();
