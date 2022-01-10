@@ -71,7 +71,7 @@ export const LeaderboardTable = memo(({ dataTable }: Props) => {
           <TableBody>
             {sortTableByColumn(dataTable, order, orderBy)
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
+              .map((row) => (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.displayName}>
                   <TableCell align="left">{row.displayName}</TableCell>
                   <TableCell align="right">{row.allPlays}</TableCell>

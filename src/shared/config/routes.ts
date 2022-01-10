@@ -3,4 +3,5 @@ export const routes = {
   login: '/login',
   registration: '/registration',
   leaderboard: '/leaderboard',
+  game: '/game',
 };
