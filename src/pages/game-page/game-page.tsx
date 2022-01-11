@@ -1,4 +1,4 @@
-import { Game } from 'entities/Game';
+import { GameEngine } from 'features/game-engine';
 import { useEffect, useRef } from 'react';
 
 export const GamePage = () => {
@@ -7,7 +7,7 @@ export const GamePage = () => {
   useEffect(() => {
     async function initCanvas() {
       if (canvasEl.current) {
-        await Game.init(canvasEl.current);
+        await GameEngine.init(canvasEl.current);
       }
     }
 

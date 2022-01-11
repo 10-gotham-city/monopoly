@@ -1,1 +1,0 @@
-export { NoPrice } from './NoPrice';

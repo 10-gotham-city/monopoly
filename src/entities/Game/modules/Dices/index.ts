@@ -1,1 +1,0 @@
-export { Dices } from './Dices';
