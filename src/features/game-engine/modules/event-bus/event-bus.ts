@@ -37,6 +37,7 @@ export class EventBus {
       throw new Error(`Нет события: ${event}`);
     }
 
+    // @ts-ignore
     this.listeners[event].forEach((listener) => listener(...args));
   }
 }

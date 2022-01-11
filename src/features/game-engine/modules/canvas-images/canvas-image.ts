@@ -34,11 +34,7 @@ export class CanvasImage extends CanvasElement {
 
   render() {
     drawImage({
-      ctx: this.ctx,
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
+      ...this.sizeAndCtx,
       image: this.image,
       rotate: this.rotate,
     });
