@@ -3,10 +3,10 @@ import { Chips } from 'features/game-engine/modules/chips';
 import { Dices } from 'features/game-engine/modules/dices';
 import { fillRect } from 'features/game-engine/utils/fillRect';
 import { theme } from 'features/game-engine/setting/theme';
-import { GameLoop } from './game-loop';
-import { Canvas } from './canvas';
 import { EventBus } from 'features/game-engine/modules/event-bus';
 import { EVENTS_NAME } from 'features/game-engine/setting/events-name';
+import { GameLoop } from './game-loop';
+import { Canvas } from './canvas';
 import { Background } from './background';
 
 // TODO Добавить ресайз

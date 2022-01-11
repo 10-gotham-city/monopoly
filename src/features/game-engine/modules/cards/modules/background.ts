@@ -36,6 +36,7 @@ export class Background extends CanvasImage {
       RIGHT: 90,
     },
   };
+
   private static readonly coordinates = {
     /* eslint-disable @typescript-eslint/unbound-method */
     [TOrientation.Horizontal]: Background.getHorizontalCoordinates,

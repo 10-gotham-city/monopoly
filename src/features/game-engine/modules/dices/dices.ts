@@ -22,6 +22,7 @@ export class Dices extends CanvasElement {
     SHIFT_DICE_1: 0.8, // сдвиг относительно центра для 1-го кубика
     SHIFT_DICE_2: 1.2, // сдвиг относительно центра для 2-го кубика
   };
+
   private static instance: Dices;
   private readonly dice1: Dice;
   private readonly dice2: Dice;
@@ -36,7 +37,7 @@ export class Dices extends CanvasElement {
     const sizeDice = Math.floor(canvasSize * Dices.CONST.DICE_SIZE);
 
     // Увеличение области кубиков для события клика (необходимо в связи с вращением кубиков)
-    const hypotenuseDice = Math.sqrt(2 * Math.pow(sizeDice, 2));
+    const hypotenuseDice = Math.sqrt(2 * sizeDice ** 2);
     const startRect = start - hypotenuseDice;
     const sizeRect = canvasSize * Dices.CONST.RECT_SIZE + hypotenuseDice * 2;
 

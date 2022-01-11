@@ -1,7 +1,7 @@
 import { EVENTS_NAME } from '../../setting';
 import { TCoordinates } from '../../types';
 import { EventBus } from '../event-bus';
-import { CanvasElement } from '../../modules';
+import { CanvasElement } from '..';
 import { arc } from '../../utils';
 
 type TChip = {
@@ -13,10 +13,11 @@ export class Chip extends CanvasElement {
   static readonly CONST = {
     RADIUS: 15, // px
     COUNT_CARD: 40,
-    END_ANGLE: 2 * Math.PI, //deg
+    END_ANGLE: 2 * Math.PI, // deg
     DISTANCE_BETWEEN_CHIPS: Math.floor(15 * 0.7), // px
-    SPEED_MOVE: 300, //ms
+    SPEED_MOVE: 300, // ms
   };
+
   private readonly color: string;
   position = 0;
 

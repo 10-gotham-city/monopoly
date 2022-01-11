@@ -26,12 +26,14 @@ export class TemplateText extends CanvasElement {
     // Сдвиг текста относительно базовой линии
     FONT_SHIFT: 5,
   };
+
   private static readonly coordinates = {
     /* eslint-disable @typescript-eslint/unbound-method */
     [TOrientation.Horizontal]: TemplateText.getHorizontalCoordinates,
     [TOrientation.Vertical]: TemplateText.getVerticalCoordinates,
     /* eslint-enable @typescript-eslint/unbound-method */
   };
+
   private readonly text: string;
   private readonly rotate: number;
 

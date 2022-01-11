@@ -45,6 +45,7 @@ export abstract class CardRect extends CanvasElement {
     x: 0,
     y: 0,
   };
+
   private backgroundColor: string = theme.color.background.card.normal;
 
   protected constructor({ index, canvasSize, ctx, type }: TCardRect) {

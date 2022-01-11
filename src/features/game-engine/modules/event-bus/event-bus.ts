@@ -5,6 +5,7 @@ export class EventBus {
   private readonly listeners: {
     [event: string]: TCallbackType[];
   };
+
   private static instance: EventBus;
   static getInstance() {
     return EventBus.instance;

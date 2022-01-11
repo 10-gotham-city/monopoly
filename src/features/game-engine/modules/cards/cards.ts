@@ -94,7 +94,7 @@ export class Cards {
    */
   checkClickAssetCard(mouseCord: TCoordinates) {
     // eslint-disable-next-line no-restricted-syntax
-    for (let card of this.assetCards) {
+    for (const card of this.assetCards) {
       if (card.isPointInPath(mouseCord)) {
         return card;
       }

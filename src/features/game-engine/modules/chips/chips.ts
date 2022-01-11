@@ -1,5 +1,5 @@
 import { TOrientation } from '../../types';
-import { EventBus } from '../../modules';
+import { EventBus } from '..';
 import { EVENTS_NAME } from '../../setting';
 import { Cards } from '../cards';
 import { Chip } from './chip';
@@ -8,6 +8,7 @@ export class Chips {
   private static readonly CONST = {
     COUNT_CARDS: 40,
   };
+
   private static instance: Chips;
   private readonly chips: Chip[];
 
@@ -100,7 +101,7 @@ export class Chips {
    * Получить координаты count карточек, начиная с карточки index
    */
   private static getIntervalCardsCenter(index: number, count: number) {
-    let centerCards = [];
+    const centerCards = [];
 
     let i = index;
     while (centerCards.length <= count) {
@@ -119,7 +120,7 @@ export class Chips {
   /**
    * Передвинуть фишку
    */
-  moveChip(indexChip: number, value: number = 0) {
+  moveChip(indexChip: number, value = 0) {
     const chip = this.getChipByIndex(indexChip);
     const startCard = chip.position;
     const moveCoordinates = Chips.getIntervalCardsCenter(startCard, value);

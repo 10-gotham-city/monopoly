@@ -1,5 +1,5 @@
 import { theme } from '../../setting';
-import { CanvasElement } from '../../modules';
+import { CanvasElement } from '..';
 import { degreeToRad } from '../../utils';
 import { TCoordinates } from '../../types';
 
@@ -20,6 +20,7 @@ export class Dice extends CanvasElement {
     CENTER_DOT: 0.5,
     END_DOT: 0.8,
   };
+
   value = 0;
   // Область для разброса кубика
   private readonly start: TCoordinates;
