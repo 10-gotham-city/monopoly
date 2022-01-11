@@ -28,6 +28,8 @@
     "react/jsx-props-no-spreading": [0],
     "implicit-arrow-linebreak": 0,
     "operator-linebreak": "off",
-    "@typescript-eslint/indent": "off"
+    "@typescript-eslint/indent": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/label-has-associated-control": "off"
   }
 }
