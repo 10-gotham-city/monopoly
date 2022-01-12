@@ -1,5 +1,5 @@
+import { Box, Card, Typography, styled } from '@mui/material';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
-import { Card, Box, styled, Typography } from '@mui/material';
 import { SchemaOf } from 'yup';
 
 const FormCard = styled(Card)`
