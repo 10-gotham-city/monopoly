@@ -1,12 +1,15 @@
-import { memo, useCallback } from 'react';
 import { Button, Grid, Link } from '@mui/material';
-import { InputField } from 'shared/ui/components';
-import { AuthorizationFormNames, TAuthorizationFormValues } from 'features/auth/types';
-import { AuthFormTemplate } from 'entities/auth';
 import { FormikProps } from 'formik';
+import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { routes } from 'shared/config';
 import * as yup from 'yup';
+
+import { AuthorizationFormNames, TAuthorizationFormValues } from 'features/auth/types';
+
+import { AuthFormTemplate } from 'entities/auth';
+
+import { routes } from 'shared/config';
+import { InputField } from 'shared/ui/components';
 
 type Props = {
   onSubmit: () => void;

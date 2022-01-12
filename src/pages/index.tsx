@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
+
 import { routes } from 'shared/config';
+
 import { RegistrationPage } from './registration-page';
 import { ProfilePage } from './profile-page';
 import { LeaderboardPage } from './leaderboard-page';
