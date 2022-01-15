@@ -4,4 +4,5 @@ export const routes = {
   registration: '/registration',
   profile: '/profile',
   leaderboard: '/leaderboard',
+  game: '/game',
 };
