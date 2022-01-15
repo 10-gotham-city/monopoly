@@ -40,7 +40,7 @@ export const ButtonStartGame = memo(({ isAuthorized }: Props) => {
           Начать игру
         </Button>
         <WrapperImage>
-          <CardMedia component="img" src={homeMonopoly as string} alt="" />
+          <CardMedia component="img" src={homeMonopoly as string} alt="monopoly-man" />
         </WrapperImage>
       </Box>
     </BoxWrapper>
