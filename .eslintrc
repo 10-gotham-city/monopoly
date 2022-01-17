@@ -22,6 +22,7 @@
       }
     ],
     "import/prefer-default-export": "off",
+    "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "react/require-default-props": [0],
     "object-curly-newline": "off",
     "react/jsx-props-no-spreading": [0],
