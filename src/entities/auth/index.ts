@@ -1,0 +1,1 @@
+export { AuthFormTemplate } from './ui';
