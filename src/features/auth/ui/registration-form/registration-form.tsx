@@ -1,5 +1,6 @@
-import { Button, Grid, Link } from '@mui/material';
-import { FormikProps } from 'formik';
+import { LoadingButton } from '@mui/lab';
+import { Grid, Link } from '@mui/material';
+import { FormikHelpers, FormikProps } from 'formik';
 import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
@@ -33,12 +34,15 @@ const defaultValues: TRegistrationFormValues = {
 const FormatPhoneCustom = getNumberFormatCustom({ format: '+# ### ### ## ##' });
 
 type Props = {
-  onSubmit: () => void;
+  onSubmit: (
+    values: TRegistrationFormValues,
+    helpers: FormikHelpers<TRegistrationFormValues>,
+  ) => void;
 };
 
 export const RegistrationForm = memo(({ onSubmit }: Props) => {
   const content = useCallback(
-    () => (
+    ({ isSubmitting }: FormikProps<TRegistrationFormValues>) => (
       <Grid container spacing={3}>
         <Grid item width={1}>
           <InputField name={RegistrationFormNames.Login} label="Логин" />
@@ -63,7 +67,7 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => {
           />
         </Grid>
         <Grid item width={1}>
-          <InputField name={RegistrationFormNames.Password} label="Пароль" />
+          <InputField name={RegistrationFormNames.Password} label="Пароль" type="password" />
         </Grid>
       </Grid>
     ),
@@ -71,11 +75,16 @@ export const RegistrationForm = memo(({ onSubmit }: Props) => {
   );
 
   const buttons = useCallback(
-    ({ handleSubmit }: FormikProps<TRegistrationFormValues>) => (
+    ({ handleSubmit, isSubmitting }: FormikProps<TRegistrationFormValues>) => (
       <>
-        <Button variant="contained" size="large" onClick={() => handleSubmit()}>
+        <LoadingButton
+          loading={isSubmitting}
+          variant="contained"
+          size="large"
+          onClick={() => handleSubmit()}
+        >
           Зарегистрироваться
-        </Button>
+        </LoadingButton>
         <Link component={RouterLink} to={routes.login}>
           Войти
         </Link>

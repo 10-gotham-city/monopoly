@@ -5,7 +5,7 @@ export const http = (function () {
 
   function createInstanceAxios(): AxiosInstance {
     return axios.create({
-      baseURL: 'ya-praktikum.tech/api/v2',
+      baseURL: 'https://ya-praktikum.tech/api/v2',
       headers: { 'Content-type': 'application/json' },
       withCredentials: true,
       timeout: 3000,
