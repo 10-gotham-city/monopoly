@@ -6,7 +6,7 @@ export const userApi = instanceApi.injectEndpoints({
     changeProfile: builder.mutation<TChangeProfileResponse, TChangeProfileQuery>({
       query: (body) => ({
         url: '/user/profile',
-        method: 'POST',
+        method: 'PUT',
         body,
       }),
     }),
