@@ -1,5 +1,5 @@
-import { registrationReducer } from 'features/auth';
+import { instanceApi } from 'shared/api';
 
 export const rootReducer = {
-  registration: registrationReducer,
+  [instanceApi.reducerPath]: instanceApi.reducer,
 };
