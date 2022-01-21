@@ -5,5 +5,4 @@ export const routes = {
   game: '/game',
   profile: '/profile',
   leaderboard: '/leaderboard',
-  game: '/game',
 };
