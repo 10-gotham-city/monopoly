@@ -1,10 +1,7 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { instanceApi } from '../instance-api';
+import { TSignInRequest, TSignUpRequest, TSignUpResponse } from './types';
 
-import { baseQuery } from '../base-query';
-
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery,
+export const authApi = instanceApi.injectEndpoints({
   endpoints: (builder) => ({
     signIn: builder.mutation<string, TSignInRequest>({
       query: (body) => ({
@@ -21,4 +18,5 @@ export const authApi = createApi({
       }),
     }),
   }),
+  overrideExisting: false,
 });

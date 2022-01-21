@@ -1,9 +1,9 @@
-type TSignInRequest = {
+export type TSignInRequest = {
   login: string;
   password: string;
 };
 
-type TSignUpRequest = {
+export type TSignUpRequest = {
   first_name: string;
   second_name: string;
   login: string;
@@ -12,6 +12,6 @@ type TSignUpRequest = {
   phone: string;
 };
 
-type TSignUpResponse = {
+export type TSignUpResponse = {
   id: number;
 };

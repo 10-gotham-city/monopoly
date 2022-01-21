@@ -1,9 +1,5 @@
-import { combineReducers } from '@reduxjs/toolkit';
-
-import { authApi } from 'shared/api';
+import { instanceApi } from 'shared/api';
 
 export const rootReducer = {
-  api: combineReducers({
-    [authApi.reducerPath]: authApi.reducer,
-  }),
+  [instanceApi.reducerPath]: instanceApi.reducer,
 };

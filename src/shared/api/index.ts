@@ -1,1 +1,1 @@
-export { authApi } from './auth';
+export { instanceApi } from './instance-api';
