@@ -1,1 +1,5 @@
-export const rootReducer = {};
+import { instanceApi } from 'shared/api';
+
+export const rootReducer = {
+  [instanceApi.reducerPath]: instanceApi.reducer,
+};
