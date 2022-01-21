@@ -1,1 +1,1 @@
-export { changeUser } from './change-user';
+export { useChangeProfileMutation, userApi } from './user-api';
