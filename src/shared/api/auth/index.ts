@@ -1,1 +1,1 @@
-export { authApi } from './auth-api';
+export { authApi, useSignInMutation, useSignUpMutation } from './auth-api';
