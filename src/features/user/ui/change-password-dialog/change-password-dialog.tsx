@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import { memo } from 'react';
 
 import { InputField } from 'shared/ui/components';
@@ -16,10 +16,7 @@ const defaultValues: TChangePasswordFormValues = {
 
 type Props = {
   open: boolean;
-  onSubmit: (
-    values: TChangePasswordFormValues,
-    helpers: FormikHelpers<TChangePasswordFormValues>,
-  ) => void;
+  onSubmit: (values: TChangePasswordFormValues) => Promise<void>;
   onClose: () => void;
 };
 

@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 import { Grid, Link } from '@mui/material';
-import { FormikHelpers, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
@@ -34,10 +34,7 @@ const defaultValues: TRegistrationFormValues = {
 const FormatPhoneCustom = getNumberFormatCustom({ format: '+# ### ### ## ##' });
 
 type Props = {
-  onSubmit: (
-    values: TRegistrationFormValues,
-    helpers: FormikHelpers<TRegistrationFormValues>,
-  ) => void;
+  onSubmit: (values: TRegistrationFormValues) => Promise<void>;
 };
 
 export const RegistrationForm = memo(({ onSubmit }: Props) => {

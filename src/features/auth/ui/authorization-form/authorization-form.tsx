@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 import { Grid, Link } from '@mui/material';
-import { FormikHelpers, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
@@ -13,10 +13,7 @@ import { routes } from 'shared/config';
 import { InputField } from 'shared/ui/components';
 
 type Props = {
-  onSubmit: (
-    values: TAuthorizationFormValues,
-    helpers: FormikHelpers<TAuthorizationFormValues>,
-  ) => void;
+  onSubmit: (values: TAuthorizationFormValues) => Promise<void>;
 };
 
 const validationSchema: yup.SchemaOf<TAuthorizationFormValues> = yup.object().shape({

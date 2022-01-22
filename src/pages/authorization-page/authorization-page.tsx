@@ -1,29 +1,23 @@
 import { Box } from '@mui/material';
-import { FormikHelpers } from 'formik';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthorizationForm, TAuthorizationFormValues } from 'features/auth';
+import { AuthorizationForm, TAuthorizationFormValues, useAuth } from 'features/auth';
 
-import { useSignInMutation } from 'shared/api/auth';
 import { routes } from 'shared/config';
 import { BaseLayout } from 'shared/ui/layouts';
 
 export const AuthorizationPage = () => {
   const navigate = useNavigate();
 
-  const [signInMutation] = useSignInMutation();
+  const { signIn } = useAuth();
 
   const signInHandler = useCallback(
-    (
-      values: TAuthorizationFormValues,
-      { setSubmitting }: FormikHelpers<TAuthorizationFormValues>,
-    ) => {
-      signInMutation(values)
-        .then(() => navigate(routes.game))
-        .finally(() => setSubmitting(false));
+    async (values: TAuthorizationFormValues) => {
+      await signIn(values);
+      navigate(routes.game);
     },
-    [signInMutation, navigate],
+    [signIn, navigate],
   );
 
   return (

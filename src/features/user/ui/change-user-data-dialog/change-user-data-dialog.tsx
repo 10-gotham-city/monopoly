@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 import { memo } from 'react';
 import * as yup from 'yup';
 
@@ -23,10 +23,7 @@ const FormatPhoneCustom = getNumberFormatCustom({ format: '+# ### ### ## ##' });
 type Props = {
   open: boolean;
   initialValues: TChangeUserDataFormValues;
-  onSubmit: (
-    values: TChangeUserDataFormValues,
-    helpers: FormikHelpers<TChangeUserDataFormValues>,
-  ) => void;
+  onSubmit: (values: TChangeUserDataFormValues) => Promise<void>;
   onClose: () => void;
 };
 

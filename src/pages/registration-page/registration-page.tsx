@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { FormikHelpers } from 'formik';
 import { useCallback } from 'react';
 
 import {
@@ -15,13 +14,8 @@ export const RegistrationPage = () => {
   const [sighUpMutation] = useSignUpMutation();
 
   const registrationSubmitHandler = useCallback(
-    (
-      formValues: TRegistrationFormValues,
-      { setSubmitting }: FormikHelpers<TRegistrationFormValues>,
-    ) => {
-      sighUpMutation(mapRegistrationFormToQuery(formValues)).finally(() => {
-        setSubmitting(false);
-      });
+    async (formValues: TRegistrationFormValues) => {
+      await sighUpMutation(mapRegistrationFormToQuery(formValues));
     },
     [sighUpMutation],
   );

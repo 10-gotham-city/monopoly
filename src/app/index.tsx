@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Router } from 'pages';
 
-import { ErrorBoundary } from './providers';
+import { AuthProvider, ErrorBoundary } from './providers';
 import { reduxStore } from './store';
 
 export const App = () => (
@@ -12,7 +12,9 @@ export const App = () => (
     <CssBaseline />
     <ReduxProvider store={reduxStore}>
       <BrowserRouter>
-        <Router />
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
       </BrowserRouter>
     </ReduxProvider>
   </ErrorBoundary>

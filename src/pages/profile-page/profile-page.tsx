@@ -3,11 +3,11 @@ import { Avatar, Box, Button, styled } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from 'features/auth';
 import { ChangeAvatarDialog, ChangePasswordDialog, ChangeUserDataDialog } from 'features/user';
 
 import { UserData } from 'entities/user';
 
-import { useLogoutMutation } from 'shared/api/auth';
 import { routes } from 'shared/config';
 import { BaseLayout } from 'shared/ui/layouts';
 
@@ -27,6 +27,7 @@ const ButtonsWrapper = styled(Box)`
 `;
 
 export const ProfilePage = () => {
+  const { logout, isLogoutPending } = useAuth();
   const navigate = useNavigate();
 
   const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
@@ -42,15 +43,13 @@ export const ProfilePage = () => {
   const handleOpenChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(true), []);
   const handleCloseChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(false), []);
 
-  const [logoutMutation, { isLoading: isLogoutPending }] = useLogoutMutation();
+  const logoutHandler = useCallback(async () => {
+    await logout();
+    navigate(routes.login);
+  }, [logout, navigate]);
 
-  const logoutHandler = useCallback(
-    () => logoutMutation({}).then(() => navigate(routes.login)),
-    [logoutMutation, navigate],
-  );
-
-  const handleSubmitChangePassword = useCallback(() => null, []);
-  const handleSubmitChangeUserData = useCallback(() => null, []);
+  const handleSubmitChangePassword = useCallback(() => Promise.resolve(), []);
+  const handleSubmitChangeUserData = useCallback(() => Promise.resolve(), []);
   const handleSubmitChangeAvatar = useCallback(() => null, []);
 
   const avatarSrc =
