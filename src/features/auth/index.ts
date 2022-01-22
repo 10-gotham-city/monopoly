@@ -1,3 +1,3 @@
 export { RegistrationForm, AuthorizationForm } from './ui';
-export { TRegistrationFormValues } from './types';
+export { TRegistrationFormValues, TAuthorizationFormValues } from './types';
 export { mapRegistrationFormToQuery } from './mappers';
