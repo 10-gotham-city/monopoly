@@ -1,7 +1,11 @@
-import { useState, useCallback } from 'react';
-import { Box, Avatar, styled, Button } from '@mui/material';
+import { Avatar, Box, Button, styled } from '@mui/material';
+import { useCallback, useState } from 'react';
+
+import { ChangeAvatarDialog, ChangePasswordDialog, ChangeUserDataDialog } from 'features/user';
+
 import { UserData } from 'entities/user';
-import { ChangePasswordDialog, ChangeUserDataDialog, ChangeAvatarDialog } from 'features/user';
+
+import { BaseLayout } from 'shared/ui/layouts';
 
 const AvatarWrapper = styled(Box)`
   display: flex;
@@ -42,8 +46,15 @@ export const ProfilePage = () => {
   const isChangeAvatarLoading = false;
 
   return (
-    <>
-      <Box width={500} display="flex" flexDirection="column" alignItems="center" margin="0 auto">
+    <BaseLayout>
+      <Box
+        width={500}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        margin="0 auto"
+        pt={6}
+      >
         <AvatarWrapper>
           <Avatar
             alt=""
@@ -109,6 +120,6 @@ export const ProfilePage = () => {
         onClose={handleCloseChangeAvatar}
         onSubmit={handleSubmitChangeAvatar}
       />
-    </>
+    </BaseLayout>
   );
 };
