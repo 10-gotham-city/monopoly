@@ -1,19 +1,24 @@
 import { Box } from '@mui/material';
 import { FormikHelpers } from 'formik';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { TRegistrationFormValues } from 'features/auth';
-import { RegistrationForm, registrationRequestAction } from 'features/auth';
+import { RegistrationForm, mapRegistrationFormToQuery } from 'features/auth';
 
+import { useSignUpMutation } from 'shared/api/auth';
 import { BaseLayer } from 'shared/ui/layers';
 
 export const RegistrationPage = () => {
-  const dispatch = useDispatch<GlobalDispatch>();
+  const [sighUpMutation] = useSignUpMutation();
 
   const registrationSubmitHandler = useCallback(
-    (formValues: TRegistrationFormValues, helpers: FormikHelpers<TRegistrationFormValues>) => {
-      dispatch(registrationRequestAction(formValues)).then(() => helpers.setSubmitting(false));
+    (
+      formValues: TRegistrationFormValues,
+      { setSubmitting }: FormikHelpers<TRegistrationFormValues>,
+    ) => {
+      sighUpMutation(mapRegistrationFormToQuery(formValues)).finally(() => {
+        setSubmitting(false);
+      });
     },
     [],
   );
