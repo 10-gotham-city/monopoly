@@ -6,7 +6,7 @@ import { TRegistrationFormValues } from 'features/auth';
 import { RegistrationForm, mapRegistrationFormToQuery } from 'features/auth';
 
 import { useSignUpMutation } from 'shared/api/auth';
-import { BaseLayer } from 'shared/ui/layers';
+import { BaseLayout } from 'shared/ui/layouts';
 
 export const RegistrationPage = () => {
   const [sighUpMutation] = useSignUpMutation();
@@ -24,10 +24,10 @@ export const RegistrationPage = () => {
   );
 
   return (
-    <BaseLayer>
+    <BaseLayout>
       <Box width={1} height={1} display="flex" alignItems="center" justifyContent="center">
         <RegistrationForm onSubmit={registrationSubmitHandler} />
       </Box>
-    </BaseLayer>
+    </BaseLayout>
   );
 };
