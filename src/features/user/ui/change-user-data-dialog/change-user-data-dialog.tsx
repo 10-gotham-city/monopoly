@@ -1,10 +1,12 @@
-import { memo } from 'react';
-import { Formik, FormikHelpers, Form } from 'formik';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Grid } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { InputField, getNumberFormatCustom } from 'shared/ui/components';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
+import { Form, Formik, FormikHelpers } from 'formik';
+import { memo } from 'react';
 import * as yup from 'yup';
+
 import { regexp } from 'shared/lib';
+import { InputField, getNumberFormatCustom } from 'shared/ui/components';
+
 import { ChangeUserDataFormNames, TChangeUserDataFormValues } from '../../types';
 
 const validationSchema: yup.SchemaOf<TChangeUserDataFormValues> = yup.object().shape({

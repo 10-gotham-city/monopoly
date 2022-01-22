@@ -1,10 +1,14 @@
+import { LoadingButton } from '@mui/lab';
 import { Avatar, Box, Button, styled } from '@mui/material';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { ChangeAvatarDialog, ChangePasswordDialog, ChangeUserDataDialog } from 'features/user';
 
 import { UserData } from 'entities/user';
 
+import { useLogoutMutation } from 'shared/api/auth';
+import { routes } from 'shared/config';
 import { BaseLayout } from 'shared/ui/layouts';
 
 const AvatarWrapper = styled(Box)`
@@ -23,6 +27,8 @@ const ButtonsWrapper = styled(Box)`
 `;
 
 export const ProfilePage = () => {
+  const navigate = useNavigate();
+
   const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
   const [isChangeUserDataDialogOpen, setChangeUserDataDialogOpen] = useState(false);
   const [isChangeAvatarDialogOpen, setChangeAvatarDialogOpen] = useState(false);
@@ -36,7 +42,13 @@ export const ProfilePage = () => {
   const handleOpenChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(true), []);
   const handleCloseChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(false), []);
 
-  const logoutHandler = useCallback(() => null, []);
+  const [logoutMutation, { isLoading: isLogoutPending }] = useLogoutMutation();
+
+  const logoutHandler = useCallback(
+    () => logoutMutation({}).then(() => navigate(routes.login)),
+    [logoutMutation, navigate],
+  );
+
   const handleSubmitChangePassword = useCallback(() => null, []);
   const handleSubmitChangeUserData = useCallback(() => null, []);
   const handleSubmitChangeAvatar = useCallback(() => null, []);
@@ -89,9 +101,14 @@ export const ProfilePage = () => {
               Изменить пароль
             </Button>
           </Box>
-          <Button variant="text" color="error" onClick={logoutHandler}>
+          <LoadingButton
+            variant="text"
+            color="error"
+            onClick={logoutHandler}
+            loading={isLogoutPending}
+          >
             Выйти
-          </Button>
+          </LoadingButton>
         </ButtonsWrapper>
       </Box>
 

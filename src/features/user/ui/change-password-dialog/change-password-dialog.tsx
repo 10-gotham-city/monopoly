@@ -1,10 +1,11 @@
-import { memo } from 'react';
-import { Grid, Dialog, DialogContent, DialogActions, DialogTitle, Button } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { FormikHelpers, Formik, Form } from 'formik';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
+import { Form, Formik, FormikHelpers } from 'formik';
+import { memo } from 'react';
 
 import { InputField } from 'shared/ui/components';
-import { TChangePasswordFormValues, ChangePasswordFormNames } from '../../types';
+
+import { ChangePasswordFormNames, TChangePasswordFormValues } from '../../types';
 import { validator } from './validator';
 
 const defaultValues: TChangePasswordFormValues = {

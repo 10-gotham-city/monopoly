@@ -1,11 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
+
 import { routes } from 'shared/config';
-import { HomePage } from './home-page';
-import { RegistrationPage } from './registration-page';
-import { ProfilePage } from './profile-page';
-import { LeaderboardPage } from './leaderboard-page';
+
 import { AuthorizationPage } from './authorization-page';
 import { GamePage } from './game-page';
+import { HomePage } from './home-page';
+import { LeaderboardPage } from './leaderboard-page';
+import { ProfilePage } from './profile-page';
+import { RegistrationPage } from './registration-page';
 
 export const Router = () => (
   <Routes>

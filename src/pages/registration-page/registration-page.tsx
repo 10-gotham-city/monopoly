@@ -2,8 +2,11 @@ import { Box } from '@mui/material';
 import { FormikHelpers } from 'formik';
 import { useCallback } from 'react';
 
-import { TRegistrationFormValues } from 'features/auth';
-import { RegistrationForm, mapRegistrationFormToQuery } from 'features/auth';
+import {
+  RegistrationForm,
+  TRegistrationFormValues,
+  mapRegistrationFormToQuery,
+} from 'features/auth';
 
 import { useSignUpMutation } from 'shared/api/auth';
 import { BaseLayout } from 'shared/ui/layouts';
@@ -20,7 +23,7 @@ export const RegistrationPage = () => {
         setSubmitting(false);
       });
     },
-    [],
+    [sighUpMutation],
   );
 
   return (

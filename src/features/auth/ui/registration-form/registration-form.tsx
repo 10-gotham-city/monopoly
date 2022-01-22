@@ -42,7 +42,7 @@ type Props = {
 
 export const RegistrationForm = memo(({ onSubmit }: Props) => {
   const content = useCallback(
-    ({ isSubmitting }: FormikProps<TRegistrationFormValues>) => (
+    () => (
       <Grid container spacing={3}>
         <Grid item width={1}>
           <InputField name={RegistrationFormNames.Login} label="Логин" />
