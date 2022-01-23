@@ -1,10 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
-
-import { Forum } from 'pages/forum/forum';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 import { routes } from 'shared/config';
 
 import { AuthorizationPage } from './authorization-page';
+import { Forum } from './forum-page';
+import { ForumSelectedPage } from './forum-selected-page';
 import { GamePage } from './game-page';
 import { HomePage } from './home-page';
 import { LeaderboardPage } from './leaderboard-page';
@@ -19,6 +19,9 @@ export const Router = () => (
     <Route path={routes.leaderboard} element={<LeaderboardPage />} />
     <Route path={routes.login} element={<AuthorizationPage />} />
     <Route path={routes.game} element={<GamePage />} />
-    <Route path={routes.forum} element={<Forum />} />
+    <Route path={routes.forum.main} element={<Outlet />}>
+      <Route index element={<Forum />} />
+      <Route path={routes.forum.selected} element={<ForumSelectedPage />} />
+    </Route>
   </Routes>
 );
