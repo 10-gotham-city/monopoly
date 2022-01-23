@@ -7,6 +7,7 @@ import { useAuth } from '../hooks';
 type Props = { children: JSX.Element };
 
 const AUTH_ROUTES = [routes.login, routes.registration];
+const AVAILABLE_ROUTES = [routes.home];
 
 export const AuthGuard = ({ children }: Props) => {
   const { isAuthorized } = useAuth();
@@ -20,7 +21,7 @@ export const AuthGuard = ({ children }: Props) => {
     return children;
   }
 
-  if (!AUTH_ROUTES.includes(pathname)) {
+  if (![...AUTH_ROUTES, ...AVAILABLE_ROUTES].includes(pathname)) {
     return <Navigate to={routes.login} replace />;
   }
 
