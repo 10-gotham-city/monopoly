@@ -3,13 +3,13 @@ import {
   TChangeAvatarRequest,
   TChangeAvatarResponse,
   TChangePasswordRequest,
-  TChangeProfileQuery,
+  TChangeProfileRequest,
   TChangeProfileResponse,
 } from './types';
 
 export const userApi = instanceApi.injectEndpoints({
   endpoints: (builder) => ({
-    changeProfile: builder.mutation<TChangeProfileResponse, TChangeProfileQuery>({
+    changeProfile: builder.mutation<TChangeProfileResponse, TChangeProfileRequest>({
       query: (body) => ({
         url: '/user/profile',
         method: 'PUT',
