@@ -1,5 +1,11 @@
 import { instanceApi } from '../instance-api';
-import { TChangeProfileQuery, TChangeProfileResponse } from './types';
+import {
+  TChangeAvatarRequest,
+  TChangeAvatarResponse,
+  TChangePasswordRequest,
+  TChangeProfileQuery,
+  TChangeProfileResponse,
+} from './types';
 
 export const userApi = instanceApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +16,25 @@ export const userApi = instanceApi.injectEndpoints({
         body,
       }),
     }),
+    changeAvatar: builder.mutation<TChangeAvatarResponse, TChangeAvatarRequest>({
+      query: (formData) => ({
+        url: '/user/profile/avatar',
+        method: 'PUT',
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+        body: formData,
+      }),
+    }),
+    changePassword: builder.mutation<void, TChangePasswordRequest>({
+      query: (body) => ({
+        url: '/user/password',
+        method: 'PUT',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useChangeProfileMutation } = userApi;
+export const { useChangeProfileMutation, useChangeAvatarMutation, useChangePasswordMutation } =
+  userApi;

@@ -1,1 +1,6 @@
-export { useChangeProfileMutation, userApi } from './user-api';
+export {
+  useChangeProfileMutation,
+  useChangeAvatarMutation,
+  useChangePasswordMutation,
+  userApi,
+} from './user-api';
