@@ -11,13 +11,13 @@ import { useSignUpMutation } from 'shared/api/auth';
 import { BaseLayout } from 'shared/ui/layouts';
 
 export const RegistrationPage = () => {
-  const [sighUpMutation] = useSignUpMutation();
+  const [signUpMutation] = useSignUpMutation();
 
   const registrationSubmitHandler = useCallback(
     async (formValues: TRegistrationFormValues) => {
-      await sighUpMutation(mapRegistrationFormToQuery(formValues));
+      await signUpMutation(mapRegistrationFormToQuery(formValues));
     },
-    [sighUpMutation],
+    [signUpMutation],
   );
 
   return (

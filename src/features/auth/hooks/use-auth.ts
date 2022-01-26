@@ -1,13 +1,10 @@
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
 
 import { useLogoutMutation, useSignInMutation } from 'shared/api/auth';
 
-const AUTH_KEY = 'authorized';
+import { authContext } from '../model';
 
-export const authContext = createContext({
-  isAuthorized: false,
-  setIsAuthorized: (value: boolean) => {},
-});
+const AUTH_KEY = 'authorized';
 
 export const useAuth = () => {
   const { isAuthorized, setIsAuthorized } = useContext(authContext);
@@ -26,9 +23,8 @@ export const useAuth = () => {
       setIsAuthorized(false);
       localStorage.removeItem(AUTH_KEY);
     },
-    defaultValue: localStorage.getItem(AUTH_KEY) === 'true',
+    initialValue: localStorage.getItem(AUTH_KEY) === 'true',
     isAuthorized,
-    setIsAuthorized,
     isLogoutPending,
   };
 };
