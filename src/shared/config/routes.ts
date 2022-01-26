@@ -7,6 +7,6 @@ export const routes = {
   leaderboard: '/leaderboard',
   forum: {
     main: '/forum',
-    details: '/:id',
+    details: ':id',
   },
 };

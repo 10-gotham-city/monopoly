@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 import { AuthGuard } from 'features/auth';
 
@@ -63,21 +63,23 @@ export const Router = () => (
         </AuthGuard>
       }
     />
-    <Route
-      path={routes.forum.main}
-      element={
-        <AuthGuard>
-          <ForumPage />
-        </AuthGuard>
-      }
-    />
-    <Route
-      path={routes.forum.details}
-      element={
-        <AuthGuard>
-          <ForumSelectedPage />
-        </AuthGuard>
-      }
-    />
+    <Route path={routes.forum.main} element={<Outlet />}>
+      <Route
+        index
+        element={
+          <AuthGuard>
+            <ForumPage />
+          </AuthGuard>
+        }
+      />
+      <Route
+        path={routes.forum.details}
+        element={
+          <AuthGuard>
+            <ForumSelectedPage />
+          </AuthGuard>
+        }
+      />
+    </Route>
   </Routes>
 );
