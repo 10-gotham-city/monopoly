@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Router } from 'pages';
 
-import { ErrorBoundary, SnackbarProvider } from './providers';
+import { AuthProvider, ErrorBoundary, SnackbarProvider } from './providers';
 import { reduxStore } from './store';
 
 export const App = () => (
@@ -13,7 +13,9 @@ export const App = () => (
     <SnackbarProvider>
       <ReduxProvider store={reduxStore}>
         <BrowserRouter>
-          <Router />
+          <AuthProvider>
+            <Router />
+          </AuthProvider>
         </BrowserRouter>
       </ReduxProvider>
     </SnackbarProvider>

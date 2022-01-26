@@ -1,6 +1,6 @@
-import { theme } from 'features/game-engine/setting';
 import { CanvasElement } from 'features/game-engine/modules';
-import { TOrientation, TPosition, TCardType, TCoordinates } from 'features/game-engine/types';
+import { theme } from 'features/game-engine/setting';
+import { TCardType, TCoordinates, TOrientation, TPosition } from 'features/game-engine/types';
 import { fillRect, strokeRect } from 'features/game-engine/utils';
 
 export type TCardRect = {

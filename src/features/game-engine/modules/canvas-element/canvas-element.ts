@@ -1,4 +1,4 @@
-import { TRect, TCoordinates } from '../../types';
+import { TCoordinates, TRect } from '../../types';
 
 type TCanvasElement = Partial<TRect> & {
   ctx: CanvasRenderingContext2D;

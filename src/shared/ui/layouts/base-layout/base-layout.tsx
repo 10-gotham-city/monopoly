@@ -27,7 +27,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const BaseLayer = memo(({ appBarStartContent, appBarEndContent, children }: Props) => (
+export const BaseLayout = memo(({ appBarStartContent, appBarEndContent, children }: Props) => (
   <Wrapper>
     <AppBar position="static">
       <Toolbar>

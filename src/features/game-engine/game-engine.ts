@@ -1,4 +1,4 @@
-import { Scene, Chips, Dices, EventBus } from './modules';
+import { Chips, Dices, EventBus, Scene } from './modules';
 import { EVENTS_NAME } from './setting';
 
 /**

@@ -1,4 +1,5 @@
-import { Button, Grid, Link } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Grid, Link } from '@mui/material';
 import { FormikProps } from 'formik';
 import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -12,7 +13,7 @@ import { routes } from 'shared/config';
 import { InputField } from 'shared/ui/components';
 
 type Props = {
-  onSubmit: () => void;
+  onSubmit: (values: TAuthorizationFormValues) => Promise<void>;
 };
 
 const validationSchema: yup.SchemaOf<TAuthorizationFormValues> = yup.object().shape({
@@ -33,7 +34,7 @@ export const AuthorizationForm = memo(({ onSubmit }: Props) => {
           <InputField name={AuthorizationFormNames.Login} label="Логин" />
         </Grid>
         <Grid item width={1}>
-          <InputField name={AuthorizationFormNames.Password} label="Пароль" />
+          <InputField name={AuthorizationFormNames.Password} label="Пароль" type="password" />
         </Grid>
       </Grid>
     ),
@@ -41,11 +42,16 @@ export const AuthorizationForm = memo(({ onSubmit }: Props) => {
   );
 
   const buttons = useCallback(
-    ({ handleSubmit }: FormikProps<TAuthorizationFormValues>) => (
+    ({ handleSubmit, isSubmitting }: FormikProps<TAuthorizationFormValues>) => (
       <>
-        <Button variant="contained" size="large" onClick={() => handleSubmit()}>
+        <LoadingButton
+          variant="contained"
+          size="large"
+          loading={isSubmitting}
+          onClick={() => handleSubmit()}
+        >
           Войти
-        </Button>
+        </LoadingButton>
         <Link component={RouterLink} to={routes.registration}>
           Зарегистрироваться
         </Link>
