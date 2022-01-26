@@ -4,16 +4,20 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { Router } from 'pages';
 
-import { ErrorBoundary } from './providers';
+import { AuthProvider, ErrorBoundary, SnackbarProvider } from './providers';
 import { reduxStore } from './store';
 
 export const App = () => (
   <ErrorBoundary>
     <CssBaseline />
-    <ReduxProvider store={reduxStore}>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
-    </ReduxProvider>
+    <SnackbarProvider>
+      <ReduxProvider store={reduxStore}>
+        <BrowserRouter>
+          <AuthProvider>
+            <Router />
+          </AuthProvider>
+        </BrowserRouter>
+      </ReduxProvider>
+    </SnackbarProvider>
   </ErrorBoundary>
 );

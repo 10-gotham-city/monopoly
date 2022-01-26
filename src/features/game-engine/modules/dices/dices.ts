@@ -1,5 +1,5 @@
-import { Dice } from './dice';
 import { CanvasElement } from '../canvas-element';
+import { Dice } from './dice';
 
 type TDices = {
   ctx: CanvasRenderingContext2D;

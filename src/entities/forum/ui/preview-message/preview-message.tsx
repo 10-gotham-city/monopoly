@@ -21,7 +21,6 @@ const styledListItemButton = {
 
 const TitleThemeBox = styled(Typography)`
   margin-bottom: ${({ theme }) => `${theme.spacing(1)}`};
-  font-size: ${({ theme }) => `${theme.typography.h6.fontSize}`};
 `;
 
 type Props = {
@@ -31,7 +30,7 @@ type Props = {
 
 export const PreviewMessage = ({ title, id, userName, time, text }: Props) => (
   <ListItemButton sx={styledListItemButton} component={RouterLint} to={id}>
-    <TitleThemeBox>{title}</TitleThemeBox>
+    <TitleThemeBox variant="h6">{title}</TitleThemeBox>
     <ForumMessage userName={userName} time={time} text={text} />
   </ListItemButton>
 );

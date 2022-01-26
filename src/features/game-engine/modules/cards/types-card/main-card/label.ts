@@ -1,7 +1,7 @@
-import { strokeRect, fillRect } from 'features/game-engine/utils';
-import { TOrientation, TPosition, TColorMainCard, TRect } from 'features/game-engine/types';
-import { theme } from 'features/game-engine/setting';
 import { CanvasElement } from 'features/game-engine/modules';
+import { theme } from 'features/game-engine/setting';
+import { TColorMainCard, TOrientation, TPosition, TRect } from 'features/game-engine/types';
+import { fillRect, strokeRect } from 'features/game-engine/utils';
 
 type TLabel = TRect & {
   color: TColorMainCard;

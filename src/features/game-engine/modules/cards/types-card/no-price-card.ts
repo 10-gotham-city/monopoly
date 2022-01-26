@@ -1,5 +1,6 @@
 import { TCardNoPriceSetting } from 'features/game-engine/types';
-import { TemplateText, Background, CardRect, TCardRect } from '../modules';
+
+import { Background, CardRect, TCardRect, TemplateText } from '../modules';
 
 export type TNoPriceCard = TCardRect & TCardNoPriceSetting;
 

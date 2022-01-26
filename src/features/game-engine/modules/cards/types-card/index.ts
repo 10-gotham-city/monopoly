@@ -1,7 +1,7 @@
 import { CornerCard, TCornerCard } from './corner-card';
-import { NoPriceCard, TNoPriceCard } from './no-price-card';
-import { WithImageCard, TWithImageCard } from './with-image-card';
 import { MainCard, TMainCard } from './main-card';
+import { NoPriceCard, TNoPriceCard } from './no-price-card';
+import { TWithImageCard, WithImageCard } from './with-image-card';
 
 type TCard = CornerCard | NoPriceCard | MainCard | WithImageCard;
 

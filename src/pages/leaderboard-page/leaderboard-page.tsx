@@ -1,7 +1,7 @@
 import { LeaderboardTable } from 'entities/leaderboard';
 import { TDataRowLeaderboardTable } from 'entities/leaderboard/types';
 
-import { BaseLayer } from 'shared/ui/layers';
+import { BaseLayout } from 'shared/ui/layouts';
 
 const createDataTable = (
   displayName: string,
@@ -38,7 +38,7 @@ const rows = [
 ];
 
 export const LeaderboardPage = () => (
-  <BaseLayer>
+  <BaseLayout>
     <LeaderboardTable dataTable={rows} />
-  </BaseLayer>
+  </BaseLayout>
 );

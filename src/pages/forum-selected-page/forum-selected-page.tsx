@@ -3,12 +3,10 @@ import { useCallback, useMemo } from 'react';
 
 import { ForumMessage } from 'entities/forum';
 
-import { BaseLayer } from 'shared/ui/layers';
+import { BaseLayout } from 'shared/ui/layouts';
 
 const ForumTitleBox = styled(Typography)`
   padding: ${({ theme }) => `${theme.spacing(3)} 0`};
-  font-weight: ${({ theme }) => `${theme.typography.fontWeightBold}`};
-  font-size: ${({ theme }) => `${theme.typography.h5.fontSize} `};
 `;
 
 const ContainerMessage = styled(Box)`
@@ -139,8 +137,8 @@ export const ForumSelectedPage = () => {
   );
 
   return (
-    <BaseLayer>
-      <ForumTitleBox>{tempData.title}</ForumTitleBox>
+    <BaseLayout>
+      <ForumTitleBox variant="h4">{tempData.title}</ForumTitleBox>
       <ContainerMessage>{messages}</ContainerMessage>
       <CustomFormGroup>
         <CustomTextField
@@ -155,6 +153,6 @@ export const ForumSelectedPage = () => {
           Отправить
         </CustomButton>
       </CustomFormGroup>
-    </BaseLayer>
+    </BaseLayout>
   );
 };

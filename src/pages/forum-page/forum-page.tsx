@@ -1,11 +1,11 @@
-import { List, Typography, styled } from '@mui/material';
-import { useMemo } from 'react';
+import { Box, Button, List, Typography, styled } from '@mui/material';
+import { useCallback, useMemo, useState } from 'react';
 
 import { AddForumThemeDialog } from 'features/forum';
 
 import { ForumPreviewMessage } from 'entities/forum';
 
-import { BaseLayer } from 'shared/ui/layers';
+import { BaseLayout } from 'shared/ui/layouts';
 
 const CustomListSubheader = styled(Typography)`
   padding: ${({ theme }) => `${theme.spacing(0)}`};
@@ -17,6 +17,11 @@ const ForumTitleBox = styled(Typography)`
 
 const CustomList = styled(List)`
   padding: ${({ theme }) => `${theme.spacing(3)} 0`};
+`;
+
+const WrapperButton = styled(Box)`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const topPreviews = [
@@ -75,6 +80,12 @@ const themePreviews = [
 ];
 
 export const ForumPage = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = useCallback(() => setOpen(true), []);
+  const handleClose = useCallback(() => setOpen(false), []);
+  const handleAddTheme = useCallback(() => null, []);
+
   const topPreviewsMessage = useMemo(
     () =>
       topPreviews.map(({ title, id, userName, time, text }) => (
@@ -92,17 +103,26 @@ export const ForumPage = () => {
   );
 
   return (
-    <BaseLayer>
-      <ForumTitleBox variant={'h4'}>Форум</ForumTitleBox>
-      <AddForumThemeDialog />
+    <BaseLayout>
+      <ForumTitleBox variant="h4">Форум</ForumTitleBox>
+      <WrapperButton>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Создать тему
+        </Button>
+      </WrapperButton>
+      <AddForumThemeDialog
+        open={open}
+        handlerClose={handleClose}
+        handlerAddTheme={handleAddTheme}
+      />
       <CustomList>
-        <CustomListSubheader variant={'h5'}>Популярное (топ 3)</CustomListSubheader>
+        <CustomListSubheader variant="h5">Популярное (топ 3)</CustomListSubheader>
         {topPreviewsMessage}
       </CustomList>
       <List>
         <CustomListSubheader>Темы</CustomListSubheader>
         {themePreviewsMessage}
       </List>
-    </BaseLayer>
+    </BaseLayout>
   );
 };

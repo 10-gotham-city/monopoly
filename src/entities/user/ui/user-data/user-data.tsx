@@ -1,5 +1,6 @@
+import { Card, Grid, styled } from '@mui/material';
 import { memo } from 'react';
-import { Grid, styled, Card } from '@mui/material';
+
 import { UserDataItem } from '../user-data-item';
 
 const TITLE_WIDTH = 156;
