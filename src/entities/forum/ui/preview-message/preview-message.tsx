@@ -1,9 +1,9 @@
-import { Box, ListItemButton, Theme, styled } from '@mui/material';
+import { ListItemButton, Theme, Typography, styled } from '@mui/material';
 import { Link as RouterLint } from 'react-router-dom';
 
 import { ForumMessage } from 'entities/forum';
 
-import { TForumMessage } from '../';
+import { TForumMessage } from '../message';
 
 const styledListItemButton = {
   display: 'flex',
@@ -18,7 +18,7 @@ const styledListItemButton = {
   },
 };
 
-const TitleThemeBox = styled(Box)`
+const TitleThemeBox = styled(Typography)`
   margin-bottom: ${({ theme }) => `${theme.spacing(1)}`};
   font-size: ${({ theme }) => `${theme.typography.h6.fontSize}`};
 `;

@@ -1,2 +1,2 @@
 export { Message } from './message';
-export { TMessage } from './types';
+export { TMessage as TForumMessage } from './types';

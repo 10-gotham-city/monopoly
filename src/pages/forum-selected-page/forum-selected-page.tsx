@@ -1,5 +1,5 @@
 import { Box, Button, FormGroup, TextField, Theme, Typography, styled } from '@mui/material';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { ForumMessage } from 'entities/forum';
 
@@ -20,6 +20,15 @@ const ContainerMessage = styled(Box)`
 const CustomTextField = styled(TextField)`
   width: 100%;
   margin-bottom: ${({ theme }) => `${theme.spacing(1)}`}; ;
+`;
+
+const CustomFormGroup = styled(FormGroup)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CustomButton = styled(Button)`
+  margin-left: auto;
 `;
 
 const styledForumMessage = {
@@ -115,21 +124,25 @@ const tempData = {
 export const ForumSelectedPage = () => {
   const handleSendMessage = useCallback((event) => null, []);
 
-  const Messages = tempData.message.map(({ userName, time, text }, index) => (
-    <ForumMessage
-      userName={userName}
-      time={time}
-      text={text}
-      key={`${userName}_${index}`}
-      sx={styledForumMessage}
-    />
-  ));
+  const messages = useMemo(
+    () =>
+      tempData.message.map(({ userName, time, text }, index) => (
+        <ForumMessage
+          userName={userName}
+          time={time}
+          text={text}
+          key={`${userName}_${index}`}
+          sx={styledForumMessage}
+        />
+      )),
+    [],
+  );
 
   return (
     <BaseLayer>
       <ForumTitleBox>{tempData.title}</ForumTitleBox>
-      <ContainerMessage>{Messages}</ContainerMessage>
-      <FormGroup sx={{ display: 'flex', flexDirection: 'column' }}>
+      <ContainerMessage>{messages}</ContainerMessage>
+      <CustomFormGroup>
         <CustomTextField
           id="sendMessage"
           name="message"
@@ -138,10 +151,10 @@ export const ForumSelectedPage = () => {
           multiline
           rows={4}
         />
-        <Button sx={{ marginLeft: 'auto' }} variant="contained" onClick={handleSendMessage}>
+        <CustomButton variant="contained" onClick={handleSendMessage}>
           Отправить
-        </Button>
-      </FormGroup>
+        </CustomButton>
+      </CustomFormGroup>
     </BaseLayer>
   );
 };

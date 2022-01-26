@@ -1,4 +1,5 @@
-import { List, ListSubheader, Typography, styled } from '@mui/material';
+import { List, Typography, styled } from '@mui/material';
+import { useMemo } from 'react';
 
 import { AddForumThemeDialog } from 'features/forum';
 
@@ -6,7 +7,7 @@ import { ForumPreviewMessage } from 'entities/forum';
 
 import { BaseLayer } from 'shared/ui/layers';
 
-const CustomListSubheader = styled(ListSubheader)`
+const CustomListSubheader = styled(Typography)`
   font-weight: ${({ theme }) => `${theme.typography.fontWeightBold}`};
   font-size: ${({ theme }) => `${theme.typography.h5.fontSize}`};
   padding: ${({ theme }) => `${theme.spacing(0)}`};
@@ -78,25 +79,21 @@ const themePreviews = [
 ];
 
 export const ForumPage = () => {
-  const topPreviewsMessage = topPreviews.map(({ title, id, userName, time, text }) => (
-    <ForumPreviewMessage
-      title={title}
-      id={id}
-      userName={userName}
-      time={time}
-      text={text}
-    ></ForumPreviewMessage>
-  ));
+  const topPreviewsMessage = useMemo(
+    () =>
+      topPreviews.map(({ title, id, userName, time, text }) => (
+        <ForumPreviewMessage title={title} id={id} userName={userName} time={time} text={text} />
+      )),
+    [],
+  );
 
-  const themePreviewsMessage = themePreviews.map(({ title, id, userName, time, text }) => (
-    <ForumPreviewMessage
-      title={title}
-      id={id}
-      userName={userName}
-      time={time}
-      text={text}
-    ></ForumPreviewMessage>
-  ));
+  const themePreviewsMessage = useMemo(
+    () =>
+      themePreviews.map(({ title, id, userName, time, text }) => (
+        <ForumPreviewMessage title={title} id={id} userName={userName} time={time} text={text} />
+      )),
+    [],
+  );
 
   return (
     <BaseLayer>

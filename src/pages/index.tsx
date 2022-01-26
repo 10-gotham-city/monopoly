@@ -21,7 +21,7 @@ export const Router = () => (
     <Route path={routes.game} element={<GamePage />} />
     <Route path={routes.forum.main} element={<Outlet />}>
       <Route index element={<ForumPage />} />
-      <Route path={routes.forum.selected} element={<ForumSelectedPage />} />
+      <Route path={routes.forum.details} element={<ForumSelectedPage />} />
     </Route>
   </Routes>
 );

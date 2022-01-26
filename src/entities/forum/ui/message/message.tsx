@@ -1,4 +1,4 @@
-import { Box, BoxProps, styled } from '@mui/material';
+import { Box, BoxProps, Typography, styled } from '@mui/material';
 
 import { TMessage } from './types';
 
@@ -12,7 +12,7 @@ const InfoBox = styled(Box)`
   margin-bottom: ${({ theme }) => theme.spacing(1)};
 `;
 
-const UserNameBox = styled(Box)`
+const UserNameBox = styled(Typography)`
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
 `;
 
@@ -22,8 +22,8 @@ export const Message = ({ userName, time, text, ...props }: Props) => (
   <MessageBox {...props}>
     <InfoBox>
       <UserNameBox>{userName}:</UserNameBox>
-      <Box>{time}</Box>
+      <Typography>{time}</Typography>
     </InfoBox>
-    <Box>{text}</Box>
+    <Typography>{text}</Typography>
   </MessageBox>
 );

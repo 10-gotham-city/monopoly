@@ -1,2 +1,2 @@
-export { Message, TMessage as TForumMessage } from './message';
+export { Message } from './message';
 export { PreviewMessage } from './preview-message';
