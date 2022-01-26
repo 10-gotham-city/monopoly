@@ -1,10 +1,12 @@
-import { memo } from 'react';
-import { Formik, FormikHelpers, Form } from 'formik';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Grid } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { InputField, getNumberFormatCustom } from 'shared/ui/components';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from '@mui/material';
+import { Form, Formik } from 'formik';
+import { memo } from 'react';
 import * as yup from 'yup';
+
 import { regexp } from 'shared/lib';
+import { InputField, getNumberFormatCustom } from 'shared/ui/components';
+
 import { ChangeUserDataFormNames, TChangeUserDataFormValues } from '../../types';
 
 const validationSchema: yup.SchemaOf<TChangeUserDataFormValues> = yup.object().shape({
@@ -21,10 +23,7 @@ const FormatPhoneCustom = getNumberFormatCustom({ format: '+# ### ### ## ##' });
 type Props = {
   open: boolean;
   initialValues: TChangeUserDataFormValues;
-  onSubmit: (
-    values: TChangeUserDataFormValues,
-    helpers: FormikHelpers<TChangeUserDataFormValues>,
-  ) => void;
+  onSubmit: (values: TChangeUserDataFormValues) => Promise<void>;
   onClose: () => void;
 };
 

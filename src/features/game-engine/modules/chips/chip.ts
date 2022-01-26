@@ -1,8 +1,8 @@
+import { CanvasElement } from '..';
 import { EVENTS_NAME } from '../../setting';
 import { TCoordinates } from '../../types';
-import { EventBus } from '../event-bus';
-import { CanvasElement } from '..';
 import { arc } from '../../utils';
+import { EventBus } from '../event-bus';
 
 type TChip = {
   color: string;

@@ -1,6 +1,7 @@
-import { TDataRowLeaderboardTable, THeadCell, TOrder } from 'entities/leaderboard/types';
-import { memo, MouseEvent, useCallback } from 'react';
 import { TableCell, TableHead, TableRow, TableSortLabel } from '@mui/material';
+import { MouseEvent, memo, useCallback } from 'react';
+
+import { TDataRowLeaderboardTable, THeadCell, TOrder } from 'entities/leaderboard/types';
 
 const headCells: readonly THeadCell[] = [
   {

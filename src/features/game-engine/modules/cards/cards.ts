@@ -1,14 +1,14 @@
+import { topic } from '../../setting';
+import { TCardType, TCoordinates } from '../../types';
 import {
-  NoPriceCard,
   CornerCard,
   MainCard,
-  WithImageCard,
+  NoPriceCard,
+  TAssetCard,
   TCard,
   TCardInit,
-  TAssetCard,
+  WithImageCard,
 } from './types-card';
-import { topic } from '../../setting';
-import { TCoordinates, TCardType } from '../../types';
 
 /**
  * Создание экземпляров карточек, обработка событий мыши
