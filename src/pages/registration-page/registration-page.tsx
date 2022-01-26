@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import {
   RegistrationForm,
   TRegistrationFormValues,
-  mapRegistrationFormToQuery,
+  mapRegistrationFormToRequestData,
 } from 'features/auth';
 
 import { useSignUpMutation } from 'shared/api/auth';
@@ -15,7 +15,7 @@ export const RegistrationPage = () => {
 
   const registrationSubmitHandler = useCallback(
     async (formValues: TRegistrationFormValues) => {
-      await signUpMutation(mapRegistrationFormToQuery(formValues));
+      await signUpMutation(mapRegistrationFormToRequestData(formValues));
     },
     [signUpMutation],
   );

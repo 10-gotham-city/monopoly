@@ -2,7 +2,7 @@ import { TSignUpRequest } from 'shared/api/auth';
 
 import { TRegistrationFormValues } from '../types';
 
-export const mapRegistrationFormToQuery = (
+export const mapRegistrationFormToRequestData = (
   formValues: TRegistrationFormValues,
 ): TSignUpRequest => ({
   email: formValues.email,
