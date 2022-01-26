@@ -1,4 +1,4 @@
-import { Box, Button, FormGroup, TextField, Typography, styled } from '@mui/material';
+import { Box, Button, FormGroup, TextField, Theme, Typography, styled } from '@mui/material';
 import { useCallback } from 'react';
 
 import { ForumMessage } from 'entities/forum';
@@ -10,6 +10,21 @@ const ForumTitleBox = styled(Typography)`
   font-weight: ${({ theme }) => `${theme.typography.fontWeightBold}`};
   font-size: ${({ theme }) => `${theme.typography.h5.fontSize} `};
 `;
+
+const ContainerMessage = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: ${({ theme }) => `${theme.spacing(3)}`};
+`;
+
+const CustomTextField = styled(TextField)`
+  width: 100%;
+  margin-bottom: ${({ theme }) => `${theme.spacing(1)}`}; ;
+`;
+
+const styledForumMessage = {
+  marginBottom: (theme: Theme) => theme.spacing(2),
+};
 
 const tempData = {
   title: 'Название темы',
@@ -97,28 +112,16 @@ const tempData = {
   ],
 };
 
-const ContainerMessage = styled(Box)`
-  max-height: calc(100vh - 64px - 264px);
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
-  overflow: scroll;
-`;
-
-const CustomTextField = styled(TextField)`
-  width: 100%;
-  margin-bottom: 8px;
-`;
-
 export const ForumSelectedPage = () => {
   const handleSendMessage = useCallback((event) => null, []);
 
-  const Messages = tempData.message.map((item, index) => (
+  const Messages = tempData.message.map(({ userName, time, text }, index) => (
     <ForumMessage
-      userName={item.userName}
-      time={item.time}
-      text={item.text}
-      key={`${item.userName}_${index}`}
+      userName={userName}
+      time={time}
+      text={text}
+      key={`${userName}_${index}`}
+      sx={styledForumMessage}
     />
   ));
 

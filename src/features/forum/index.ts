@@ -1,1 +1,1 @@
-export { AddForumThemeDialog } from './add-forum-theme-dialog';
+export { AddForumThemeDialog } from './ui';

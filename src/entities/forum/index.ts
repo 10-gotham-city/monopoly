@@ -1,1 +1,1 @@
-export { ForumMessage } from './ui';
+export { Message as ForumMessage, PreviewMessage as ForumPreviewMessage } from './ui';

@@ -1,10 +1,9 @@
-import { Box, styled } from '@mui/material';
+import { Box, BoxProps, styled } from '@mui/material';
 
-import { TForumMessage } from './types';
+import { TMessage } from './types';
 
 const MessageBox = styled(Box)`
   width: 100%;
-  padding: ${({ theme }) => `${theme.spacing(2)} 0`};
 `;
 
 const InfoBox = styled(Box)`
@@ -17,10 +16,10 @@ const UserNameBox = styled(Box)`
   font-weight: ${({ theme }) => theme.typography.fontWeightBold};
 `;
 
-type Props = TForumMessage;
+type Props = TMessage & BoxProps;
 
-export const ForumMessage = ({ userName, time, text }: Props) => (
-  <MessageBox>
+export const Message = ({ userName, time, text, ...props }: Props) => (
+  <MessageBox {...props}>
     <InfoBox>
       <UserNameBox>{userName}:</UserNameBox>
       <Box>{time}</Box>

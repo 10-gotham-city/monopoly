@@ -3,7 +3,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { routes } from 'shared/config';
 
 import { AuthorizationPage } from './authorization-page';
-import { Forum } from './forum-page';
+import { ForumPage } from './forum-page';
 import { ForumSelectedPage } from './forum-selected-page';
 import { GamePage } from './game-page';
 import { HomePage } from './home-page';
@@ -20,7 +20,7 @@ export const Router = () => (
     <Route path={routes.login} element={<AuthorizationPage />} />
     <Route path={routes.game} element={<GamePage />} />
     <Route path={routes.forum.main} element={<Outlet />}>
-      <Route index element={<Forum />} />
+      <Route index element={<ForumPage />} />
       <Route path={routes.forum.selected} element={<ForumSelectedPage />} />
     </Route>
   </Routes>

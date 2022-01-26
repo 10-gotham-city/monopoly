@@ -1,2 +1,2 @@
-export { ForumMessage } from './forum-message';
-export { ForumNameThemeWithLastMessage as NameThemeWithLastMessage } from './forum-name-theme-with-last-message';
+export { Message, TMessage as TForumMessage } from './message';
+export { PreviewMessage } from './preview-message';
