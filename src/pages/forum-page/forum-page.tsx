@@ -8,15 +8,11 @@ import { ForumPreviewMessage } from 'entities/forum';
 import { BaseLayer } from 'shared/ui/layers';
 
 const CustomListSubheader = styled(Typography)`
-  font-weight: ${({ theme }) => `${theme.typography.fontWeightBold}`};
-  font-size: ${({ theme }) => `${theme.typography.h5.fontSize}`};
   padding: ${({ theme }) => `${theme.spacing(0)}`};
 `;
 
 const ForumTitleBox = styled(Typography)`
   padding: ${({ theme }) => `${theme.spacing(3)} 0`};
-  font-weight: ${({ theme }) => `${theme.typography.fontWeightBold}`};
-  font-size: ${({ theme }) => `${theme.typography.h5.fontSize} `};
 `;
 
 const CustomList = styled(List)`
@@ -97,10 +93,10 @@ export const ForumPage = () => {
 
   return (
     <BaseLayer>
-      <ForumTitleBox>Форум</ForumTitleBox>
+      <ForumTitleBox variant={'h4'}>Форум</ForumTitleBox>
       <AddForumThemeDialog />
       <CustomList>
-        <CustomListSubheader>Популярное (топ 3)</CustomListSubheader>
+        <CustomListSubheader variant={'h5'}>Популярное (топ 3)</CustomListSubheader>
         {topPreviewsMessage}
       </CustomList>
       <List>

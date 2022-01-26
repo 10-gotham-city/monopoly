@@ -11,6 +11,7 @@ const styledListItemButton = {
   alignItems: 'flex-start',
   borderBottom: '1px',
   borderStyle: 'solid',
+  paddingLeft: (theme: Theme) => theme.spacing(1),
   borderColor: (theme: Theme) => theme.palette.grey.A400,
 
   ':last-child': {
