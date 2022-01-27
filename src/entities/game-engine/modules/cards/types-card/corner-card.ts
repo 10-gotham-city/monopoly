@@ -1,4 +1,5 @@
-import { TCardCornerSetting } from 'features/game-engine/types';
+import { TCardCornerSetting } from 'entities/game-engine/types';
+
 import { CanvasImage } from '../../canvas-images';
 import { CardRect, TCardRect } from '../modules/card-rect';
 

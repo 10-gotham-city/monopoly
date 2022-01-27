@@ -1,5 +1,6 @@
-import { TCardMainSetting } from 'features/game-engine/types';
-import { topic } from 'features/game-engine/setting';
+import { topic } from 'entities/game-engine/setting';
+import { TCardMainSetting } from 'entities/game-engine/types';
+
 import { CardRect, TCardRect } from '../../modules/card-rect';
 import { TemplateText } from '../../modules/template-text';
 import { Label } from './label';

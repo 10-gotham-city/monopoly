@@ -1,6 +1,6 @@
-import { CanvasImage } from 'features/game-engine/modules';
-import { TOrientation, TPosition, TRect } from 'features/game-engine/types';
-import { degreeToRad } from 'features/game-engine/utils';
+import { CanvasImage } from 'entities/game-engine/modules';
+import { TOrientation, TPosition, TRect } from 'entities/game-engine/types';
+import { degreeToRad } from 'entities/game-engine/utils';
 
 type TBackground = TRect & {
   src: string;

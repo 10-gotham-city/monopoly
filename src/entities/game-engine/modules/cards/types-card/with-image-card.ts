@@ -1,6 +1,7 @@
-import { TCardWithImageSetting } from 'features/game-engine/types';
-import { topic } from 'features/game-engine/setting';
-import { TemplateText, Background, CardRect, TCardRect } from '../modules';
+import { topic } from 'entities/game-engine/setting';
+import { TCardWithImageSetting } from 'entities/game-engine/types';
+
+import { Background, CardRect, TCardRect, TemplateText } from '../modules';
 
 export type TWithImageCard = TCardRect & TCardWithImageSetting;
 

@@ -1,7 +1,7 @@
-import { degreeToRad, strokeText, TCanvasTextAlign } from 'features/game-engine/utils';
-import { TOrientation, TPosition, TRect } from 'features/game-engine/types';
-import { theme } from 'features/game-engine/setting';
-import { CanvasElement } from 'features/game-engine/modules';
+import { CanvasElement } from 'entities/game-engine/modules';
+import { theme } from 'entities/game-engine/setting';
+import { TOrientation, TPosition, TRect } from 'entities/game-engine/types';
+import { TCanvasTextAlign, degreeToRad, strokeText } from 'entities/game-engine/utils';
 
 export type TTemplateTitle = TRect & {
   text: string;

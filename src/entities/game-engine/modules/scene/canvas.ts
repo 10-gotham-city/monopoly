@@ -1,4 +1,4 @@
-import { CanvasElement } from 'features/game-engine/modules';
+import { CanvasElement } from 'entities/game-engine/modules';
 
 type TCanvasEvents = {
   mouseout: () => void;

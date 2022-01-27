@@ -1,7 +1,7 @@
-import { TOrientation } from '../../types';
-import { EventBus } from '..';
 import { EVENTS_NAME } from '../../setting';
+import { TOrientation } from '../../types';
 import { Cards } from '../cards';
+import { EventBus } from '../index';
 import { Chip } from './chip';
 
 export class Chips {

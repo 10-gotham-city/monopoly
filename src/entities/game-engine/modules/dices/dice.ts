@@ -1,7 +1,7 @@
 import { theme } from '../../setting';
-import { CanvasElement } from '..';
-import { degreeToRad } from '../../utils';
 import { TCoordinates } from '../../types';
+import { degreeToRad } from '../../utils';
+import { CanvasElement } from '../index';
 
 type TDice = {
   ctx: CanvasRenderingContext2D;

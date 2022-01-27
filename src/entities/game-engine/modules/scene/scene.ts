@@ -1,13 +1,14 @@
-import { Cards } from 'features/game-engine/modules/cards';
-import { Chips } from 'features/game-engine/modules/chips';
-import { Dices } from 'features/game-engine/modules/dices';
-import { fillRect } from 'features/game-engine/utils/fillRect';
-import { theme } from 'features/game-engine/setting/theme';
-import { EventBus } from 'features/game-engine/modules/event-bus';
-import { EVENTS_NAME } from 'features/game-engine/setting/events-name';
-import { GameLoop } from './game-loop';
-import { Canvas } from './canvas';
+import { Cards } from 'entities/game-engine/modules/cards';
+import { Chips } from 'entities/game-engine/modules/chips';
+import { Dices } from 'entities/game-engine/modules/dices';
+import { EventBus } from 'entities/game-engine/modules/event-bus';
+import { EVENTS_NAME } from 'entities/game-engine/setting/events-name';
+import { theme } from 'entities/game-engine/setting/theme';
+import { fillRect } from 'entities/game-engine/utils/fillRect';
+
 import { Background } from './background';
+import { Canvas } from './canvas';
+import { GameLoop } from './game-loop';
 
 // TODO Добавить ресайз
 // TODO Добавить ожидание загрузки ресурсов
