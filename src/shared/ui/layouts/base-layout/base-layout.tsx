@@ -1,14 +1,27 @@
-import { AppBar, Box, Container, Toolbar, Typography, styled } from '@mui/material';
+import { AppBar, Box, Container, Link, Toolbar, styled } from '@mui/material';
 import { ReactNode, memo } from 'react';
+
+import { routes } from 'shared/config';
+import background from 'shared/ui/images/background.jpg';
 
 const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-image: url(${background});
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position-y: 100%;
+  background-color: ${(props) => props.theme.palette.background.default};
 `;
 
-const LogoTypography = styled(Typography)`
+const ToolbarWrapper = styled(Toolbar)`
+  background-color: ${(props) => props.theme.palette.background.paper};
+`;
+
+const LogoLink = styled(Link)`
   text-transform: uppercase;
+  color: ${(props) => props.theme.palette.text.primary};
 `;
 
 const AppBarInner = styled(Box)`
@@ -30,10 +43,12 @@ type Props = {
 export const BaseLayout = memo(({ appBarStartContent, appBarEndContent, children }: Props) => (
   <Wrapper>
     <AppBar position="static">
-      <Toolbar>
+      <ToolbarWrapper>
         <Container maxWidth="xl">
           <AppBarInner>
-            <LogoTypography variant="h6">Монополия</LogoTypography>
+            <LogoLink href={routes.home} variant="h6" underline="none">
+              Монополия
+            </LogoLink>
 
             {appBarStartContent && (
               <Box ml={3} mr="auto">
@@ -44,7 +59,7 @@ export const BaseLayout = memo(({ appBarStartContent, appBarEndContent, children
             {appBarEndContent && <Box ml="auto">{appBarEndContent}</Box>}
           </AppBarInner>
         </Container>
-      </Toolbar>
+      </ToolbarWrapper>
     </AppBar>
 
     <ContentWrapper>
