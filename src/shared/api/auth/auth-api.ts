@@ -28,6 +28,7 @@ export const authApi = instanceApi.injectEndpoints({
         url: '/auth/user',
         method: 'GET',
       }),
+      providesTags: () => [{ type: 'user' }],
     }),
   }),
   overrideExisting: false,

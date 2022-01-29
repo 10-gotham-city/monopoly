@@ -15,6 +15,7 @@ export const userApi = instanceApi.injectEndpoints({
         method: 'PUT',
         body,
       }),
+      invalidatesTags: [{ type: 'user' }],
     }),
     changeAvatar: builder.mutation<TChangeAvatarResponse, TChangeAvatarRequest>({
       query: (formData) => ({
