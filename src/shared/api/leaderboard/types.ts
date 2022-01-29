@@ -12,4 +12,9 @@ export type TAllLeaderboardRequest = {
   limit: number;
 };
 
+export type TTeamLeaderboardRequest = {
+  teamName: string;
+  body: TAllLeaderboardRequest;
+};
+
 export type TAllLeaderboardResponse = TDataObject[];

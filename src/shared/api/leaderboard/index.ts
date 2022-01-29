@@ -1,6 +1,13 @@
 export {
   leaderboardApi,
   useAddUserToLeaderboardMutation,
-  useGetAllLeaderboardMutation,
+  useGetTeamLeaderboardQuery,
+  useGetAllLeaderboardQuery,
 } from './leaderboard-api';
-export { TUserLeaderboardRequest, TAllLeaderboardRequest, TAllLeaderboardResponse } from './types';
+
+export {
+  TUserLeaderboardRequest,
+  TAllLeaderboardRequest,
+  TAllLeaderboardResponse,
+  TTeamLeaderboardRequest,
+} from './types';

@@ -1,5 +1,10 @@
 import { instanceApi } from '../instance-api';
-import { TAllLeaderboardRequest, TAllLeaderboardResponse, TUserLeaderboardRequest } from './types';
+import {
+  TAllLeaderboardRequest,
+  TAllLeaderboardResponse,
+  TTeamLeaderboardRequest,
+  TUserLeaderboardRequest,
+} from './types';
 
 export const leaderboardApi = instanceApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +15,14 @@ export const leaderboardApi = instanceApi.injectEndpoints({
         body,
       }),
     }),
-    getAllLeaderboard: builder.mutation<TAllLeaderboardResponse, TAllLeaderboardRequest>({
+    getTeamLeaderboard: builder.query<TAllLeaderboardResponse, TTeamLeaderboardRequest>({
+      query: ({ teamName, body }) => ({
+        url: `/leaderboard/${teamName}`,
+        method: 'POST',
+        body,
+      }),
+    }),
+    getAllLeaderboard: builder.query<TAllLeaderboardResponse, TAllLeaderboardRequest>({
       query: (body) => ({
         url: '/leaderboard/all',
         method: 'POST',
@@ -20,4 +32,8 @@ export const leaderboardApi = instanceApi.injectEndpoints({
   }),
 });
 
-export const { useAddUserToLeaderboardMutation, useGetAllLeaderboardMutation } = leaderboardApi;
+export const {
+  useAddUserToLeaderboardMutation,
+  useGetTeamLeaderboardQuery,
+  useGetAllLeaderboardQuery,
+} = leaderboardApi;
