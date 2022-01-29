@@ -1,5 +1,5 @@
 import { instanceApi } from '../instance-api';
-import { TSignInRequest, TSignUpRequest, TSignUpResponse } from './types';
+import { TGetUserResponse, TSignInRequest, TSignUpRequest, TSignUpResponse } from './types';
 
 export const authApi = instanceApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -17,8 +17,20 @@ export const authApi = instanceApi.injectEndpoints({
         body,
       }),
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'POST',
+      }),
+    }),
+    getUser: builder.query<TGetUserResponse, void>({
+      query: () => ({
+        url: '/auth/user',
+        method: 'GET',
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useSignInMutation, useSignUpMutation } = authApi;
+export const { useSignUpMutation, useSignInMutation, useLogoutMutation, useGetUserQuery } = authApi;

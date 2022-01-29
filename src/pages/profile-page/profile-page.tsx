@@ -1,6 +1,9 @@
+import { LoadingButton } from '@mui/lab';
 import { Avatar, Box, Button, styled } from '@mui/material';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from 'features/auth';
 import {
   ChangeAvatarDialog,
   ChangePasswordDialog,
@@ -12,6 +15,8 @@ import {
 import { UserData } from 'entities/user';
 
 import { useChangePasswordMutation } from 'shared/api/user';
+import { routes } from 'shared/config';
+import { BaseLayout } from 'shared/ui/layouts';
 
 const AvatarWrapper = styled(Box)`
   display: flex;
@@ -30,6 +35,8 @@ const ButtonsWrapper = styled(Box)`
 
 export const ProfilePage = () => {
   const [changePasswordMutation] = useChangePasswordMutation();
+  const { logout, isLogoutPending } = useAuth();
+  const navigate = useNavigate();
 
   const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
   const [isChangeUserDataDialogOpen, setChangeUserDataDialogOpen] = useState(false);
@@ -44,7 +51,6 @@ export const ProfilePage = () => {
   const handleOpenChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(true), []);
   const handleCloseChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(false), []);
 
-  const logoutHandler = useCallback(() => null, []);
   // TODO: add snack
   const handleSubmitChangePassword = useCallback(
     async (values: TChangePasswordFormValues) => {
@@ -52,16 +58,28 @@ export const ProfilePage = () => {
     },
     [changePasswordMutation],
   );
-  const handleSubmitChangeUserData = useCallback(() => null, []);
-  const handleSubmitChangeAvatar = useCallback(() => null, []);
+  const handleSubmitChangeUserData = useCallback(() => Promise.resolve(), []);
+  const handleSubmitChangeAvatar = useCallback(() => Promise.resolve(), []);
+
+  const logoutHandler = useCallback(async () => {
+    await logout();
+    navigate(routes.login);
+  }, [logout, navigate]);
 
   const avatarSrc =
     'https://im0-tub-ru.yandex.net/i?id=a482f9ff07db5e691c0ed263cdeab7d4&n=13&exp=1';
   const isChangeAvatarLoading = false;
 
   return (
-    <>
-      <Box width={500} display="flex" flexDirection="column" alignItems="center" margin="0 auto">
+    <BaseLayout>
+      <Box
+        width={500}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        margin="0 auto"
+        pt={6}
+      >
         <AvatarWrapper>
           <Avatar
             alt=""
@@ -96,9 +114,14 @@ export const ProfilePage = () => {
               Изменить пароль
             </Button>
           </Box>
-          <Button variant="text" color="error" onClick={logoutHandler}>
+          <LoadingButton
+            variant="text"
+            color="error"
+            onClick={logoutHandler}
+            loading={isLogoutPending}
+          >
             Выйти
-          </Button>
+          </LoadingButton>
         </ButtonsWrapper>
       </Box>
 
@@ -127,6 +150,6 @@ export const ProfilePage = () => {
         onClose={handleCloseChangeAvatar}
         onSubmit={handleSubmitChangeAvatar}
       />
-    </>
+    </BaseLayout>
   );
 };

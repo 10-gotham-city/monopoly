@@ -1,4 +1,3 @@
-import { useState, MouseEvent, ChangeEvent, memo, useCallback, useMemo } from 'react';
 import {
   Paper,
   Table,
@@ -9,8 +8,10 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { TDataRowLeaderboardTable, TOrder } from 'entities/leaderboard/types';
+import { ChangeEvent, MouseEvent, memo, useCallback, useMemo, useState } from 'react';
+
 import { sortTableByColumn } from 'entities/leaderboard/lib';
+import { TDataRowLeaderboardTable, TOrder } from 'entities/leaderboard/types';
 import { LeaderboardTableHead } from 'entities/leaderboard/ui/leaderboard-table-head';
 
 const INITIAL_PAGE_INDEX = 0;

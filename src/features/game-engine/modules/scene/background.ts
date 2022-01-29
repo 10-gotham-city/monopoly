@@ -1,5 +1,5 @@
-import { CanvasImage } from '../canvas-images';
 import { theme } from '../../setting';
+import { CanvasImage } from '../canvas-images';
 
 type TBackground = {
   canvasSize: number;

@@ -1,6 +1,6 @@
 import { TRect } from '../../types';
-import { CanvasElement } from '../canvas-element';
 import { drawImage } from '../../utils';
+import { CanvasElement } from '../canvas-element';
 
 type TCanvasImage = TRect & {
   src: string;
