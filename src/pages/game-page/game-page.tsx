@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { UserProfile } from 'widgets/user-profile';
 
 import { GameEngine } from 'features/game-engine';
+
+import { BaseLayout } from 'shared/ui/layouts';
 
 export const GamePage = () => {
   const canvasEl = useRef<HTMLCanvasElement>(null);
@@ -17,14 +20,16 @@ export const GamePage = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasEl}
-      width={1000}
-      height={1000}
-      style={{
-        marginLeft: 50,
-        marginTop: 100,
-      }}
-    />
+    <BaseLayout appBarEndContent={<UserProfile />}>
+      <canvas
+        ref={canvasEl}
+        width={1000}
+        height={1000}
+        style={{
+          marginLeft: 50,
+          marginTop: 100,
+        }}
+      />
+    </BaseLayout>
   );
 };

@@ -1,5 +1,6 @@
-import { AppBar, Box, Container, Link, Toolbar, styled } from '@mui/material';
+import { AppBar, Box, Container, Toolbar, styled } from '@mui/material';
 import { ReactNode, memo } from 'react';
+import { Link } from 'react-router-dom';
 
 import { routes } from 'shared/config';
 import background from 'shared/ui/images/background.jpg';
@@ -20,7 +21,9 @@ const ToolbarWrapper = styled(Toolbar)`
 `;
 
 const LogoLink = styled(Link)`
+  ${(props) => props.theme.typography.h6}
   text-transform: uppercase;
+  text-decoration: none;
   color: ${(props) => props.theme.palette.text.primary};
 `;
 
@@ -46,9 +49,7 @@ export const BaseLayout = memo(({ appBarStartContent, appBarEndContent, children
       <ToolbarWrapper>
         <Container maxWidth="xl">
           <AppBarInner>
-            <LogoLink href={routes.home} variant="h6" underline="none">
-              Монополия
-            </LogoLink>
+            <LogoLink to={routes.home}>Монополия</LogoLink>
 
             {appBarStartContent && (
               <Box ml={3} mr="auto">

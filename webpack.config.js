@@ -15,6 +15,7 @@ module.exports = {
       features: path.resolve(__dirname, 'src/features/'),
       entities: path.resolve(__dirname, 'src/entities/'),
       shared: path.resolve(__dirname, 'src/shared/'),
+      widgets: path.resolve(__dirname, 'src/widgets/'),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },

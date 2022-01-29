@@ -7,14 +7,44 @@ export const theme = createTheme({
       default: '#0C2F35',
       paper: '#06262B',
     },
-    text: {
-      // primary: '#FFFFFF',
-    },
     primary: {
       main: '#35ACEE',
     },
+    error: {
+      main: '#ff867d',
+    },
   },
-  status: {
-    danger: '',
+  typography: {
+    h1: {
+      fontSize: '1.5rem',
+      fontWeight: 400,
+      marginBottom: '0.35em',
+    },
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'transparent',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: '#FFFFFF',
+        },
+      },
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          color: '#FFFFFF',
+        },
+      },
+    },
+  },
+  size: {
+    formWidth: '400px',
   },
 });
