@@ -9,12 +9,14 @@ import {
   ChangePasswordDialog,
   ChangeUserDataDialog,
   TChangePasswordFormValues,
-  mapPasswordFormToQuery,
+  TChangeUserDataFormValues,
+  mapChangeUserDataFormToRequestData,
+  mapPasswordFormToRequestData,
 } from 'features/user';
 
 import { UserData } from 'entities/user';
 
-import { useChangePasswordMutation } from 'shared/api/user';
+import { useChangePasswordMutation, useChangeProfileMutation } from 'shared/api/user';
 import { routes } from 'shared/config';
 import { BaseLayout } from 'shared/ui/layouts';
 
@@ -34,9 +36,11 @@ const ButtonsWrapper = styled(Box)`
 `;
 
 export const ProfilePage = () => {
-  const [changePasswordMutation] = useChangePasswordMutation();
-  const { logout, isLogoutPending } = useAuth();
   const navigate = useNavigate();
+
+  const { logout, isLogoutPending } = useAuth();
+  const [changePasswordMutation] = useChangePasswordMutation();
+  const [changeUserDataMutation] = useChangeProfileMutation();
 
   const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
   const [isChangeUserDataDialogOpen, setChangeUserDataDialogOpen] = useState(false);
@@ -54,11 +58,20 @@ export const ProfilePage = () => {
   // TODO: add snack
   const handleSubmitChangePassword = useCallback(
     async (values: TChangePasswordFormValues) => {
-      await changePasswordMutation(mapPasswordFormToQuery(values));
+      await changePasswordMutation(mapPasswordFormToRequestData(values)).then(() =>
+        handleCloseChangePassword(),
+      );
     },
-    [changePasswordMutation],
+    [changePasswordMutation, handleCloseChangePassword],
   );
-  const handleSubmitChangeUserData = useCallback(() => Promise.resolve(), []);
+  const handleSubmitChangeUserData = useCallback(
+    async (values: TChangeUserDataFormValues) => {
+      await changeUserDataMutation(mapChangeUserDataFormToRequestData(values)).then(() =>
+        handleCloseChangeUserData(),
+      );
+    },
+    [changeUserDataMutation, handleCloseChangeUserData],
+  );
   const handleSubmitChangeAvatar = useCallback(() => Promise.resolve(), []);
 
   const logoutHandler = useCallback(async () => {
