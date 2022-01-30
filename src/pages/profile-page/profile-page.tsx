@@ -1,3 +1,4 @@
+import { useSnackbar } from 'notistack';
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ import { ProfilePageTemplate } from './profile-page-template';
 
 export const ProfilePage = () => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { logout, isLogoutPending } = useAuth();
   const {
@@ -54,22 +56,29 @@ export const ProfilePage = () => {
   const handleOpenChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(true), []);
   const handleCloseChangeAvatar = useCallback(() => setChangeAvatarDialogOpen(false), []);
 
-  // TODO: add snack
   const handleSubmitChangePassword = useCallback(
     async (values: TChangePasswordFormValues) => {
-      await changePasswordMutation(mapPasswordFormToRequestData(values)).then(() =>
-        handleCloseChangePassword(),
-      );
+      await changePasswordMutation(mapPasswordFormToRequestData(values))
+        .unwrap()
+        .then(() => {
+          handleCloseChangePassword();
+          enqueueSnackbar('Пароль успешно изменен', { variant: 'success' });
+        })
+        .catch(() => enqueueSnackbar('Не удалось изменить пароль', { variant: 'error' }));
     },
-    [changePasswordMutation, handleCloseChangePassword],
+    [changePasswordMutation, handleCloseChangePassword, enqueueSnackbar],
   );
   const handleSubmitChangeUserData = useCallback(
     async (values: TChangeUserDataFormValues) => {
-      await changeUserDataMutation(mapChangeUserDataFormToRequestData(values)).then(() =>
-        handleCloseChangeUserData(),
-      );
+      await changeUserDataMutation(mapChangeUserDataFormToRequestData(values))
+        .unwrap()
+        .then(() => {
+          handleCloseChangeUserData();
+          enqueueSnackbar('Данные профиля успешно изменены', { variant: 'success' });
+        })
+        .catch(() => enqueueSnackbar('Не удалось изменить данные профиля', { variant: 'error' }));
     },
-    [changeUserDataMutation, handleCloseChangeUserData],
+    [changeUserDataMutation, handleCloseChangeUserData, enqueueSnackbar],
   );
   const handleSubmitChangeAvatar = useCallback(
     async (values: TChangeAvatarDataFormValues) => {
@@ -77,12 +86,16 @@ export const ProfilePage = () => {
 
       if (values.avatar) {
         formData.set('avatar', values.avatar);
-        await changeAvatarMutation(formData).then(() => {
-          handleCloseChangeAvatar();
-        });
+        await changeAvatarMutation(formData)
+          .unwrap()
+          .then(() => {
+            handleCloseChangeAvatar();
+            enqueueSnackbar('Аватар успешно изменен', { variant: 'success' });
+          })
+          .catch(() => enqueueSnackbar('Не удалось изменить аватар', { variant: 'error' }));
       }
     },
-    [changeAvatarMutation, handleCloseChangeAvatar],
+    [changeAvatarMutation, handleCloseChangeAvatar, enqueueSnackbar],
   );
 
   const logoutHandler = useCallback(async () => {
