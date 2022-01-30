@@ -16,7 +16,7 @@ export const addBaseUrl = <T extends Record<string, unknown>>({
   const resourceValues = payload[resourceKeyName];
 
   if (typeof resourceValues !== 'string') {
-    throw new Error(`Невалидное значение поля ${String(resourceKeyName)}`);
+    return payload;
   }
 
   return {
