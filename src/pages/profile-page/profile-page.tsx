@@ -77,10 +77,12 @@ export const ProfilePage = () => {
 
       if (values.avatar) {
         formData.set('avatar', values.avatar);
-        await changeAvatarMutation(formData);
+        await changeAvatarMutation(formData).then(() => {
+          handleCloseChangeAvatar();
+        });
       }
     },
-    [changeAvatarMutation],
+    [changeAvatarMutation, handleCloseChangeAvatar],
   );
 
   const logoutHandler = useCallback(async () => {
