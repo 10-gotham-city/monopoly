@@ -23,6 +23,7 @@ export const userApi = instanceApi.injectEndpoints({
         method: 'PUT',
         body: formData,
       }),
+      invalidatesTags: [{ type: 'user' }],
     }),
     changePassword: builder.mutation<void, TChangePasswordRequest>({
       query: (body) => ({
