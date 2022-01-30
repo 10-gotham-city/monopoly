@@ -3,7 +3,7 @@ import { Formik, FormikProps } from 'formik';
 import { SchemaOf } from 'yup';
 
 const FormCard = styled(Card)`
-  max-width: ${({ theme }) => theme.size.formWidth};
+  max-width: 420px;
   padding: ${({ theme }) => theme.spacing(2)};
 `;
 
@@ -34,9 +34,11 @@ export const AuthFormTemplate = <T extends Record<string, unknown>>({
   buttons: Buttons,
 }: Props<T>) => (
   <FormCard>
-    <Typography variant="h1" align="center">
-      {title}
-    </Typography>
+    <Box display="flex" justifyContent="center" mb={2}>
+      <Typography variant="h1" align="center">
+        {title}
+      </Typography>
+    </Box>
 
     <Formik<T>
       initialValues={defaultValues}

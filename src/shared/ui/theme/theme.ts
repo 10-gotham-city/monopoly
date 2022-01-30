@@ -44,7 +44,4 @@ export const theme = createTheme({
       },
     },
   },
-  size: {
-    formWidth: '400px',
-  },
 });

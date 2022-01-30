@@ -13,18 +13,18 @@ const Wrapper = styled(Box)`
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position-y: 100%;
-  background-color: ${(props) => props.theme.palette.background.default};
+  background-color: ${({ theme }) => theme.palette.background.default};
 `;
 
 const ToolbarWrapper = styled(Toolbar)`
-  background-color: ${(props) => props.theme.palette.background.paper};
+  background-color: ${({ theme }) => theme.palette.background.paper};
 `;
 
 const LogoLink = styled(Link)`
-  ${(props) => props.theme.typography.h6}
+  ${({ theme }) => theme.typography.h6}
   text-transform: uppercase;
   text-decoration: none;
-  color: ${(props) => props.theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 const AppBarInner = styled(Box)`
