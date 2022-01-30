@@ -21,9 +21,6 @@ export const userApi = instanceApi.injectEndpoints({
       query: (formData) => ({
         url: '/user/profile/avatar',
         method: 'PUT',
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
         body: formData,
       }),
     }),

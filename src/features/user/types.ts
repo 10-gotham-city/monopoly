@@ -20,3 +20,7 @@ export enum ChangeUserDataFormNames {
 export type TChangeUserDataFormValues = {
   [key in ChangeUserDataFormNames]: string;
 };
+
+export type TChangeAvatarDataFormValues = {
+  avatar: File | null;
+};

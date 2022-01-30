@@ -14,9 +14,14 @@ import {
   mapUserResponse,
   mapUserResponseToFormInitialValues,
 } from 'features/user';
+import { TChangeAvatarDataFormValues } from 'features/user/types';
 
 import { useGetUserQuery } from 'shared/api/auth';
-import { useChangePasswordMutation, useChangeProfileMutation } from 'shared/api/user';
+import {
+  useChangeAvatarMutation,
+  useChangePasswordMutation,
+  useChangeProfileMutation,
+} from 'shared/api/user';
 import { routes } from 'shared/config';
 import { ErrorContent } from 'shared/ui/components';
 
@@ -34,6 +39,7 @@ export const ProfilePage = () => {
   } = useGetUserQuery();
   const [changePasswordMutation] = useChangePasswordMutation();
   const [changeUserDataMutation] = useChangeProfileMutation();
+  const [changeAvatarMutation] = useChangeAvatarMutation();
 
   const [isChangePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
   const [isChangeUserDataDialogOpen, setChangeUserDataDialogOpen] = useState(false);
@@ -65,14 +71,22 @@ export const ProfilePage = () => {
     },
     [changeUserDataMutation, handleCloseChangeUserData],
   );
-  const handleSubmitChangeAvatar = useCallback(() => Promise.resolve(), []);
+  const handleSubmitChangeAvatar = useCallback(
+    async (values: TChangeAvatarDataFormValues) => {
+      const formData = new FormData();
+
+      if (values.avatar) {
+        formData.set('avatar', values.avatar);
+        await changeAvatarMutation(formData);
+      }
+    },
+    [changeAvatarMutation],
+  );
 
   const logoutHandler = useCallback(async () => {
     await logout();
     navigate(routes.login);
   }, [logout, navigate]);
-
-  const isChangeAvatarLoading = false;
 
   const pageContent = useMemo(
     () => (
@@ -123,7 +137,6 @@ export const ProfilePage = () => {
       />
       <ChangeAvatarDialog
         open={isChangeAvatarDialogOpen}
-        isLoading={isChangeAvatarLoading}
         onClose={handleCloseChangeAvatar}
         onSubmit={handleSubmitChangeAvatar}
       />
