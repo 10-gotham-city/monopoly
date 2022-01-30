@@ -7,12 +7,7 @@ type Props = {
 };
 
 export const EndGameDialog = ({ open, handleClose, handleRepeatGame }: Props) => (
-  <Dialog
-    open={open}
-    onClose={handleClose}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-  >
+  <Dialog open={open} onClose={handleClose}>
     <DialogTitle>Хотите сыграть снова?</DialogTitle>
     <DialogActions>
       <Button onClick={handleClose}>Нет</Button>
