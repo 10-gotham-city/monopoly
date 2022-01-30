@@ -35,7 +35,9 @@ export const AuthFormTemplate = <T extends Record<string, unknown>>({
 }: Props<T>) => (
   <FormCard>
     <Box display="flex" justifyContent="center" mb={2}>
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h1" align="center">
+        {title}
+      </Typography>
     </Box>
 
     <Formik<T>

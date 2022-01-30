@@ -6,7 +6,7 @@ import { ForumMessage } from 'entities/forum';
 import { BaseLayout } from 'shared/ui/layouts';
 
 const ForumTitleBox = styled(Typography)`
-  padding: ${({ theme }) => `${theme.spacing(3)} 0`};
+  padding: ${({ theme }) => `${theme.spacing(3)} 0 ${theme.spacing(10)} 0`};
 `;
 
 const ContainerMessage = styled(Box)`
@@ -39,82 +39,82 @@ const tempData = {
     {
       userName: 'Имя пользователя отправившего сообщение',
       text: 'Текст сообщения',
-      time: '14:14',
+      time: '29.01.2022, 14:14',
     },
     {
       userName: 'Петя',
       text: 'Текст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщенияТекст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Олег',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Noname',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: '12312eld',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
     {
       userName: 'Bujhm',
       text: 'Текст сообщения',
-      time: '15:12',
+      time: '29.01.2022, 15:12',
     },
   ],
 };
@@ -138,7 +138,7 @@ export const ForumSelectedPage = () => {
 
   return (
     <BaseLayout>
-      <ForumTitleBox variant="h4">{tempData.title}</ForumTitleBox>
+      <ForumTitleBox variant="h1">{tempData.title}</ForumTitleBox>
       <ContainerMessage>{messages}</ContainerMessage>
       <CustomFormGroup>
         <CustomTextField

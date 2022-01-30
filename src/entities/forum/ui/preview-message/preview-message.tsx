@@ -1,4 +1,4 @@
-import { ListItemButton, Theme, Typography, styled } from '@mui/material';
+import { ListItemButton, Theme, Typography } from '@mui/material';
 import { Link as RouterLint } from 'react-router-dom';
 
 import { ForumMessage } from 'entities/forum';
@@ -11,17 +11,13 @@ const styledListItemButton = {
   alignItems: 'flex-start',
   borderBottom: '1px',
   borderStyle: 'solid',
-  paddingLeft: (theme: Theme) => theme.spacing(1),
+  padding: (theme: Theme) => theme.spacing(1),
   borderColor: (theme: Theme) => theme.palette.grey.A400,
 
   ':last-child': {
     border: 'none',
   },
 };
-
-const TitleThemeBox = styled(Typography)`
-  margin-bottom: ${({ theme }) => `${theme.spacing(1)}`};
-`;
 
 type Props = {
   id: string;
@@ -30,7 +26,7 @@ type Props = {
 
 export const PreviewMessage = ({ title, id, userName, time, text }: Props) => (
   <ListItemButton sx={styledListItemButton} component={RouterLint} to={id}>
-    <TitleThemeBox variant="h6">{title}</TitleThemeBox>
+    <Typography variant="h6">{title}</Typography>
     <ForumMessage userName={userName} time={time} text={text} />
   </ListItemButton>
 );
