@@ -1,4 +1,4 @@
-import { app } from './server';
+const { app } = require('./dist/server.js');
 
 const { PORT = 3000 } = process.env;
 
