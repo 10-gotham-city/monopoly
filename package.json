@@ -19,10 +19,13 @@
   },
   "homepage": "https://github.com/10-gotham-city/monopoly#readme",
   "devDependencies": {
+    "@testing-library/jest-dom": "5.16.1",
+    "@testing-library/react": "12.1.2",
     "@trivago/prettier-plugin-sort-imports": "3.1.1",
     "@types/jest": "27.4.0",
     "@types/react": "17.0.37",
     "@types/react-dom": "17.0.11",
+    "@types/react-test-renderer": "17.0.1",
     "@typescript-eslint/eslint-plugin": "5.7.0",
     "@typescript-eslint/parser": "5.7.0",
     "copy-webpack-plugin": "10.2.0",
