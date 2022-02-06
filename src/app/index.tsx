@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import { hot } from 'react-hot-loader/root';
 import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ import { theme } from 'shared/ui/theme';
 import { AuthProvider, ErrorBoundary, SnackbarProvider } from './providers';
 import { reduxStore } from './store';
 
-export const App = () => (
+export const App = hot(() => (
   <ThemeProvider theme={theme}>
     <ErrorBoundary>
       <CssBaseline />
@@ -25,4 +26,4 @@ export const App = () => (
       </SnackbarProvider>
     </ErrorBoundary>
   </ThemeProvider>
-);
+));
