@@ -25,4 +25,11 @@ describe('AuthorizationForm', () => {
     fireEvent.click(link);
     expect(window.location.href).toBe('http://localhost/registration');
   });
+
+  // test('checking input without value on loss of focus', () => {
+  //   act(() => login.focus());
+  //   act(() => login.blur());
+  //   // expect(login).toHaveFocus();
+  //   expect(login).toHaveAttribute('aria-invalid', 'true');
+  // });
 });
