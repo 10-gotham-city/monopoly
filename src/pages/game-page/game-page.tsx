@@ -2,11 +2,9 @@ import { useEffect, useRef } from 'react';
 import { useFullScreenHandle } from 'react-full-screen';
 import { UserProfile } from 'widgets/user-profile';
 
-import { FullscreenButton } from 'features/game';
 import { GameEngine } from 'features/game-engine';
 
-import { FullscreenWrapper } from 'entities/game';
-
+import { FullscreenButton, FullscreenWrapper } from 'shared/ui/components';
 import { BaseLayout } from 'shared/ui/layouts';
 
 export const GamePage = () => {
