@@ -1,5 +1,6 @@
 import { Box, Button, Card, Typography, styled } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { AddPlayerForm } from 'features/player';
 
@@ -32,10 +33,10 @@ export const StartGamePage = () => {
     <BaseLayout>
       <Box width={1} height={1} display="flex" alignItems="start" justifyContent="center">
         <StartGameCard>
-          <Typography variant={'h1'} align="center">
+          <Typography variant="h1" align="center">
             Начало игры
           </Typography>
-          <Description variant={'body1'} align="center">
+          <Description variant="body1" align="center">
             Добавте игроков
           </Description>
 
@@ -44,7 +45,7 @@ export const StartGamePage = () => {
 
           {players.length ? (
             <WrapBtnGame>
-              <Button variant="contained" size="large" href={routes.game}>
+              <Button variant="contained" size="large" to={routes.game} component={RouterLink}>
                 Играть
               </Button>
             </WrapBtnGame>

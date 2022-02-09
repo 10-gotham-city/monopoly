@@ -24,11 +24,11 @@ const playersSlice = createSlice({
   reducers: {
     addPlayer(state, action: PayloadAction<{ name: string }>) {
       const id = uuidv4();
-      const color = state.colors.pop()!;
+      const color = state.colors.pop();
       state.data[id] = {
         id,
         name: action.payload.name,
-        color,
+        color: color || colors.grey['500'],
       };
     },
     removePlayer(state, action: PayloadAction<{ id: string }>) {
