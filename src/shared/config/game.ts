@@ -1,3 +1,3 @@
 export const GAME = {
-  MAX_PLAYERS: 4,
+  MAX_PLAYERS: 5,
 };

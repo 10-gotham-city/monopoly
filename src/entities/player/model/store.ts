@@ -9,15 +9,13 @@ const initialState: {
   colors: string[];
 } = {
   data: {},
-  // стандартные цвета mui, через одного для увеличения контрастности
-  colors: Object.values(colors).reduce((acc, color, i) => {
-    // @ts-ignore
-    if (color[500] && i % 2) {
-      // @ts-ignore
-      acc.push(color[500]);
-    }
-    return acc;
-  }, []),
+  colors: [
+    colors.deepPurple['300'],
+    colors.orange['500'],
+    colors.green['500'],
+    colors.blue['500'],
+    colors.red['500'],
+  ],
 };
 
 const playersSlice = createSlice({

@@ -1,5 +1,5 @@
 import { Box, Card, Typography, styled } from '@mui/material';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { SchemaOf } from 'yup';
 
 const FormCard = styled(Card)`
@@ -20,7 +20,7 @@ type Props<T> = {
   title: string;
   defaultValues: T;
   validationSchema: SchemaOf<T>;
-  onSubmit: (values: T, helpers: FormikHelpers<T>) => void;
+  onSubmit: (values: T) => Promise<void>;
   content: (props: FormikProps<T>) => JSX.Element;
   buttons: (props: FormikProps<T>) => JSX.Element;
 };
@@ -35,7 +35,9 @@ export const AuthFormTemplate = <T extends Record<string, unknown>>({
 }: Props<T>) => (
   <FormCard>
     <Box display="flex" justifyContent="center" mb={2}>
-      <Typography variant="h5">{title}</Typography>
+      <Typography variant="h1" align="center">
+        {title}
+      </Typography>
     </Box>
 
     <Formik<T>

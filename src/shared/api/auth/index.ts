@@ -1,2 +1,8 @@
-export { signIn } from './sign-in';
-export { signUp } from './sign-up';
+export {
+  authApi,
+  useSignInMutation,
+  useSignUpMutation,
+  useLogoutMutation,
+  useGetUserQuery,
+} from './auth-api';
+export { TSignUpRequest, TSignInRequest } from './types';

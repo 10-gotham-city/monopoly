@@ -1,8 +1,9 @@
 import { Box, Button, CardMedia, styled } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import homeMonopoly from 'shared/ui/images/home-monopoly.png';
 import { memo } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
 import { routes } from 'shared/config';
+import homeMonopoly from 'shared/ui/images/home-monopoly.png';
 
 const BoxWrapper = styled(Box)`
   height: 100%;

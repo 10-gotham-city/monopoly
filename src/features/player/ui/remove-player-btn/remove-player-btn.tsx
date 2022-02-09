@@ -1,3 +1,5 @@
+import { Close as DeleteIcon } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 import { useDispatch } from 'react-redux';
 
 import { modelPlayer } from 'entities/player';
@@ -13,5 +15,9 @@ export const RemovePlayerBtn = ({ id }: TProps) => {
     dispatch(modelPlayer.removePlayer({ id }));
   };
 
-  return <button onClick={handleRemove}>del</button>;
+  return (
+    <IconButton onClick={handleRemove}>
+      <DeleteIcon />
+    </IconButton>
+  );
 };

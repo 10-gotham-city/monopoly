@@ -22,7 +22,11 @@
       }
     ],
     "import/prefer-default-export": "off",
-    "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "@typescript-eslint/lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
     "react/require-default-props": [0],
     "object-curly-newline": "off",
     "react/jsx-props-no-spreading": [0],
@@ -30,6 +34,8 @@
     "operator-linebreak": "off",
     "@typescript-eslint/indent": "off",
     "react/jsx-one-expression-per-line": "off",
-    "jsx-a11y/label-has-associated-control": "off"
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/no-array-index-key": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }
