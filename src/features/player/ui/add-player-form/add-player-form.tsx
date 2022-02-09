@@ -47,6 +47,7 @@ export const AddPlayerForm = () => {
         value={name}
         onChange={(event) => setName(event.target.value)}
         onKeyDown={handleKeyDownEnter}
+        autoFocus
       />
       <IconButton onClick={handleAddPlayer} sx={{ p: '10px' }}>
         <AddIcon />

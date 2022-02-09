@@ -2,6 +2,9 @@ import { Box, Button, Card, Typography, styled } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 
+import { Navigation } from 'widgets/navigation';
+import { UserProfile } from 'widgets/user-profile';
+
 import { AddPlayerForm } from 'features/player';
 
 import { modelPlayer } from 'entities/player';
@@ -30,7 +33,7 @@ export const StartGamePage = () => {
   const players = useSelector(modelPlayer.selectPlayers);
 
   return (
-    <BaseLayout>
+    <BaseLayout appBarEndContent={<UserProfile />} appBarStartContent={<Navigation />}>
       <Box width={1} height={1} display="flex" alignItems="start" justifyContent="center">
         <StartGameCard>
           <Typography variant="h1" align="center">
@@ -41,6 +44,7 @@ export const StartGamePage = () => {
           </Description>
 
           <PlayerList />
+
           <AddPlayerForm />
 
           {players.length ? (

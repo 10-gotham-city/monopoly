@@ -3,6 +3,8 @@ import { Avatar, Box, Button, styled } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Navigation } from 'widgets/navigation';
+
 import { useAuth } from 'features/auth';
 import { ChangeAvatarDialog, ChangePasswordDialog, ChangeUserDataDialog } from 'features/user';
 
@@ -57,7 +59,7 @@ export const ProfilePage = () => {
   const isChangeAvatarLoading = false;
 
   return (
-    <BaseLayout>
+    <BaseLayout appBarStartContent={<Navigation />}>
       <Box
         width={500}
         display="flex"
