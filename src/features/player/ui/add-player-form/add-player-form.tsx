@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { modelPlayer } from 'entities/player';
 
+import { GAME } from 'shared/config';
+
 export const AddPlayerForm = () => {
   const players = useSelector(modelPlayer.selectPlayers);
   const [name, setName] = useState('');
@@ -19,7 +21,7 @@ export const AddPlayerForm = () => {
     }
   };
 
-  if (players.length > 4) {
+  if (players.length > GAME.MAX_PLAYERS) {
     return null;
   }
 
