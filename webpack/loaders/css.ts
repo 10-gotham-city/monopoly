@@ -1,11 +1,27 @@
-import { IS_DEV } from '../env';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export const cssLoader = {
+import { ENVS } from '../assets/env';
+
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    sourceMap: ENVS.__DEV__,
+    importLoaders: 1,
+    modules: {
+      localIdentName: ENVS.__DEV__ ? '[name]__[local]--[hash:base64:5]' : '[hash:base64:8]',
+    },
+  },
+};
+
+const cssLoaders = [MiniCssExtractPlugin.loader, cssLoader];
+
+export default {
   client: {
     test: /\.css$/,
-    use: [IS_DEV && 'css-hot-loader', 'style-loader', 'css-loader'].filter(Boolean) as string[],
+    exclude: /node_modules/,
+    use: cssLoaders,
   },
-  server: {
+  ssr: {
     test: /\.css$/,
     loader: 'null-loader',
   },

@@ -1,12 +1,24 @@
-const fileRegex = /^(?!.*\.inline).*\.(svg|jpe?g|png|gif|eot|woff2?|ttf)$/;
+const cfg = require('../../lib/cfg').default;
 
-export const fileLoader = {
+const filenameRegexp = /^(?!.*\.inline).*\.(jpe?g|png|gif|eot|woff2?|ttf)$/;
+
+export default {
   client: {
-    loader: 'url-loader',
-    test: fileRegex,
+    loader: 'file-loader',
+    test: filenameRegexp,
+    options: {
+      name: '[hash].[ext]',
+      outputPath: './',
+      publicPath: cfg.static.baseUrl,
+    },
   },
-  server: {
-    loader: 'null-loader',
-    test: fileRegex,
+  ssr: {
+    loader: 'file-loader',
+    test: filenameRegexp,
+    options: {
+      name: '[hash].[ext]',
+      outputPath: './client/',
+      publicPath: cfg.static.baseUrl,
+    },
   },
 };
