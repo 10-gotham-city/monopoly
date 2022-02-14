@@ -1,3 +1,4 @@
+import { addBaseUrl } from '../../lib';
 import { instanceApi } from '../instance-api';
 import { TGetUserResponse, TSignInRequest, TSignUpRequest, TSignUpResponse } from './types';
 
@@ -28,6 +29,12 @@ export const authApi = instanceApi.injectEndpoints({
         url: '/auth/user',
         method: 'GET',
       }),
+      providesTags: () => [{ type: 'user' }],
+      transformResponse: (result: TGetUserResponse) =>
+        addBaseUrl({
+          payload: result,
+          resourceKeyName: 'avatar',
+        }),
     }),
   }),
   overrideExisting: false,

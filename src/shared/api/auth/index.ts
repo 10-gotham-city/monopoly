@@ -5,4 +5,4 @@ export {
   useLogoutMutation,
   useGetUserQuery,
 } from './auth-api';
-export { TSignUpRequest, TSignInRequest } from './types';
+export { TSignUpRequest, TSignInRequest, TGetUserResponse } from './types';
