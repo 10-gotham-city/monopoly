@@ -5,4 +5,8 @@ export const routes = {
   game: '/game',
   profile: '/profile',
   leaderboard: '/leaderboard',
+  forum: {
+    main: '/forum',
+    details: ':id',
+  },
 };
