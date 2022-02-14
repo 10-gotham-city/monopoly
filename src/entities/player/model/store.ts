@@ -28,7 +28,7 @@ const playersSlice = createSlice({
       state.data[id] = {
         id,
         name: action.payload.name,
-        color: color || colors.grey['500'],
+        color: color ?? colors.grey['500'],
       };
     },
     removePlayer(state, action: PayloadAction<{ id: string }>) {

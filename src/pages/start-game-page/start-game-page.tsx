@@ -5,14 +5,12 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Navigation } from 'widgets/navigation';
 import { UserProfile } from 'widgets/user-profile';
 
-import { AddPlayerForm } from 'features/player';
+import { AddPlayerForm, RemovePlayerBtn } from 'features/player';
 
-import { modelPlayer } from 'entities/player';
+import { PlayerCard, PlayersList, modelPlayer } from 'entities/player';
 
 import { routes } from 'shared/config';
 import { BaseLayout } from 'shared/ui/layouts';
-
-import { PlayerList } from './player-list';
 
 const StartGameCard = styled(Card)`
   margin-top: ${({ theme }) => theme.spacing(3)};
@@ -43,7 +41,15 @@ export const StartGamePage = () => {
             Добавте игроков
           </Description>
 
-          <PlayerList />
+          <PlayersList>
+            {players.map((player) => (
+              <PlayerCard
+                {...player}
+                key={player.id}
+                removeBtn={<RemovePlayerBtn id={player.id} />}
+              />
+            ))}
+          </PlayersList>
 
           <AddPlayerForm />
 
