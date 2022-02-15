@@ -1,10 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 import { AuthGuard } from 'features/auth';
 
 import { routes } from 'shared/config';
 
 import { AuthorizationPage } from './authorization-page';
+import { ForumPage } from './forum-page';
+import { ForumSelectedPage } from './forum-selected-page';
 import { GamePage } from './game-page';
 import { HomePage } from './home-page';
 import { LeaderboardPage } from './leaderboard-page';
@@ -70,5 +72,23 @@ export const Router = () => (
         </AuthGuard>
       }
     />
+    <Route path={routes.forum.main} element={<Outlet />}>
+      <Route
+        index
+        element={
+          <AuthGuard>
+            <ForumPage />
+          </AuthGuard>
+        }
+      />
+      <Route
+        path={routes.forum.details}
+        element={
+          <AuthGuard>
+            <ForumSelectedPage />
+          </AuthGuard>
+        }
+      />
+    </Route>
   </Routes>
 );
