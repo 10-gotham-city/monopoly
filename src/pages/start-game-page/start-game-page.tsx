@@ -7,7 +7,7 @@ import { UserProfile } from 'widgets/user-profile';
 
 import { AddPlayerForm, RemovePlayerBtn } from 'features/player';
 
-import { PlayerCard, PlayersList, modelPlayer } from 'entities/player';
+import { PlayerCard, modelPlayer } from 'entities/player';
 
 import { routes } from 'shared/config';
 import { BaseLayout } from 'shared/ui/layouts';
@@ -25,6 +25,13 @@ const Description = styled(Typography)`
 const WrapBtnGame = styled('div')`
   text-align: center;
   padding-top: ${({ theme }) => theme.spacing(2)};
+`;
+
+const PlayersList = styled('div')`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing()};
+  flex-direction: column;
+  margin: 0 auto;
 `;
 
 export const StartGamePage = () => {

@@ -1,6 +1,6 @@
 import { Close as DeleteIcon } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { modelPlayer } from 'entities/player';
@@ -9,7 +9,7 @@ type TProps = {
   id: string;
 };
 
-export const RemovePlayerBtn = ({ id }: TProps) => {
+export const RemovePlayerBtn = memo(({ id }: TProps) => {
   const dispatch = useDispatch();
 
   const handleRemove = useCallback(() => {
@@ -21,4 +21,4 @@ export const RemovePlayerBtn = ({ id }: TProps) => {
       <DeleteIcon />
     </IconButton>
   );
-};
+});

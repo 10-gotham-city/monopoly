@@ -1,6 +1,6 @@
 import { Add as AddIcon } from '@mui/icons-material';
 import { IconButton, InputBase, Paper, styled } from '@mui/material';
-import { KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { modelPlayer } from 'entities/player';
@@ -36,6 +36,10 @@ export const AddPlayerForm = () => {
     }
   };
 
+  const handleOnChange = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
   if (players.length >= GAME.MAX_PLAYERS) {
     return null;
   }
@@ -45,7 +49,7 @@ export const AddPlayerForm = () => {
       <Input
         placeholder="Назовите своего игрока"
         value={name}
-        onChange={(event) => setName(event.target.value)}
+        onChange={handleOnChange}
         onKeyDown={handleKeyDownEnter}
         autoFocus
       />
