@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
-module.exports = {
+let config = {
   entry: './src/index.tsx',
   output: {
     path: path.join(__dirname, '/dist'),
@@ -47,4 +48,14 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
+};
+
+module.exports = (env, argv) => {
+  config.devtool = argv.mode === 'development' ? 'inline-source-map' : 'source-map';
+
+  if (argv.mode === 'production') {
+    config.plugins.push(new GenerateSW());
+  }
+
+  return config;
 };
