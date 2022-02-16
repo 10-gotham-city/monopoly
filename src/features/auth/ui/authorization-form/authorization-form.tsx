@@ -6,6 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { AuthorizationFormNames, TAuthorizationFormValues } from 'features/auth/types';
+import { OauthButton } from 'features/oauth';
 
 import { AuthFormTemplate } from 'entities/auth';
 
@@ -52,6 +53,9 @@ export const AuthorizationForm = memo(({ onSubmit }: Props) => {
         >
           Войти
         </LoadingButton>
+
+        <OauthButton />
+
         <Link component={RouterLink} to={routes.registration}>
           Зарегистрироваться
         </Link>
