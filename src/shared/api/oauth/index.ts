@@ -1,1 +1,1 @@
-export { useGetServiceIdQuery, useSignInMutation, oauthApi } from './oauth-api';
+export { useGetServiceIdQuery, useSignInOauthMutation, oauthApi } from './oauth-api';

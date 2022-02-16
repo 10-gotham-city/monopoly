@@ -1,9 +1,9 @@
 import { LoadingButton } from '@mui/lab';
 
-import { useOauth } from '../hooks';
+import { useOauthClientId } from '../../hooks';
 
 export const OauthButton = () => {
-  const { isLoading, onClick } = useOauth();
+  const { isLoading, onClick } = useOauthClientId();
 
   return (
     <LoadingButton variant="contained" color="secondary" loading={isLoading} onClick={onClick}>

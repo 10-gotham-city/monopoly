@@ -5,12 +5,16 @@ import { TGetServiceIdResponse, TOauthSignInRequest } from './types';
 
 export const oauthApi = instanceApi.injectEndpoints({
   endpoints: (builder) => ({
-    signIn: builder.mutation<void, TOauthSignInRequest>({
+    signInOauth: builder.mutation<void, TOauthSignInRequest>({
       query: (body) => ({
         url: '/oauth/yandex',
         method: 'POST',
         body,
       }),
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+      transformResponse: (response) => {
+        console.log('response', response);
+      },
     }),
     getServiceId: builder.query<TGetServiceIdResponse, void>({
       query: () => ({
@@ -22,4 +26,4 @@ export const oauthApi = instanceApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetServiceIdQuery, useSignInMutation } = oauthApi;
+export const { useGetServiceIdQuery, useSignInOauthMutation } = oauthApi;

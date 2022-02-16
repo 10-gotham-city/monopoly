@@ -5,8 +5,8 @@ import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { OauthButton } from 'features/auth';
 import { AuthorizationFormNames, TAuthorizationFormValues } from 'features/auth/types';
-import { OauthButton } from 'features/oauth';
 
 import { AuthFormTemplate } from 'entities/auth';
 
