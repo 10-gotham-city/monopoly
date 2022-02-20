@@ -1,1 +1,1 @@
-export { EndGameDialog } from './ui';
+export { EndGameDialog, FullscreenButton } from './ui';

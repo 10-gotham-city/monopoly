@@ -1,6 +1,8 @@
 import { LeaderboardTable } from 'entities/leaderboard';
 import { TDataRowLeaderboardTable } from 'entities/leaderboard/types';
 
+import { BaseLayout } from 'shared/ui/layouts';
+
 const createDataTable = (
   displayName: string,
   winsCount: number,
@@ -35,4 +37,8 @@ const rows = [
   createDataTable('Master', 234, 300),
 ];
 
-export const LeaderboardPage = () => <LeaderboardTable dataTable={rows} />;
+export const LeaderboardPage = () => (
+  <BaseLayout>
+    <LeaderboardTable dataTable={rows} />
+  </BaseLayout>
+);

@@ -7,6 +7,7 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  styled,
 } from '@mui/material';
 import { ChangeEvent, MouseEvent, memo, useCallback, useMemo, useState } from 'react';
 
@@ -21,6 +22,12 @@ const ROWS_PER_PAGE_OPTIONS = [5, 10, 25, 50, 75, 100];
 type Props = {
   dataTable: TDataRowLeaderboardTable[];
 };
+
+const CustomPaper = styled(Paper)`
+  margin-top: ${({ theme }) => `${theme.spacing(3)}`};
+  width: 100%;
+  overflow: hidden;
+`;
 
 export const LeaderboardTable = memo(({ dataTable }: Props) => {
   const [order, setOrder] = useState<TOrder>('desc');
@@ -55,7 +62,7 @@ export const LeaderboardTable = memo(({ dataTable }: Props) => {
   );
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <CustomPaper>
       <Typography
         sx={{ flex: '1 1 100%' }}
         variant="h6"
@@ -98,6 +105,6 @@ export const LeaderboardTable = memo(({ dataTable }: Props) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </CustomPaper>
   );
 });
