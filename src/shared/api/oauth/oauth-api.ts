@@ -5,16 +5,13 @@ import { TGetServiceIdResponse, TOauthSignInRequest } from './types';
 
 export const oauthApi = instanceApi.injectEndpoints({
   endpoints: (builder) => ({
-    signInOauth: builder.mutation<void, TOauthSignInRequest>({
+    signInOauth: builder.mutation<string, TOauthSignInRequest>({
       query: (body) => ({
         url: '/oauth/yandex',
         method: 'POST',
         body,
+        responseHandler: (response) => response.text(),
       }),
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      transformResponse: (response) => {
-        console.log('response', response);
-      },
     }),
     getServiceId: builder.query<TGetServiceIdResponse, void>({
       query: () => ({

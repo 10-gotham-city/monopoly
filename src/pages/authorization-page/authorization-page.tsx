@@ -2,13 +2,18 @@ import { Box } from '@mui/material';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthorizationForm, TAuthorizationFormValues, useAuth } from 'features/auth';
+import {
+  AuthorizationForm,
+  TAuthorizationFormValues,
+  useAuth, // useOauth
+} from 'features/auth';
 
 import { routes } from 'shared/config';
 import { BaseLayout } from 'shared/ui/layouts';
 
 export const AuthorizationPage = () => {
   const navigate = useNavigate();
+  // const { isAuthorizedOauthLoading } = useOauth();
 
   const { signIn } = useAuth();
 

@@ -1,26 +1,40 @@
 import { useEffect } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useSignInOauthMutation } from 'shared/api/oauth';
 import { REDIRECT_URI } from 'shared/config';
+import { routes } from 'shared/config';
+
+import { AUTH_KEY_LS, authContext } from '../model';
 
 export const useOauth = () => {
-  const [signInOauth, { isError, error }] = useSignInOauthMutation();
+  const navigate = useNavigate();
+  const { isAuthorized, setIsAuthorized } = useContext(authContext);
+  const [signInOauth, { isLoading }] = useSignInOauthMutation();
+
   useEffect(() => {
     async function signIn(code: string) {
-      await signInOauth({
+      const response = await signInOauth({
         code,
         redirect_uri: REDIRECT_URI,
       });
+      // @ts-ignore
+      if (response.data === 'OK') {
+        setIsAuthorized(true);
+        localStorage.setItem(AUTH_KEY_LS, 'true');
+        navigate(routes.game);
+      }
     }
     const code = /code=([^&]+)/.exec(document.location.search);
     if (code && code[1]) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       signIn(code[1]);
     }
-  }, [signInOauth]);
+  }, [signInOauth, navigate, setIsAuthorized]);
 
-  console.log(error);
-  // rtq не обработал ответ "ОК"
-  // "SyntaxError: Unexpected token O in JSON at position 0"
-  return { isAuthorizedOauth: isError && error === 200 };
+  return {
+    isAuthorizedOauth: isAuthorized,
+    isAuthorizedOauthLoading: isLoading,
+  };
 };

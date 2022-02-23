@@ -7,16 +7,16 @@ type Props = {
 };
 
 export const AuthProvider = ({ children }: Props) => {
+  useOauth();
   const { initialValue } = useAuth();
-  const { isAuthorizedOauth } = useOauth();
   const [isAuthorized, setIsAuthorized] = useState(initialValue);
 
   const providerValue = useMemo(
     () => ({
-      isAuthorized: isAuthorized || isAuthorizedOauth,
+      isAuthorized: isAuthorized,
       setIsAuthorized: (value: boolean) => setIsAuthorized(value),
     }),
-    [isAuthorized, isAuthorizedOauth],
+    [isAuthorized],
   );
 
   return <authContext.Provider value={providerValue}>{children}</authContext.Provider>;
