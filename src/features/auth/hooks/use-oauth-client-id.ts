@@ -6,11 +6,11 @@ import { OAUTH_YANDEX, REDIRECT_URI } from 'shared/config';
 export const useOauthClientId = () => {
   const { data: { service_id: serviceId } = {}, isLoading } = useGetServiceIdQuery();
 
-  const onClick = useCallback(() => {
+  const redirectOauthYandex = useCallback(() => {
     if (serviceId) {
       window.location.href = `${OAUTH_YANDEX}client_id=${serviceId}&redirect_uri=${REDIRECT_URI}`;
     }
   }, [serviceId]);
 
-  return { isLoading, onClick };
+  return { isLoading, redirectOauthYandex };
 };

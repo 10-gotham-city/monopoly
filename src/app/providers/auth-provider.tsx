@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   const providerValue = useMemo(
     () => ({
-      isAuthorized: isAuthorized,
+      isAuthorized,
       setIsAuthorized: (value: boolean) => setIsAuthorized(value),
     }),
     [isAuthorized],

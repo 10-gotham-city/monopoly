@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useSignInOauthMutation } from 'shared/api/oauth';
-import { REDIRECT_URI } from 'shared/config';
-import { routes } from 'shared/config';
+import { REDIRECT_URI, routes } from 'shared/config';
 
 import { AUTH_KEY_LS, authContext } from '../model';
 
@@ -19,8 +17,8 @@ export const useOauth = () => {
         code,
         redirect_uri: REDIRECT_URI,
       });
-      // @ts-ignore
-      if (response.data === 'OK') {
+
+      if ('data' in response && response.data === 'OK') {
         setIsAuthorized(true);
         localStorage.setItem(AUTH_KEY_LS, 'true');
         navigate(routes.game);

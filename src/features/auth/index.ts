@@ -1,4 +1,4 @@
-export { RegistrationForm, AuthorizationForm, OauthButton } from './ui';
+export { RegistrationForm, AuthorizationForm } from './ui';
 export { TRegistrationFormValues, TAuthorizationFormValues } from './types';
 export { mapRegistrationFormToRequestData } from './mappers';
 export { useAuth, useOauth } from './hooks';

@@ -5,7 +5,7 @@ import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { OauthButton } from 'features/auth';
+import { useOauthClientId } from 'features/auth/hooks';
 import { AuthorizationFormNames, TAuthorizationFormValues } from 'features/auth/types';
 
 import { AuthFormTemplate } from 'entities/auth';
@@ -28,6 +28,8 @@ const defaultValues: TAuthorizationFormValues = {
 };
 
 export const AuthorizationForm = memo(({ onSubmit }: Props) => {
+  const { isLoading, redirectOauthYandex } = useOauthClientId();
+
   const content = useCallback(
     () => (
       <Grid container spacing={3}>
@@ -54,14 +56,21 @@ export const AuthorizationForm = memo(({ onSubmit }: Props) => {
           Войти
         </LoadingButton>
 
-        <OauthButton />
+        <LoadingButton
+          variant="contained"
+          color="secondary"
+          loading={isLoading}
+          onClick={redirectOauthYandex}
+        >
+          Войти через Яндекс
+        </LoadingButton>
 
         <Link component={RouterLink} to={routes.registration}>
           Зарегистрироваться
         </Link>
       </>
     ),
-    [],
+    [isLoading, redirectOauthYandex],
   );
 
   return (
