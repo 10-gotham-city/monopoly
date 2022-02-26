@@ -22,7 +22,6 @@ const getHtml = (reactHtml: string) => `
       <script src="main.js"></script>
     </body>
   </html>
-  
   `;
 
 export const serverRenderMiddleware = (req: Request, res: Response) => {
@@ -32,13 +31,7 @@ export const serverRenderMiddleware = (req: Request, res: Response) => {
     </StaticRouter>
   );
 
-  let reactHtml = '';
-
-  try {
-    reactHtml = renderToString(jsx);
-  } catch (err) {
-    console.log(err);
-  }
+  const reactHtml = renderToString(jsx);
 
   res.status(200).send(getHtml(reactHtml));
 };

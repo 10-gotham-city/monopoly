@@ -16,14 +16,18 @@ export const useAuth = () => {
     signIn: async (payload: Parameters<typeof signInMutation>[0]) => {
       await signInMutation(payload);
       setIsAuthorized(true);
-      localStorage.setItem(AUTH_KEY, 'true');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(AUTH_KEY, 'true');
+      }
     },
     logout: async () => {
       await logoutMutation();
       setIsAuthorized(false);
-      localStorage.removeItem(AUTH_KEY);
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(AUTH_KEY);
+      }
     },
-    initialValue: localStorage.getItem(AUTH_KEY) === 'true',
+    initialValue: typeof window !== 'undefined' ? localStorage.getItem(AUTH_KEY) === 'true' : false,
     isAuthorized,
     isLogoutPending,
   };

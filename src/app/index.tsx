@@ -2,7 +2,6 @@ import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { hot } from 'react-hot-loader/root';
 import { Provider as ReduxProvider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 
 import { Router } from 'pages';
 
@@ -17,11 +16,9 @@ export const App = hot(() => (
       <CssBaseline />
       <SnackbarProvider>
         <ReduxProvider store={reduxStore}>
-          <BrowserRouter>
-            <AuthProvider>
-              <Router />
-            </AuthProvider>
-          </BrowserRouter>
+          <AuthProvider>
+            <Router />
+          </AuthProvider>
         </ReduxProvider>
       </SnackbarProvider>
     </ErrorBoundary>
