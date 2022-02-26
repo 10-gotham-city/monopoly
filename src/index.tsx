@@ -1,22 +1,17 @@
 import { hydrate } from 'react-dom';
-import { Helmet } from 'react-helmet';
+import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from './app';
+import { initStore } from './app/store';
+
+const store = initStore(window.__INITIAL_STATE__);
 
 hydrate(
-  <BrowserRouter>
-    <Helmet>
-      <meta charSet="UTF-8" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Monopoly</title>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      />
-    </Helmet>
-    <App />
-  </BrowserRouter>,
+  <ReduxProvider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ReduxProvider>,
   document.getElementById('root'),
 );
