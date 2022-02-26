@@ -18,7 +18,8 @@ export const serverConfig: Configuration = {
     filename: 'server.js',
     libraryTarget: 'commonjs2',
     path: DIST_DIR,
-    publicPath: '/static/',
+    publicPath: '/',
+    assetModuleFilename: 'static/[hash][ext][query]',
   },
   resolve: {
     modules: ['src', 'node_modules'],

@@ -6,7 +6,7 @@ export const fileLoader = {
     test: fileRegex,
   },
   server: {
-    loader: 'null-loader',
+    type: 'asset/resource',
     test: fileRegex,
   },
 };
