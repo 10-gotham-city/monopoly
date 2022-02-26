@@ -1,21 +1,19 @@
 import { Request, Response } from 'express';
 import { renderToString } from 'react-dom/server';
+import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom/server';
 
 import { App } from '../../src/app';
 
-const getHtml = (reactHtml: string) => `
+const getHtml = (reactHtml: string) => {
+  const helmet = Helmet.renderStatic();
+  return `
   <!DOCTYPE html>
-  <html lang="en">
+  <html ${helmet.htmlAttributes.toString()}>
     <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-      />
+      ${helmet.title.toString()}
+      ${helmet.meta.toString()}
+      ${helmet.link.toString()}
     </head>
     <body>
       <div id="root">${reactHtml}</div>
@@ -23,6 +21,7 @@ const getHtml = (reactHtml: string) => `
     </body>
   </html>
   `;
+};
 
 export const serverRenderMiddleware = (req: Request, res: Response) => {
   const jsx = (
