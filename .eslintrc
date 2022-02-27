@@ -36,6 +36,7 @@
     "react/jsx-one-expression-per-line": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "react/no-array-index-key": "off",
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-floating-promises": 0
   }
 }
