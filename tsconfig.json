@@ -15,6 +15,7 @@
     "skipLibCheck": true,
     "declaration": false,
     "sourceMap": false,
+    "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "outDir": "./dist",
     "paths": {
