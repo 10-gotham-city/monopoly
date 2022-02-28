@@ -1,12 +1,13 @@
 import { useMemo, useState } from 'react';
 
-import { authContext, useAuth } from 'features/auth';
+import { authContext, useAuth, useOauth } from 'features/auth';
 
 type Props = {
   children: JSX.Element;
 };
 
 export const AuthProvider = ({ children }: Props) => {
+  useOauth();
   const { initialValue } = useAuth();
   const [isAuthorized, setIsAuthorized] = useState(initialValue);
 
