@@ -1,6 +1,8 @@
 import { Box, CircularProgress } from '@mui/material';
 import { memo } from 'react';
 
+import { Navigation } from 'widgets/navigation';
+
 import { BaseLayout } from 'shared/ui/layouts';
 
 type TTemplateLayoutProps = {
@@ -15,7 +17,7 @@ type Props = {
 };
 
 const TemplateLayout = ({ children }: TTemplateLayoutProps) => (
-  <BaseLayout>
+  <BaseLayout appBarEndContent={<Navigation />}>
     <Box
       width={500}
       display="flex"

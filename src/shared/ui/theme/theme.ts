@@ -20,6 +20,9 @@ export const theme = createTheme({
       fontWeight: 400,
       marginBottom: '0.35em',
     },
+    subtitle1: {
+      fontSize: '1.3rem',
+    },
   },
   components: {
     MuiCard: {

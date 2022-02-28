@@ -26,7 +26,7 @@ type Props = {
 };
 
 export const ButtonStartGame = memo(({ isAuthorized }: Props) => {
-  const pathTo = isAuthorized ? routes.game : routes.login;
+  const pathTo = isAuthorized ? routes.start : routes.login;
 
   return (
     <BoxWrapper>

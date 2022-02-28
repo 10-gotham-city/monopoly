@@ -47,6 +47,7 @@ let config = {
   ],
   devServer: {
     historyApiFallback: true,
+    port: 3000,
   },
 };
 

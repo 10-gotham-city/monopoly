@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { useFullScreenHandle } from 'react-full-screen';
+
+import { Navigation } from 'widgets/navigation';
 import { UserProfile } from 'widgets/user-profile';
 
-import { GameEngine } from 'features/game-engine';
+import { GameEngine } from 'entities/game-engine';
 
 import { FullscreenButton, FullscreenWrapper } from 'shared/ui/components';
 import { BaseLayout } from 'shared/ui/layouts';
@@ -23,8 +25,15 @@ export const GamePage = () => {
   }, []);
 
   return (
-    <BaseLayout appBarEndContent={<UserProfile />}>
-      <FullscreenButton handleFullscreen={handleFullscreen} />
+    <BaseLayout
+      appBarStartContent={<Navigation />}
+      appBarEndContent={
+        <>
+          <FullscreenButton handleFullscreen={handleFullscreen} />
+          <UserProfile />
+        </>
+      }
+    >
       <FullscreenWrapper handleFullscreen={handleFullscreen}>
         <canvas
           ref={canvasEl}

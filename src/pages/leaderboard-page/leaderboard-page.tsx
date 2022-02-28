@@ -1,3 +1,6 @@
+import { Navigation } from 'widgets/navigation';
+import { UserProfile } from 'widgets/user-profile';
+
 import { LeaderboardTable } from 'entities/leaderboard';
 import { TDataRowLeaderboardTable } from 'entities/leaderboard/types';
 
@@ -38,7 +41,7 @@ const rows = [
 ];
 
 export const LeaderboardPage = () => (
-  <BaseLayout>
+  <BaseLayout appBarStartContent={<Navigation />} appBarEndContent={<UserProfile />}>
     <LeaderboardTable dataTable={rows} />
   </BaseLayout>
 );
