@@ -35,6 +35,7 @@ const AppBarInner = styled(Box)`
 const ContentWrapper = styled(Box)`
   display: flex;
   flex: 1;
+  padding-top: ${({ theme }) => theme.spacing(5)};
 `;
 
 type Props = {

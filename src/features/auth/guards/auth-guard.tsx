@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 import { routes } from 'shared/config';
 
-import { useAuth } from '../hooks';
+import { useAuth, useOauth } from '../hooks';
 
 type Props = { children: JSX.Element };
 
@@ -11,9 +11,10 @@ const AVAILABLE_ROUTES = [routes.home];
 
 export const AuthGuard = ({ children }: Props) => {
   const { isAuthorized } = useAuth();
+  const { isAuthorizedOauth } = useOauth();
   const { pathname } = useLocation();
 
-  if (isAuthorized) {
+  if (isAuthorized || isAuthorizedOauth) {
     if (AUTH_ROUTES.includes(pathname)) {
       return <Navigate to={routes.game} replace />;
     }

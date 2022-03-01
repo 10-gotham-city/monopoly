@@ -42,6 +42,14 @@
     "@typescript-eslint/no-unsafe-member-access": 0,
     "@typescript-eslint/no-unsafe-call": 0,
     "import/no-mutable-exports": 0,
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "@typescript-eslint/no-unsafe-argument": 0,
+    "@typescript-eslint/no-unsafe-return": 0,
+    "no-param-reassign": [
+      "error",
+      {
+        "ignorePropertyModificationsFor": ["state", "ctx"]
+      }
+    ]
   }
 }

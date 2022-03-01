@@ -12,6 +12,7 @@ import { HomePage } from './home-page';
 import { LeaderboardPage } from './leaderboard-page';
 import { ProfilePage } from './profile-page';
 import { RegistrationPage } from './registration-page';
+import { StartGamePage } from './start-game-page';
 
 export const Router = () => (
   <Routes>
@@ -52,6 +53,14 @@ export const Router = () => (
       element={
         <AuthGuard>
           <AuthorizationPage />
+        </AuthGuard>
+      }
+    />
+    <Route
+      path={routes.start}
+      element={
+        <AuthGuard>
+          <StartGamePage />
         </AuthGuard>
       }
     />

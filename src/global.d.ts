@@ -1,4 +1,4 @@
-import { reduxStore } from './app/store';
+import { reduxStore } from 'app/store';
 
 declare global {
   type GlobalStore = ReturnType<typeof reduxStore.getState>;

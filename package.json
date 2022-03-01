@@ -36,6 +36,8 @@
     "@types/react-helmet": "^6.1.5",
     "@types/webpack-hot-middleware": "2.25.5",
     "@types/webpack-node-externals": "2.5.3",
+    "@types/redux-persist": "4.3.1",
+    "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.7.0",
     "@typescript-eslint/parser": "5.7.0",
     "babel-loader": "8.2.3",
@@ -92,7 +94,9 @@
     "react-number-format": "4.9.0",
     "react-redux": "7.2.6",
     "react-router-dom": "6.2.1",
+    "redux-persist": "6.0.0",
     "styled-components": "5.3.3",
+    "uuid": "8.3.2",
     "yup": "0.32.11"
   }
 }
