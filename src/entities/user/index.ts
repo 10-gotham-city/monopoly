@@ -1,2 +1,2 @@
 export { UserData } from './ui';
-export { TUserData } from './types';
+export type { TUserData } from './types';

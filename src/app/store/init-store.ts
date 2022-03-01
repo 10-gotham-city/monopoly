@@ -6,12 +6,15 @@ import { instanceApi } from 'shared/api';
 import { persistConfig } from './persist';
 import { rootReducer } from './root-reducer';
 
+export const getInitialState = () => ({});
+
 // необходимо объявить до конфигурации store
 // https://github.com/reduxjs/redux-toolkit/issues/1831
 const reducer = persistReducer(persistConfig, rootReducer);
 
-export const initStore = () => {
+export const initStore = (state: GlobalStore) => {
   const store = configureStore({
+    preloadedState: state,
     reducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
