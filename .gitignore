@@ -2,3 +2,4 @@
 /.idea
 /dist
 /postgresdata
+/dev.env
