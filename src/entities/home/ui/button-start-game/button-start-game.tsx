@@ -1,8 +1,9 @@
 import { Box, Button, CardMedia, styled } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import homeMonopoly from 'shared/ui/images/home-monopoly.png';
 import { memo } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
 import { routes } from 'shared/config';
+import homeMonopoly from 'shared/ui/images/home-monopoly.png';
 
 const BoxWrapper = styled(Box)`
   height: 100%;
@@ -25,7 +26,7 @@ type Props = {
 };
 
 export const ButtonStartGame = memo(({ isAuthorized }: Props) => {
-  const pathTo = isAuthorized ? routes.game : routes.login;
+  const pathTo = isAuthorized ? routes.start : routes.login;
 
   return (
     <BoxWrapper>

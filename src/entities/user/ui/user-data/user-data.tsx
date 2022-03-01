@@ -1,5 +1,7 @@
+import { Card, Grid, styled } from '@mui/material';
 import { memo } from 'react';
-import { Grid, styled, Card } from '@mui/material';
+
+import { TUserData } from '../../types';
 import { UserDataItem } from '../user-data-item';
 
 const TITLE_WIDTH = 156;
@@ -14,17 +16,8 @@ const StyledGrid = styled(Grid)`
   }
 `;
 
-type Props = {
-  firstName: string;
-  secondName: string;
-  displayName: string;
-  login: string;
-  email: string;
-  phone: string;
-};
-
 export const UserData = memo(
-  ({ displayName, email, firstName, login, phone, secondName }: Props) => (
+  ({ displayName, email, firstName, login, phone, secondName }: TUserData) => (
     <Card>
       <Grid container direction="column">
         <StyledGrid item>

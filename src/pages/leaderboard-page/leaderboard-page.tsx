@@ -1,5 +1,10 @@
+import { Navigation } from 'widgets/navigation';
+import { UserProfile } from 'widgets/user-profile';
+
 import { LeaderboardTable } from 'entities/leaderboard';
 import { TDataRowLeaderboardTable } from 'entities/leaderboard/types';
+
+import { BaseLayout } from 'shared/ui/layouts';
 
 const createDataTable = (
   displayName: string,
@@ -35,4 +40,8 @@ const rows = [
   createDataTable('Master', 234, 300),
 ];
 
-export const LeaderboardPage = () => <LeaderboardTable dataTable={rows} />;
+export const LeaderboardPage = () => (
+  <BaseLayout appBarStartContent={<Navigation />} appBarEndContent={<UserProfile />}>
+    <LeaderboardTable dataTable={rows} />
+  </BaseLayout>
+);

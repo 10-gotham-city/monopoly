@@ -1,4 +1,3 @@
-import { useState, MouseEvent, ChangeEvent, memo, useCallback, useMemo } from 'react';
 import {
   Paper,
   Table,
@@ -8,9 +7,12 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  styled,
 } from '@mui/material';
-import { TDataRowLeaderboardTable, TOrder } from 'entities/leaderboard/types';
+import { ChangeEvent, MouseEvent, memo, useCallback, useMemo, useState } from 'react';
+
 import { sortTableByColumn } from 'entities/leaderboard/lib';
+import { TDataRowLeaderboardTable, TOrder } from 'entities/leaderboard/types';
 import { LeaderboardTableHead } from 'entities/leaderboard/ui/leaderboard-table-head';
 
 const INITIAL_PAGE_INDEX = 0;
@@ -20,6 +22,12 @@ const ROWS_PER_PAGE_OPTIONS = [5, 10, 25, 50, 75, 100];
 type Props = {
   dataTable: TDataRowLeaderboardTable[];
 };
+
+const CustomPaper = styled(Paper)`
+  margin-top: ${({ theme }) => `${theme.spacing(3)}`};
+  width: 100%;
+  overflow: hidden;
+`;
 
 export const LeaderboardTable = memo(({ dataTable }: Props) => {
   const [order, setOrder] = useState<TOrder>('desc');
@@ -54,7 +62,7 @@ export const LeaderboardTable = memo(({ dataTable }: Props) => {
   );
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <CustomPaper>
       <Typography
         sx={{ flex: '1 1 100%' }}
         variant="h6"
@@ -97,6 +105,6 @@ export const LeaderboardTable = memo(({ dataTable }: Props) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </CustomPaper>
   );
 });

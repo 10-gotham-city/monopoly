@@ -1,4 +1,4 @@
-import { TChangePasswordFormValues, ChangePasswordFormNames } from '../../types';
+import { ChangePasswordFormNames, TChangePasswordFormValues } from '../../types';
 
 export const validator = (values: TChangePasswordFormValues) => {
   const errors: Partial<Record<ChangePasswordFormNames, string>> = {};

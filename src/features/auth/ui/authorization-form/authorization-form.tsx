@@ -1,9 +1,11 @@
-import { Button, Grid, Link } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { Grid, Link } from '@mui/material';
 import { FormikProps } from 'formik';
 import { memo, useCallback } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { useOauthClientId } from 'features/auth/hooks';
 import { AuthorizationFormNames, TAuthorizationFormValues } from 'features/auth/types';
 
 import { AuthFormTemplate } from 'entities/auth';
@@ -12,7 +14,7 @@ import { routes } from 'shared/config';
 import { InputField } from 'shared/ui/components';
 
 type Props = {
-  onSubmit: () => void;
+  onSubmit: (values: TAuthorizationFormValues) => Promise<void>;
 };
 
 const validationSchema: yup.SchemaOf<TAuthorizationFormValues> = yup.object().shape({
@@ -26,6 +28,8 @@ const defaultValues: TAuthorizationFormValues = {
 };
 
 export const AuthorizationForm = memo(({ onSubmit }: Props) => {
+  const { isLoading, redirectOauthYandex } = useOauthClientId();
+
   const content = useCallback(
     () => (
       <Grid container spacing={3}>
@@ -33,7 +37,7 @@ export const AuthorizationForm = memo(({ onSubmit }: Props) => {
           <InputField name={AuthorizationFormNames.Login} label="Логин" />
         </Grid>
         <Grid item width={1}>
-          <InputField name={AuthorizationFormNames.Password} label="Пароль" />
+          <InputField name={AuthorizationFormNames.Password} label="Пароль" type="password" />
         </Grid>
       </Grid>
     ),
@@ -41,17 +45,32 @@ export const AuthorizationForm = memo(({ onSubmit }: Props) => {
   );
 
   const buttons = useCallback(
-    ({ handleSubmit }: FormikProps<TAuthorizationFormValues>) => (
+    ({ handleSubmit, isSubmitting }: FormikProps<TAuthorizationFormValues>) => (
       <>
-        <Button variant="contained" size="large" onClick={() => handleSubmit()}>
+        <LoadingButton
+          variant="contained"
+          size="large"
+          loading={isSubmitting}
+          onClick={() => handleSubmit()}
+        >
           Войти
-        </Button>
+        </LoadingButton>
+
+        <LoadingButton
+          variant="contained"
+          color="secondary"
+          loading={isLoading}
+          onClick={redirectOauthYandex}
+        >
+          Войти через Яндекс
+        </LoadingButton>
+
         <Link component={RouterLink} to={routes.registration}>
           Зарегистрироваться
         </Link>
       </>
     ),
-    [],
+    [isLoading, redirectOauthYandex],
   );
 
   return (
