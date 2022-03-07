@@ -10,4 +10,4 @@ export {
   mapUserResponse,
   mapUserResponseToFormInitialValues,
 } from './mappers';
-export { TChangePasswordFormValues, TChangeUserDataFormValues } from './types';
+export type { TChangePasswordFormValues, TChangeUserDataFormValues } from './types';
