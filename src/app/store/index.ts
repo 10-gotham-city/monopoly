@@ -1,1 +1,1 @@
-export { store as reduxStore } from './store';
+export { initStore, getInitialState } from './init-store';
