@@ -4,4 +4,4 @@ export {
   useChangePasswordMutation,
   userApi,
 } from './user-api';
-export { TChangePasswordRequest, TChangeProfileRequest } from './types';
+export type { TChangePasswordRequest, TChangeProfileRequest } from './types';

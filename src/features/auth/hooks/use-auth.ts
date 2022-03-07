@@ -2,9 +2,7 @@ import { useContext } from 'react';
 
 import { useLogoutMutation, useSignInMutation } from 'shared/api/auth';
 
-import { authContext } from '../model';
-
-const AUTH_KEY = 'authorized';
+import { AUTH_KEY_LS, authContext } from '../model';
 
 export const useAuth = () => {
   const { isAuthorized, setIsAuthorized } = useContext(authContext);
@@ -16,14 +14,19 @@ export const useAuth = () => {
     signIn: async (payload: Parameters<typeof signInMutation>[0]) => {
       await signInMutation(payload);
       setIsAuthorized(true);
-      localStorage.setItem(AUTH_KEY, 'true');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(AUTH_KEY_LS, 'true');
+      }
     },
     logout: async () => {
       await logoutMutation();
       setIsAuthorized(false);
-      localStorage.removeItem(AUTH_KEY);
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(AUTH_KEY_LS);
+      }
     },
-    initialValue: localStorage.getItem(AUTH_KEY) === 'true',
+    initialValue:
+      typeof window !== 'undefined' ? localStorage.getItem(AUTH_KEY_LS) === 'true' : false,
     isAuthorized,
     isLogoutPending,
   };
