@@ -10,6 +10,6 @@ const dbConnect = async () => {
   }
 };
 
-export const startApp = () => {
+export const startDb = () => {
   dbConnect().then(() => {});
 };

@@ -1,2 +1,2 @@
 export { sequelize } from './models';
-export { startApp } from './init';
+export { startDb } from './init';

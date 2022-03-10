@@ -5,7 +5,10 @@ import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
 
 import { clientConfig } from '../webpack';
+import { startDb } from './init';
 import { serverRenderMiddleware } from './middlewares';
+
+const { PORT = 3000 } = process.env;
 
 export const getWebpackMiddlewares = (config: webpack.Configuration): RequestHandler[] => {
   const compiler = webpack({ ...config, mode: 'development' });
@@ -26,4 +29,12 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/*', [...getWebpackMiddlewares(clientConfig)], serverRenderMiddleware);
 
-export { app };
+const startApp = () => {
+  startDb();
+
+  app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}!`);
+  });
+};
+
+export { startApp };
