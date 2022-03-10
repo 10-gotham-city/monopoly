@@ -7,17 +7,5 @@
   "bracketSpacing": true,
   "semi": true,
   "trailingComma": "all",
-  "arrowParens": "always",
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
-  "importOrder": [
-    "<THIRD_PARTY_MODULES>",
-    "(^app/(.*)$|app)",
-    "(^pages/(.*)$|pages)",
-    "^widgets/(.*)$",
-    "^features/(.*)$",
-    "^entities/(.*)$",
-    "^shared/(.*)$",
-    "^[./]"
-  ]
+  "arrowParens": "always"
 }
