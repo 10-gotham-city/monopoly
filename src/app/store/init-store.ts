@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from 'redux-persist';
-
 import { instanceApi } from 'shared/api';
-
-import { persistConfig } from './persist';
 import { rootReducer } from './root-reducer';
+import { persistConfig } from './persist';
 
 export const getInitialState = () => ({});
 

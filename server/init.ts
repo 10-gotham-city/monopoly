@@ -10,6 +10,4 @@ const dbConnect = async () => {
   }
 };
 
-export const startApp = () => {
-  dbConnect().then(() => {});
-};
+export const startDb = async () => dbConnect();
