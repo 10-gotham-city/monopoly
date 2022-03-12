@@ -29,8 +29,8 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/*', [...getWebpackMiddlewares(clientConfig)], serverRenderMiddleware);
 
-const startApp = () => {
-  startDb();
+const startApp = async () => {
+  await startDb();
 
   app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}!`);
